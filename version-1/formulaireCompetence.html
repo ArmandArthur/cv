@@ -1,0 +1,23 @@
+<form name="competenceFormulaire" class="spacer" ng-submit="submit(framework)" ng-controller="competenceController" > 
+     <select class="form-control" ng-model="competence"  > 
+          <option value="FRAMEWORK_PHP" selected="selected">Framework PHP</option> 
+          <option value="FRAMEWORK_JAVASCRIPT">Framework Javascript</option> 
+     </select> 
+     <div class="input-group"> 
+          <span class="input-group-addon">Compétence</span> 
+          <input type="text"  class="form-control" ng-model="framework.name"> 
+     </div> 
+     <div class="input-group"> 
+          <span class="input-group-addon">Version</span> 
+          <input type="text" ng-model="framework.version"   class="form-control"> 
+     </div> 
+     <div class="input-group"> 
+          <span class="input-group-addon">Niveau</span> 
+          <input type="text" ng-model="framework.level"    class="form-control"> 
+     </div>
+     <div class="input-group "> 
+           <span class="input-group-addon">iD</span> 
+          <input type="text" ng-model="framework.id"   class="form-control" > 
+     </div>     
+     <input type="submit" class="btn btn-success pull-right" >
+</form>

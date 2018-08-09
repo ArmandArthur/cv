@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>CV Arthur ARMAND - Angular - Node</title>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="style.css"/>
+        <!--[if lt IE 9]>
+            <script src="html5shiv.js"></script>
+        <![endif]-->
+
+    </head>
+    <body ng-app="CV" >
+
+        <div class="container" ng-controller="CompetenceCtrl">
+
+        	<div ng-show="vueCourante == 'VUE_COMPETENCE_LISTE'">
+	        	<div class="input-group" >
+					
+		            <ul class="nav nav-pills spacer input-group-addon">
+		                <li ng-repeat="competence in competences"
+		                    ng-class="{ active: competence.value == competenceCourante }"><a href="#{{competence.value}}">{{competence.label}}</a></li>
+		            </ul>
+
+					<span class="input-group-addon"   >
+						<a href="#VUE_COMPETENCE_FORMULAIRE">
+							<span class="glyphicon glyphicon-edit" ></span>
+						</a>
+					</span>				
+				</div>
+
+
+	            <div class="tab-content spacer">
+	               <div ng-repeat="competence in competences"  id="{{competence.value}}" role="tabpanel" class="tab-pane show  {{competence.value == competenceCourante ? 'active' : 'd-none'}}"  >
+	               		<div class="progress" ng-repeat="framework in competence.frameworks"  >
+						 	<div  ng-click="display_competence_formulaire(framework)"  class="progress-bar" role="progressbar" style="width: {{framework.level}}%" aria-valuenow="{{framework.level}}" aria-valuemin="0" aria-valuemax="100">
+						 		<div data-toggle="tooltip" data-placement="top" data-title="{{framework.version}}"></div>
+						 		{{framework.name}}
+						 	</div>
+						</div>
+					</div>
+				</div>
+        	</div>
+
+        	<formulaire-competence ng-show="vueCourante == 'VUE_COMPETENCE_FORMULAIRE'" framework="frameworkCourant"></formulaire-competence>
+    	</div>
+
+    	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/tooltip.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular-sanitize.min.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="app-bootstrap.js"></script>
+        <script type="text/javascript" src="directives-form.js"></script>        
+    </body>
+
+    
+
+</html>
