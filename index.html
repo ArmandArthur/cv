@@ -18,11 +18,12 @@
     <body >
 
         <div class="container" id="categorieController" ng-controller="categorieController">
-                <div class="input-group"  ng-show="vueCourante == 'VUE_DISPLAY_CATEGORIES' || vueCourante == 'VUE_DISPLAY_CATEGORIE' " >
+                <div class="input-group"  ng-show="vueCourante == 'VUE_DISPLAY_CATEGORIES' || vueCourante == 'VUE_DISPLAY_CATEGORIE' || vueCourante == 'VUE_DISPLAY_EXPERIENCES' " >
                     
                     <ul class="nav nav-pills spacer">
                         <li ng-repeat="categorie in categories"
                             ng-class=""><a href="#VUE_DISPLAY_CATEGORIE/{{categorie.value}}">{{categorie.label}}</a></li>
+                        <li><a href="#VUE_DISPLAY_EXPERIENCES">EXPERIENCES</a></li>                            
                         <li>
                             <a href="#VUE_FORMULAIRE_CATEGORIE" ng-click="display_categorie_formulaire()">
                                 <span class="glyphicon glyphicon-edit" ></span>
@@ -31,6 +32,11 @@
                         <li>
                         <a href="#VUE_FORMULAIRE_FRAMEWORK" ng-click="display_framework_formulaire()">
                             <span class="glyphicon glyphicon-plus" ></span>
+                        </a>                            
+                        </li>
+                        <li>
+                        <a href="#VUE_FORMULAIRE_EXPERIENCE" ng-click="display_experience_formulaire()">
+                            <span class="glyphicon glyphicon-home" ></span>
                         </a>                            
                         </li>
                     </ul>
@@ -48,8 +54,20 @@
     					</div>
     				</div>
                 </div>
+                <div ng-show="vueCourante == 'VUE_DISPLAY_EXPERIENCES' ">
+                    <ul class="list-group">
+                      <li class="list-group-item" ng-repeat="experience in experiences" ng-click="display_experience_formulaire(experience)">
+                        
+                          <span>Titre : {{experience.titre}}</span><br />
+                          <span>Frameworks : </span><span ng-repeat="framework in experience.frameworks" > {{framework.nom}}</span>
+                        
+                      </li>
+                    </ul>
+                </div>
+
                 <formulaire-categorie ng-show="vueCourante == 'VUE_FORMULAIRE_CATEGORIE'" ></formulaire-categorie>
-                <formulaire-framework ng-show="vueCourante == 'VUE_FORMULAIRE_FRAMEWORK'" categories="categories" framework="frameworkCourant" ></formulaire-framework>
+                <formulaire-framework ng-show="vueCourante == 'VUE_FORMULAIRE_FRAMEWORK'" categories="categories" framework="frameworkCourant" ></formulaire-framework> 
+                <formulaire-experience ng-if="vueCourante == 'VUE_FORMULAIRE_EXPERIENCE'" frameworks="frameworks" experience="experienceCourant" ></formulaire-experience> 
         	</div>
 
         
@@ -61,6 +79,7 @@
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular.min.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular-sanitize.min.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular-resource.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular-route.min.js"></script>
         <script type="text/javascript" src="app.js"></script>
         <script type="text/javascript" src="app-bootstrap.js"></script>
         <script type="text/javascript" src="directives-form.js"></script> 

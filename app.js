@@ -2,8 +2,10 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful" ])
 .controller("categorieController", function($scope, $location, restfulService) {
 	$scope.categories = [];
 	$scope.frameworks = [];
+	$scope.experiences = [];
 	$scope.vueCourante = "VUE_DISPLAY_CATEGORIES";
 	$scope.frameworkCourant = null;
+	$scope.experienceCourant = null;
 
 
 
@@ -25,6 +27,15 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful" ])
 
 		
 	}
+	$scope.display_experience_formulaire = function(experience) 
+	{	
+		$scope.experienceCourant = experience;
+		$scope.vueCourante = 'VUE_FORMULAIRE_EXPERIENCE';
+		$location.path($scope.vueCourante); // url
+
+			
+
+	}
 
 	$scope.$on('categorieFormulaireSubmit', function(event, categorie) {
 		//console.info($scope.get_categorie_structure());
@@ -44,7 +55,15 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful" ])
 	  	})
 
     });
+	$scope.$on('experienceFormulaireSubmit', function(event, experience) {
+		//console.info($scope.get_categorie_structure());
+       restfulService.experience(experience).then(function(experienceReturned){
+	  		$scope.vueCourante = "VUE_DISPLAY_EXPERIENCES"; 
+	  		//$scope.experiences.push(experienceReturned);
+	  		$location.path($scope.vueCourante); 
+	  	});
 
+    });
 	$scope.$watch(
 		function() 
 		{
@@ -62,7 +81,31 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful" ])
 			else if(url == 'VUE_FORMULAIRE_FRAMEWORK')
 			{
 				//alert('ko')
-			}			
+			}	
+			else if(url == 'VUE_FORMULAIRE_EXPERIENCE')
+			{
+				restfulService.getFrameworks().then(function(frameworks){
+			  		$scope.frameworks = frameworks;
+	  				$scope.experienceController = false;
+			  	});
+			}
+			else if(url == 'VUE_DISPLAY_EXPERIENCES')
+			{
+				restfulService.getFrameworks().then(function(frameworks){
+			  		$scope.frameworks = frameworks;
+			  		
+			  	});
+
+				restfulService.getExperiences().then(function(experiences){
+			  		$scope.experiences = experiences;
+			  		$scope.vueCourante = url;
+			  	});
+				restfulService.getCategories().then(function(categories){
+			  		$scope.categories = categories;
+			  		//$scope.vueCourante = url;
+			  	});
+
+			}	
 			else if(url == 'VUE_DISPLAY_CATEGORIES')
 			{
 				restfulService.getCategories().then(function(categories){

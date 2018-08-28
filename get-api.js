@@ -1,140 +1,292 @@
 var serviceConstante = require(__dirname + "/get-constante.js");
+var rp = require('request-promise');
 
-exports.getCategories = function(req, res) {
-	var Categorie = sequelizeCategorie(serviceConstante);
+
+var Framework = sequelizeFramework(serviceConstante);
+var Experience = sequelizeExperience(serviceConstante);
+var Categorie = sequelizeCategorie(serviceConstante);
+var ExperienceFramework = sequelizeExperienceFramework(serviceConstante);
+
+Framework.associate = function () {
+	Framework.belongsToMany(Experience, {
+		as: 'experiences',
+		through: 'experienceframework',
+		foreignKey: 'frameworkId'
+	});
+	Framework.belongsTo(Categorie, {
+		foreignKey: 'categorie_id'
+	})
+};
+Experience.associate = function () {
+	Experience.belongsToMany(Framework, {
+		as: 'frameworks',
+		through: 'experienceframework',
+		foreignKey: 'experienceId'
+	});
+};
+
+exports.associateGlobale = function () {
+	Framework.associate();
+	Experience.associate();
+}
+exports.associateGlobale();
+exports.getCategories = function (req, res) {
+
 	Categorie.findAll().then(categories => {
 
 
-      res.setHeader('Access-Control-Allow-Origin','*') 
-	  res.send(categories);
-	  //res.end();
+		res.setHeader('Access-Control-Allow-Origin', '*')
+		res.send(categories);
+		//res.end();
 	})
 
-	
+
 };
+exports.getFrameworks = function (req, res) {
 
-exports.getFrameworksByCategorieValue = function(req, res) {
-	var Categorie = sequelizeCategorie(serviceConstante);
-	var Framework = sequelizeFramework(serviceConstante);
+	Framework.findAll().then(frameworks => {
 
-	jointure_categorie_framework(Categorie,Framework);
-	//Categorie.sync()
-	//Framework.sync()
 
-	Framework.findAll({include: [{model:Categorie, where: {value: req.params.categorie_label} }]})
-	.then(frameworks => {
-      res.setHeader('Access-Control-Allow-Origin','*') 
-	  res.send(frameworks);
+		res.setHeader('Access-Control-Allow-Origin', '*')
+		res.send(frameworks);
+		//res.end();
 	})
 
-	
+
+};
+exports.getExperiences = function (req, res) {
+
+	Experience.findAll({
+		include: [{
+			model: Framework,
+			as: 'frameworks'
+		}]
+	}).then(experiences => {
+
+
+		res.setHeader('Access-Control-Allow-Origin', '*')
+		res.send(experiences);
+		//res.end();
+	})
+
+
 };
 
-exports.categorie = function(req, res)
-{
-	var Categorie = sequelizeCategorie(serviceConstante);
-	const categorie = Categorie.build(
-		{
-			label: req.query.categorie_nom,
-			value : req.query.categorie_nom 
-		}
-	);
+exports.getFrameworksByCategorieValue = function (req, res) {
+
+
+	Framework.findAll({
+			include: [{
+				model: Categorie,
+				where: {
+					value: req.params.categorie_label
+				}
+			}]
+		})
+		.then(frameworks => {
+			res.setHeader('Access-Control-Allow-Origin', '*')
+			res.send(frameworks);
+		})
+
+
+};
+
+exports.categorie = function (req, res) {
+
+	const categorie = Categorie.build({
+		label: req.body.categorie_nom,
+		value: req.body.categorie_nom
+	});
 	categorie.save().then(() => {
-	  res.setHeader('Access-Control-Allow-Origin','*')
-	  res.send(categorie); 
+		res.setHeader('Access-Control-Allow-Origin', '*')
+		res.send(categorie);
 	})
-	
-	
+
+
 };
 
-exports.framework = function(req, res)
-{
-	var Framework = sequelizeFramework(serviceConstante);
-	var Categorie = sequelizeCategorie(serviceConstante);
-	jointure_categorie_framework(Categorie,Framework);
-	const framework =
-		{
-			id: req.query.framework_id ,
-			nom: req.query.framework_nom ,
-			version : req.query.framework_version,
-			level : req.query.framework_level,
-			categorie_id: req.query.categorie_id 
-		}
-	;
-	console.info(framework);
-	if(req.query.framework_id != null)
-	{		
-		Framework.update(framework).then(() => {
+exports.framework = function (req, res) {
 
-		  res.setHeader('Access-Control-Allow-Origin','*')
-			  Framework.findOne({
-                where: {
-                   'id': req.query.framework_id
-                },
-                include: [
-                    {model: Categorie}
-                ]
-            }).then(frameworkCategorie => {
-	  				res.send(frameworkCategorie); 
-				})
-		})		
-	}
-	else{
+	const framework = {
+		id: req.body.framework_id,
+		nom: req.body.framework_nom,
+		version: req.body.framework_version,
+		level: req.body.framework_level,
+		categorie_id: req.body.categorie_id
+	};
+	if (req.body.framework_id != null) {
+		Framework.update(framework, {
+			where: {
+				id: framework.id
+			}
+		}).then(() => {
+
+			Framework.findOne({
+				where: {
+					'id': req.body.framework_id
+				},
+				include: [{
+					model: Categorie
+				}]
+			}).then(frameworkCategorie => {
+				res.send(frameworkCategorie);
+			})
+		})
+	} else {
 
 		Framework.create(framework).then((frameworkItem) => {
-		  res.setHeader('Access-Control-Allow-Origin','*')
-			  Framework.findOne({
-                where: {
-                   'id': frameworkItem.get('id')
-                },
-                include: [
-                    {model: Categorie}
-                ]
-            }).then(frameworkCategorie => {
-	  				res.send(frameworkCategorie); 
-				})
-		})	
+			Framework.findOne({
+				where: {
+					'id': frameworkItem.get('id')
+				},
+				include: [{
+					model: Categorie
+				}]
+			}).then(frameworkCategorie => {
+				res.send(frameworkCategorie);
+			})
+		})
 	}
 
 
-	
-	
 };
 
-function sequelizeCategorie(serviceConstante){
+
+exports.experience = function (req, res) {
+
+
+	//jointure_experience_framework(Experience,Framework,ExperienceFramework);
+	const experience = {
+		titre: req.body.experience_titre,
+		id: req.body.experience_id
+	};
+
+
+	if (typeof experience.id === "undefined") 
+	{
+
+			Experience.create(experience).then((experienceInsert)=>{
+					experienceInsert.addFramework(req.body.frameworks_checked);
+
+					// le timeout permet aux insert de s'effectuer, avec des promises, ça serait plus propre
+					// 200 c'est rapide néanmoins
+					setTimeout(function(){ Experience.findOne({
+						where: {
+							'id': experienceInsert.get('id')
+						},
+						include: [{
+							model: Framework,
+							as: 'frameworks'
+						}]
+					}).then(experienceFinale => {
+						res.send(experienceFinale)
+					}) }, 200);
+			});
+	}
+	else
+	{
+		Experience.update(experience, {
+			where: {
+				id: experience.id
+			}
+		}).then((d) => {
+			Experience.findOne({
+				where: {
+					'id': experience.id
+				}
+				,
+				include: [{
+							model: Framework,
+							as: 'frameworks'
+						}]
+			}).then(experienceUpdate => {
+				experienceUpdate.getFrameworks().then((frameworks) => {
+					experienceUpdate.removeFramework(frameworks);
+					experienceUpdate.addFramework(req.body.frameworks_checked);
+
+					setTimeout(function(){ Experience.findOne({
+						where: {
+							'id': experienceUpdate.get('id')
+						},
+						include: [{
+							model: Framework,
+							as: 'frameworks'
+						}]
+					}).then(experienceFinale => {
+						res.send(experienceFinale)
+					}) }, 200);
+
+				});
+			});
+
+		});
+	}
+
+
+};
+
+function sequelizeCategorie(serviceConstante) {
 	return serviceConstante.sequelize.define('categorie', {
-			   label: {
-			    type: serviceConstante.Sequelize.STRING
-			  },
-			  value: {
-			    type: serviceConstante.Sequelize.STRING
-			  }
-			});
+		label: {
+			type: serviceConstante.Sequelize.STRING
+		},
+		value: {
+			type: serviceConstante.Sequelize.STRING
+		}
+	});
 }
 
-function sequelizeFramework(serviceConstante){
+function sequelizeFramework(serviceConstante) {
 	return serviceConstante.sequelize.define('framework', {
-			  id: {
-			    type: serviceConstante.Sequelize.INTEGER,
-			    primaryKey: true,
-			    autoIncrement: true
-			  },		
-			   nom: {
-			    type: serviceConstante.Sequelize.STRING
-			  },
-			  version: {
-			    type: serviceConstante.Sequelize.STRING
-			  }
-			  ,
-			  level: {
-			    type: serviceConstante.Sequelize.STRING
-			  },
-  			  categorie_id: {
-			    type: serviceConstante.Sequelize.INTEGER
-			  }
-			});
+		id: {
+			type: serviceConstante.Sequelize.INTEGER,
+			primaryKey: true,
+			autoIncrement: true
+		},
+		nom: {
+			type: serviceConstante.Sequelize.STRING
+		},
+		version: {
+			type: serviceConstante.Sequelize.STRING
+		},
+		level: {
+			type: serviceConstante.Sequelize.STRING
+		},
+		categorie_id: {
+			type: serviceConstante.Sequelize.INTEGER
+		}
+	}, );
 }
 
-function jointure_categorie_framework(Categorie,Framework){
-	Framework.belongsTo(Categorie, {foreignKey: 'categorie_id'})
+function sequelizeExperience(serviceConstante) {
+	return serviceConstante.sequelize.define('experience', {
+		id: {
+			type: serviceConstante.Sequelize.INTEGER,
+			primaryKey: true,
+			autoIncrement: true
+		},
+		titre: {
+			type: serviceConstante.Sequelize.STRING
+		}
+	});
+
+
+}
+
+function sequelizeExperienceFramework(serviceConstante) {
+	return serviceConstante.sequelize.define('experienceframework', {
+		id: {
+			type: serviceConstante.Sequelize.INTEGER,
+			primaryKey: true,
+			autoIncrement: true
+		},
+		experienceId: {
+			type: serviceConstante.Sequelize.INTEGER
+		},
+		frameworkId: {
+			type: serviceConstante.Sequelize.INTEGER
+		}
+	}, {
+		tableName: 'experienceframework'
+	});
 }
