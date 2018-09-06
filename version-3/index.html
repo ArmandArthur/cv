@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr"  ng-app="cv">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>CV Arthur ARMAND - Angular - Node</title>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="style.css"/>
+        <!--[if lt IE 9]>
+            <script src="html5shiv.js"></script>
+        <![endif]-->
+
+    </head>
+    <body >
+
+        <div class="container" id="categorieController" ng-controller="categorieController">
+                <div class="input-group"  ng-show="vueCourante == 'VUE_DISPLAY_CATEGORIES' || vueCourante == 'VUE_DISPLAY_CATEGORIE' || vueCourante == 'VUE_DISPLAY_EXPERIENCES' " >
+                    
+                    <ul class="nav nav-pills spacer">
+                        <li ng-repeat="categorie in categories"
+                            ng-class=""><a href="#VUE_DISPLAY_CATEGORIE/{{categorie.value}}">{{categorie.label}}</a></li>
+                        <li><a href="#VUE_DISPLAY_EXPERIENCES">EXPERIENCES</a></li>                            
+                        <li>
+                            <a href="#VUE_FORMULAIRE_CATEGORIE" ng-click="display_categorie_formulaire()">
+                                <span class="glyphicon glyphicon-edit" ></span>
+                            </a>
+                        </li>
+                        <li>
+                        <a href="#VUE_FORMULAIRE_FRAMEWORK" ng-click="display_framework_formulaire()">
+                            <span class="glyphicon glyphicon-plus" ></span>
+                        </a>                            
+                        </li>
+                        <li>
+                        <a href="#VUE_FORMULAIRE_EXPERIENCE" ng-click="display_experience_formulaire()">
+                            <span class="glyphicon glyphicon-home" ></span>
+                        </a>                            
+                        </li>
+                    </ul>
+                </div>
+
+                <div ng-show="vueCourante == 'VUE_DISPLAY_CATEGORIE' ">
+    	            <div class="tab-content spacer">
+    	               <div ng-repeat="framework in frameworks"  id="{{framework.id}}" role="tabpanel" class="tab-pane show active"  >
+    	               		<div class="progress" >
+    						 	<div  ng-click="display_framework_formulaire(framework)"  class="progress-bar" role="progressbar" style="width: {{framework.level}}%" aria-valuenow="{{framework.level}}" aria-valuemin="0" aria-valuemax="100">
+    						 		<div data-toggle="tooltip" data-placement="top" data-title="{{framework.version}}"></div>
+    						 		{{framework.nom}} 
+    						 	</div>
+    						</div>
+    					</div>
+    				</div>
+                </div>
+                <div ng-show="vueCourante == 'VUE_DISPLAY_EXPERIENCES' ">
+                    <ul class="list-group">
+                      <li class="list-group-item" ng-repeat="experience in experiences" ng-click="display_experience_formulaire(experience)">
+                        
+                          <span>Titre : {{experience.titre}}</span><br />
+                          <span>Frameworks : </span><span ng-repeat="framework in experience.frameworks" > {{framework.nom}}</span>
+                        
+                      </li>
+                    </ul>
+                </div>
+
+                <formulaire-categorie ng-show="vueCourante == 'VUE_FORMULAIRE_CATEGORIE'" ></formulaire-categorie>
+                <formulaire-framework ng-show="vueCourante == 'VUE_FORMULAIRE_FRAMEWORK'" categories="categories" framework="frameworkCourant" ></formulaire-framework> 
+                <formulaire-experience ng-if="vueCourante == 'VUE_FORMULAIRE_EXPERIENCE'" frameworks="frameworks" experience="experienceCourant" ></formulaire-experience> 
+        	</div>
+
+        
+    	</div>
+
+    	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/tooltip.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular-sanitize.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular-resource.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular-route.min.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="app-bootstrap.js"></script>
+        <script type="text/javascript" src="directives-form.js"></script> 
+        <script type="text/javascript" src="directives-api-restful.js"></script>          
+
+
+    </body>
+
+    
+
+</html>
