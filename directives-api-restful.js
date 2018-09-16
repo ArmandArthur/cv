@@ -1,7 +1,7 @@
 angular.module("DirectivesApiRestful", ["ngResource"])
 .factory("restfulService", function($resource){
 
-    var url = "http://armand-arthur.com:8084/api/";
+    var url = "http://armand-arthur.com:8085/api/";
     var serviceRest  = $resource(
         url, 
         null, 
