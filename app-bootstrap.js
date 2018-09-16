@@ -24,5 +24,3 @@ function updateTooltip(element, tooltip) {
     });
 }
 
-
-
