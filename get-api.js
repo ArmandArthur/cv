@@ -260,7 +260,7 @@ function sequelizeFramework(serviceConstante) {
 		categorie_id: {
 			type: serviceConstante.Sequelize.INTEGER
 		}
-	}, );
+	} );
 }
 
 function sequelizeExperience(serviceConstante) {
