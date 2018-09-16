@@ -6,7 +6,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful" ])
 	$scope.vueCourante = "VUE_DISPLAY_CATEGORIES";
 	$scope.frameworkCourant = null;
 	$scope.experienceCourant = null;
-
+	$location.path($scope.vueCourante);
 
 
 	$scope.display_categorie_formulaire = function() 
