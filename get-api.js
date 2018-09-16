@@ -232,6 +232,11 @@ exports.experience = function (req, res) {
 
 function sequelizeCategorie(serviceConstante) {
 	return serviceConstante.sequelize.define('categorie', {
+		id: {
+			type: serviceConstante.Sequelize.INTEGER,
+			primaryKey: true,
+			autoIncrement: true
+		},		
 		label: {
 			type: serviceConstante.Sequelize.STRING
 		},
