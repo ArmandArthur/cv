@@ -7,10 +7,7 @@ var Experience = sequelizeExperience(serviceConstante);
 var Categorie = sequelizeCategorie(serviceConstante);
 var ExperienceFramework = sequelizeExperienceFramework(serviceConstante);
 
-Framework.sync({force: true});
-Experience.sync({force: true});
-Categorie.sync({force: true});
-ExperienceFramework.sync({force: true});
+
 
 Framework.associate = function () {
 	Framework.belongsToMany(Experience, {
@@ -35,6 +32,10 @@ exports.associateGlobale = function () {
 	Experience.associate();
 }
 exports.associateGlobale();
+Framework.sync({force: true});
+Experience.sync({force: true});
+Categorie.sync({force: true});
+ExperienceFramework.sync({force: true});
 exports.getCategories = function (req, res) {
 
 	Categorie.findAll().then(categories => {
