@@ -74,63 +74,44 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful" ])
 			var url = location.split('/')[1];
 			var categorie_value = location.split('/')[2];
 
+
+			restfulService.getFrameworks().then(function(frameworks){
+		  		$scope.frameworks = frameworks;
+		  		
+		  	});
+
+			restfulService.getExperiences().then(function(experiences){
+		  		$scope.experiences = experiences;
+		  		
+		  	});
+			restfulService.getCategories().then(function(categories){
+		  		$scope.categories = categories;
+		  	});
+
 			if(url == 'VUE_FORMULAIRE_CATEGORIE')
 			{
-				//alert('ko')
+				$scope.vueCourante = url;
 			}
 			else if(url == 'VUE_FORMULAIRE_FRAMEWORK')
 			{
-				//alert('ko')
+				$scope.vueCourante = url;
 			}	
 			else if(url == 'VUE_FORMULAIRE_EXPERIENCE')
 			{
-				restfulService.getFrameworks().then(function(frameworks){
-			  		$scope.frameworks = frameworks;
-	  				$scope.experienceController = false;
-			  	});
+				$scope.vueCourante = url;
 			}
 			else if(url == 'VUE_DISPLAY_EXPERIENCES')
 			{
-				restfulService.getFrameworks().then(function(frameworks){
-			  		$scope.frameworks = frameworks;
-			  		
-			  	});
-
-				restfulService.getExperiences().then(function(experiences){
-			  		$scope.experiences = experiences;
-			  		$scope.vueCourante = url;
-			  	});
-				restfulService.getCategories().then(function(categories){
-			  		$scope.categories = categories;
-			  		//$scope.vueCourante = url;
-			  	});
+				$scope.vueCourante = url;
 
 			}	
 			else if(url == 'VUE_DISPLAY_CATEGORIES')
 			{
-				restfulService.getCategories().then(function(categories){
-			  		$scope.categories = categories;
-			  		$scope.vueCourante = url;
-			  	});
+				$scope.vueCourante = url;
 			}			
 			else if(url == 'VUE_DISPLAY_CATEGORIE')
 			{
-				restfulService.getCategories().then(function(categories){
-			  		$scope.categories = categories;
-			  		$scope.vueCourante = url;
-			  	});
-
-				restfulService.getFrameworksByCategorieValue(categorie_value).then(function(frameworks){
-					$scope.frameworks = [];					
-			  		angular.forEach(frameworks, function(framework, key) {
-			  			$scope.frameworks.push(framework);
-			  		});
-
-
-
-			  		
-
-			  	});
+				$scope.vueCourante = url;
 
 			}
 			

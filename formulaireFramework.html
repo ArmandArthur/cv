@@ -1,21 +1,22 @@
 <form name="frameworkForm" id="frameworkForm" method="POST" class="spacer"  ng-submit="submit()"  > 
      <div class="input-group">
-<select ng-model="framework.categorie.id"  >
+<select ng-model="framework.categorie.id"  class="form-control" >
+	<option value="/" ng-model="/">Choix du framework</option>
    <option data-ng-repeat="categorie in categories" value="{{categorie.id}}" ng-selected="categorie.id == framework.categorie.id">{{categorie.label}}</option>
                                                 </select>
      </div> 
-     <div class="input-group" > 
+     <div class="input-group spacer"  style="display:none;"> 
           <input type="text"  class="form-control" ng-value="id" ng-model="framework.id"> 
      </div> 
-     <div class="input-group"> 
+     <div class="input-group spacer"> 
           <span class="input-group-addon">Nom</span> 
           <input type="text"  class="form-control"  ng-value="nom" ng-model="framework.nom"> 
      </div> 
-     <div class="input-group"> 
+     <div class="input-group spacer"> 
           <span class="input-group-addon">Version</span> 
           <input type="text"  class="form-control" ng-value="version" ng-model="framework.version"> 
      </div>    
-     <div class="input-group"> 
+     <div class="input-group spacer"> 
           <span class="input-group-addon">Niveau</span> 
           <input type="text"  class="form-control" ng-value="level" ng-model="framework.level"> 
      </div>            

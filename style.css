@@ -5,3 +5,25 @@
 	margin-top: 20px;
 }
 
+li{
+	list-style: none;
+
+}
+li a{
+	text-transform: uppercase;
+}
+li a span{
+	float:right;
+}
+ul{
+	padding: 10px;
+}
+
+
+.input-group-addon-exception:first-child{
+	border-bottom-right-radius: 3px;
+	border-top-right-radius: 3px;
+	border-top-right: 1px;
+
+}
+
