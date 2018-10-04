@@ -3,11 +3,11 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 	$scope.categories = [];
 	$scope.frameworks = [];
 	$scope.experiences = [];
-	//$scope.vueCourante = "VUE_DISPLAY_CATEGORIE";
+	$scope.vueCourante = "VUE_HOME";
 	$scope.frameworkCourant = null;
 	$scope.experienceCourant = null;
 	$scope.isConnectedByCookie = false;
-	//$location.path($scope.vueCourante);
+	$location.path($scope.vueCourante);
 
 	
 
@@ -153,7 +153,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 
 					$scope.vueCourante = url;
 					$scope.animateTechnologies = "technologies";
-			  									
+
 			}			
 
 			

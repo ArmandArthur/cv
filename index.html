@@ -61,17 +61,17 @@
                     Pour accéder à la partie d'administration, veuillez entrer votre email svp.
                 </div>
 
-                <formulaire-utilisateur ng-if="vueCourante == 'VUE_DISPLAY_CATEGORIES' && isConnectedByCookie == false" ></formulaire-utilisateur>
+                <formulaire-utilisateur ng-if="vueCourante == 'VUE_HOME' && isConnectedByCookie == false" ></formulaire-utilisateur>
 
                     <div class="animate {{animateTechnologies}}" ng-if="vueCourante == 'VUE_DISPLAY_CATEGORIES' ">
-                        <div ng-if="vueCourante == 'VUE_DISPLAY_CATEGORIE'" class="alert alert-warning navbar-collapse-question collapse ">
+                        <div ng-if="vueCourante == 'VUE_DISPLAY_CATEGORIES'" class="alert alert-warning navbar-collapse-question collapse ">
                             <h6>CONNAISSANCE DE LA TECHNOLOGIE (%)</h6>
                           </div>
 
                         <nav aria-label="breadcrumb" class="spacer">
                           <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#/VUE_DISPLAY_CATEGORIES">Accueil</a></li>
-                            <li class="breadcrumb-item"><a href="#/VUE_DISPLAY_CATEGORIE">Technologies</a></li>
+                            <li class="breadcrumb-item"><a href="#/VUE_DISPLAY_CATEGORIES">Technologies</a></li>
                           </ol>
                         </nav> 
                        
