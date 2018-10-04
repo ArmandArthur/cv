@@ -166,6 +166,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 			if( utilisateur.email )
 			{
 				$scope.isConnectedByCookie = true;
+				$scope.vueCourante = 'VUE_DISPLAY_EXPERIENCES';
 			}
 		});
     });
