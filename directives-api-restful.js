@@ -1,8 +1,8 @@
 angular.module("DirectivesApiRestful", ["ngResource"])
 .factory("restfulService", function($resource){
 
-     var url = "http://armand-arthur.com:8085/api/"; 
-    //var url = "http://arthur.cv-angular-node.com:8085/api/"
+     //var url = "http://armand-arthur.com:8085/api/"; 
+    var url = "http://arthur.cv-angular-node.com:8085/api/"
     var serviceRest  = $resource(
         url, 
         null, 
@@ -11,6 +11,7 @@ angular.module("DirectivesApiRestful", ["ngResource"])
             "getFrameworks" : { method: "GET", isArray: true, url: url+'frameworks'},
             "getExperiences" : { method: "GET", isArray: true, url: url+'experiences'},
             "getFrameworksByCategorieValue" : { method: "GET", isArray: true, url :url+'categorie/:categorie_label/frameworks'},
+            "getUtilisateurByIp" : { method: "GET", isArray: false, url :url+'utilisateur/:ip'}
 
             //"getCategorieStructure" :  { method: "GET", isArray: false, url : url+'categorie_structure'}
             //"getFrameworks" : { method: "GET", isArray: false, url : url_api+'frameworks'}
@@ -25,6 +26,7 @@ angular.module("DirectivesApiRestful", ["ngResource"])
     var experienceServiceRest = $resource(url+'experience_crud', null, {
         post : {headers: {'Content-Type': 'text/plain'} }
     });
+    var utilisateurServiceRest = $resource(url+'utilisateur_crud', null, {});
 
     return {
         getCategories : function(){
@@ -111,6 +113,31 @@ angular.module("DirectivesApiRestful", ["ngResource"])
                     return 'error';
                 } 
             );
-        }  
+        },
+        utilisateur : function(utilisateur){
+
+
+            return utilisateurServiceRest.save(utilisateur).$promise
+            .then(
+                function(data) {
+                    return data;
+                },
+                function() {
+                    return 'error';
+                } 
+            );
+        },
+        getUtilisateurByIp: function(ip){
+            return serviceRest.getUtilisateurByIp({ip: ip}).$promise
+            .then(
+                function(data) {
+                    return data;
+                },
+                function(error) {
+                    console.info(error);
+                    return 'error';
+                } 
+            );
+        }           
     }
 });

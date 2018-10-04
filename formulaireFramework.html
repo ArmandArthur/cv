@@ -1,24 +1,36 @@
-<form name="frameworkForm" id="frameworkForm" method="POST" class="spacer"  ng-submit="submit()"  > 
+<div class="alert alert-warning navbar-collapse-question collapse ">
+    <h6>FORMULAIRE FRAMEWORK</h6>
+</div>
+<nav aria-label="breadcrumb" class="spacer">
+                          <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#/VUE_DISPLAY_CATEGORIES">Accueil</a></li>
+                            <li class="breadcrumb-item"><a href="#/VUE_DISPLAY_CATEGORIE">Formulaire</a></li>
+                            <li class="breadcrumb-item"><a href="#/VUE_DISPLAY_CATEGORIE">Framework</a></li>
+                          </ol>
+                        </nav> 
+<form name="frameworkForm" id="frameworkForm" method="POST" class="spacer animate {{animateExperiences}}"   ng-submit="submit(frameworkForm)" ng-validate="validationFramework"> 
      <div class="input-group">
-<select ng-model="framework.categorie.id"  class="form-control" >
-	<option value="/" ng-model="/">Choix du framework</option>
+<select name="categorie" ng-model="framework.categorie.id"  class="form-control" >
+	<option value="" ng-selected="framework.categorie.id == null ">Choix de la catégorie</option>
    <option data-ng-repeat="categorie in categories" value="{{categorie.id}}" ng-selected="categorie.id == framework.categorie.id">{{categorie.label}}</option>
                                                 </select>
      </div> 
      <div class="input-group spacer"  style="display:none;"> 
-          <input type="text"  class="form-control" ng-value="id" ng-model="framework.id"> 
+          <input type="text"  class="form-control" ng-value="id" ng-model="framework.id" name="id"> 
      </div> 
      <div class="input-group spacer"> 
           <span class="input-group-addon">Nom</span> 
-          <input type="text"  class="form-control"  ng-value="nom" ng-model="framework.nom"> 
+          <input type="text"  class="form-control"  ng-value="nom" ng-model="framework.nom" name="nom"> 
      </div> 
      <div class="input-group spacer"> 
           <span class="input-group-addon">Version</span> 
-          <input type="text"  class="form-control" ng-value="version" ng-model="framework.version"> 
+          <input type="text"  class="form-control" ng-value="version" ng-model="framework.version" name="version"> 
      </div>    
      <div class="input-group spacer"> 
           <span class="input-group-addon">Niveau</span> 
-          <input type="text"  class="form-control" ng-value="level" ng-model="framework.level"> 
+          <input type="text"  class="form-control" ng-value="level" ng-model="framework.level" name="level"> 
      </div>            
-     <input type="submit" class="btn btn-success pull-right" >
+    <br />
+    <br />
+    <input type="submit" class="btn btn-success pull-right">
 </form>

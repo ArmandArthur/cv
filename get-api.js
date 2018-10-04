@@ -6,7 +6,7 @@ var Framework = sequelizeFramework(serviceConstante);
 var Experience = sequelizeExperience(serviceConstante);
 var Categorie = sequelizeCategorie(serviceConstante);
 var ExperienceFramework = sequelizeExperienceFramework(serviceConstante);
-
+var Utilisateur = sequelizeUtilisateur(serviceConstante);
 
 
 Framework.associate = function () {
@@ -32,10 +32,13 @@ exports.associateGlobale = function () {
 	Experience.associate();
 }
 exports.associateGlobale();
-/*Framework.sync();
+/*Categorie.sync();
+Framework.sync();
+
+
 Experience.sync();
-Categorie.sync();
-ExperienceFramework.sync();*/
+ExperienceFramework.sync();
+Utilisateur.sync();*/
 
 exports.getCategories = function (req, res) {
 
@@ -98,6 +101,22 @@ exports.getFrameworksByCategorieValue = function (req, res) {
 
 };
 
+exports.getUtilisateurByIp = function (req, res) {
+
+
+	Utilisateur.findOne({
+			where : {
+				ip : req.params.ip
+			}
+		})
+		.then(utilisateur => {
+			res.setHeader('Access-Control-Allow-Origin', '*')
+			res.send(utilisateur);
+		})
+
+
+};
+
 exports.categorie = function (req, res) {
 
 	const categorie = Categorie.build({
@@ -107,6 +126,20 @@ exports.categorie = function (req, res) {
 	categorie.save().then(() => {
 		res.setHeader('Access-Control-Allow-Origin', '*')
 		res.send(categorie);
+	})
+
+
+};
+
+exports.utilisateur = function (req, res) {
+
+	const utilisateur = Utilisateur.build({
+		email: req.body.email,
+		ip: req.body.ip
+	});
+	utilisateur.save().then(() => {
+		res.setHeader('Access-Control-Allow-Origin', '*')
+		res.send(utilisateur);
 	})
 
 
@@ -165,11 +198,15 @@ exports.experience = function (req, res) {
 	//jointure_experience_framework(Experience,Framework,ExperienceFramework);
 	const experience = {
 		titre: req.body.experience_titre,
-		id: req.body.experience_id
+		id: req.body.experience_id,
+		date_debut: req.body.date_debut,
+		date_fin: req.body.date_fin,
+		type: req.body.type,
+		description: req.body.description
 	};
 
 
-	if (typeof experience.id === "undefined") 
+	if (experience.id == null) 
 	{
 
 			Experience.create(experience).then((experienceInsert)=>{
@@ -280,6 +317,22 @@ function sequelizeExperience(serviceConstante) {
 		titre: {
 			type: serviceConstante.Sequelize.STRING
 		}
+		,
+		date_debut: {
+			type: serviceConstante.Sequelize.DATE
+		}
+		,
+		date_fin: {
+			type: serviceConstante.Sequelize.DATE
+		}
+		,
+		type: {
+			type: serviceConstante.Sequelize.INTEGER
+		}
+		,
+		description: {
+			type: serviceConstante.Sequelize.TEXT
+		}
 	});
 
 
@@ -301,4 +354,22 @@ function sequelizeExperienceFramework(serviceConstante) {
 	}, {
 		tableName: 'experienceframework'
 	});
+}
+
+function sequelizeUtilisateur(serviceConstante) {
+	return serviceConstante.sequelize.define('utilisateur', {
+		id: {
+			type: serviceConstante.Sequelize.INTEGER,
+			primaryKey: true,
+			autoIncrement: true
+		},
+		email: {
+			type: serviceConstante.Sequelize.STRING
+		},
+		ip: {
+			type: serviceConstante.Sequelize.STRING
+		}
+	});
+
+
 }

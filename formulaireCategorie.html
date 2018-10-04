@@ -1,7 +1,18 @@
+<div class="alert alert-warning navbar-collapse-question collapse ">
+    <h6>FORMULAIRE CATEGORIE</h6>
+</div>
+<nav aria-label="breadcrumb" class="spacer">
+                          <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#/VUE_DISPLAY_CATEGORIES">Accueil</a></li>
+                            <li class="breadcrumb-item"><a href="#/VUE_DISPLAY_CATEGORIE">Formulaire</a></li>
+                            <li class="breadcrumb-item"><a href="#/VUE_DISPLAY_CATEGORIE">Catégorie</a></li>
+                          </ol>
+                        </nav> 
 <form name="categorieForm" method="POST" class="spacer"  ng-submit="submit()" ng-controller="categorieFormulaireController" > 
      <div class="input-group"> 
           <span class="input-group-addon">Nom de la catégorie</span> 
           <input type="text"  class="form-control" ng-model="categorie.nom"> 
-     </div>    
+     </div>
+       <br />    
      <input type="submit" class="btn btn-success pull-right" >
 </form>

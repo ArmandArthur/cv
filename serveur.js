@@ -24,10 +24,12 @@ api.get("/categories", serviceApi.getCategories);
 api.get("/frameworks", serviceApi.getFrameworks);
 api.get("/experiences", serviceApi.getExperiences);
 api.get("/categorie/:categorie_label/frameworks", serviceApi.getFrameworksByCategorieValue);
+api.get("/utilisateur/:ip", serviceApi.getUtilisateurByIp);
 
 api.post("/categorie_crud", serviceApi.categorie); 
 api.post("/framework_crud", serviceApi.framework); 
 api.post("/experience_crud", serviceApi.experience); 
+api.post("/utilisateur_crud", serviceApi.utilisateur); 
 
 app.use("/api", api);
 

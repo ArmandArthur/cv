@@ -1,13 +1,15 @@
-angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful" ])
+angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAnimate"])
 .controller("categorieController", function($scope, $location, restfulService) {
 	$scope.categories = [];
 	$scope.frameworks = [];
 	$scope.experiences = [];
-	$scope.vueCourante = "VUE_DISPLAY_CATEGORIES";
+	//$scope.vueCourante = "VUE_DISPLAY_CATEGORIE";
 	$scope.frameworkCourant = null;
 	$scope.experienceCourant = null;
-	$location.path($scope.vueCourante);
+	$scope.isConnectedByCookie = false;
+	//$location.path($scope.vueCourante);
 
+	
 
 	$scope.display_categorie_formulaire = function() 
 	{	
@@ -19,7 +21,21 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful" ])
 	$scope.display_framework_formulaire = function(framework) 
 	{	
 		//$scope.framework_selection(framework);
-		$scope.frameworkCourant = framework;
+		if(framework != null)
+		{
+			$scope.frameworkCourant = framework;
+		}
+		else{
+			$scope.frameworkCourant =  {
+ 
+                  categorie : {
+                  		id : null
+                  },
+                  nom : null,
+                  version: null,
+                  level: null
+              };
+		}
 		$scope.vueCourante = 'VUE_FORMULAIRE_FRAMEWORK';
 		
 		//$scope.framework = framework;
@@ -29,7 +45,22 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful" ])
 	}
 	$scope.display_experience_formulaire = function(experience) 
 	{	
-		$scope.experienceCourant = experience;
+		if(experience != null)
+		{
+			$scope.experienceCourant = experience;
+		}
+		else{
+			$scope.experienceCourant =  {
+ 
+                  titre : null,
+                  id : null,
+                  date_debut: null,
+                  date_fin: null,
+                  type: null,
+                  description: null,
+                  frameworks : []
+              };
+		}
 		$scope.vueCourante = 'VUE_FORMULAIRE_EXPERIENCE';
 		$location.path($scope.vueCourante); // url
 
@@ -64,6 +95,20 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful" ])
 	  	});
 
     });
+
+	$scope.$on('utilisateurFormulaireSubmit', function(event, utilisateur) {
+		//console.info($scope.get_categorie_structure());
+       restfulService.utilisateur(utilisateur).then(function(utilisateurReturned){
+       			if(utilisateurReturned.email != '')
+   				{
+   					$scope.isConnectedByCookie = true;
+   				}
+	  	});
+
+    });
+
+
+
 	$scope.$watch(
 		function() 
 		{
@@ -73,7 +118,6 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful" ])
 		{
 			var url = location.split('/')[1];
 			var categorie_value = location.split('/')[2];
-
 
 			restfulService.getFrameworks().then(function(frameworks){
 		  		$scope.frameworks = frameworks;
@@ -88,37 +132,43 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful" ])
 		  		$scope.categories = categories;
 		  	});
 
-			if(url == 'VUE_FORMULAIRE_CATEGORIE')
-			{
-				$scope.vueCourante = url;
-			}
-			else if(url == 'VUE_FORMULAIRE_FRAMEWORK')
+
+			if(url == 'VUE_FORMULAIRE_FRAMEWORK')
 			{
 				$scope.vueCourante = url;
 			}	
 			else if(url == 'VUE_FORMULAIRE_EXPERIENCE')
 			{
 				$scope.vueCourante = url;
+				$scope.animateTechnologies = "technologies";
 			}
 			else if(url == 'VUE_DISPLAY_EXPERIENCES')
 			{
 				$scope.vueCourante = url;
 
+
 			}	
 			else if(url == 'VUE_DISPLAY_CATEGORIES')
 			{
-				$scope.vueCourante = url;
-			}			
-			else if(url == 'VUE_DISPLAY_CATEGORIE')
-			{
-				$scope.vueCourante = url;
 
-			}
+					$scope.vueCourante = url;
+					$scope.animateTechnologies = "technologies";
+			  									
+			}			
+
 			
 		
 		}
 	);
 
+    $.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function(data) {
+		restfulService.getUtilisateurByIp(data.geobytesipaddress).then(function(utilisateur){
+			if( utilisateur.email )
+			{
+				$scope.isConnectedByCookie = true;
+			}
+		});
+    });
 
 
 

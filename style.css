@@ -9,8 +9,21 @@ li{
 	list-style: none;
 
 }
+
 li a{
+	color: #5b9bd1;
+	background-color: #f6f9fb;
+	margin-left: -2px;
+	margin-right: 10px;
+	padding: 0px !important;
+}
+
+.breadcrumb a{
+	text-transform: capitalize;
+}
+#tab-cateogories li a {
 	text-transform: uppercase;
+	margin-right: 20px;
 }
 li a span{
 	float:right;
@@ -27,3 +40,72 @@ ul{
 
 }
 
+.alert{
+	padding: 6px !important;
+	margin-bottom: 0px;
+}
+
+.container, .navbar{
+	padding: 10px;
+}
+.error{
+	border: 1px solid #a94442;
+}
+
+label.error{
+	position: absolute;
+	top: 34px;
+	left: 1px;
+	font-size: 10px;
+	color:  #a94442;;
+	border: none;
+}
+.checkbox-container label.error{
+	top: -18px;
+}
+
+.alert .p-5 {
+  padding: 1px 0 2px 0 !important;
+  display: block;
+}
+
+
+
+
+
+.animate{
+ -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+    -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+    -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+    transition-delay: 0s;
+  padding:10px;
+
+  position: absolute;
+  left: 0;
+  opacity: 1;
+  width: 100%;
+}
+
+.animate.ng-enter {
+  left: -100%;
+  opacity:0;
+}
+
+.animate.technologies{
+ -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+    -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+    -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
+  padding:10px;
+
+  position: absolute;
+  left: 0;
+  opacity: 1;
+  width: 100%;
+}
+
+.animate.technologies.ng-enter {
+  left: 100%;
+  opacity:0;
+}

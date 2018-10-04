@@ -1,27 +1,79 @@
-<form name="experienceForm" id="experienceForm" method="POST" class="spacer"  ng-submit="submit()"  > 
-     <div class="input-group" style="display:none;"> 
-          <input type="text"  class="form-control" ng-value="id" ng-model="experience.id"> 
-     </div>      
-     <div class="input-group spacer"> 
-          <span class="input-group-addon">Titre</span> 
-          <input type="text"  class="form-control" ng-value="titre" ng-model="experience.titre"> 
-     </div>    
-     <div class=" spacer" > 
-          <span class="input-group-addon form-control input-group-addon-exception" >Framework </span>
-          <br />
-          <div  ng-repeat="(key,framework) in frameworks" ng-init="framework.selected = (checkbox_selection.indexOf(framework.id) > -1)" style="display:inline-block;">
-          
-          <span style="width:25%" class="input-group-addon form-control input-group-addon-exception" >
-               
-             <input 
-              type="checkbox" 
-             
-              value={{framework.id}}  ng-model="framework.selected" ng-click="ngclick(framework.id)" 
-            >    
-          </span>
-                    <label class="form-control" >{{framework.nom}}</label>
 
-          </div>
-     </div> 
-     <input type="submit" class="btn btn-success pull-right" >
+<div class="alert alert-warning navbar-collapse-question collapse ">
+    <h6>FORMULAIRE EXPERIENCE</h6>
+</div>
+<nav aria-label="breadcrumb" class="spacer">
+                          <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#/VUE_DISPLAY_CATEGORIES">Accueil</a></li>
+                            <li class="breadcrumb-item"><a href="#/VUE_DISPLAY_CATEGORIE">Formulaire</a></li>
+                            <li class="breadcrumb-item"><a href="#/VUE_DISPLAY_CATEGORIE">Expérience</a></li>
+                          </ol>
+                        </nav> 
+<form  name="experienceForm" id="experienceForm" method="POST" class="spacer" ng-submit="submit(experienceForm)" ng-validate="validationExperience">
+    <div style="display:none;" ng-if="experience.id != ''" class="input-group">
+        <input type="text" class="form-control" ng-value="id" ng-model="experience.id">
+    </div>
+    <div class="input-group spacer">
+        <span class="input-group-addon">Titre</span>
+        <input type="text" class="form-control" ng-model="experience.titre" name="titre">
+
+    </div>
+    <div class="spacer">
+        <div class='input-group date' id='datetimepicker3'>
+            <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+            </span>
+            <input ng-model="experience.date_debut" type='text' class="form-control" name="datedebut" />
+
+        </div>
+    </div>
+    <div class="spacer">
+        <div class='input-group date' id='datetimepicker3'>
+            <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+            </span>
+            <input ng-model="experience.date_fin" type='text' class="form-control" name="datefin" />
+
+        </div>
+    </div>
+    <div class=" spacer">
+        <span class="input-group-addon form-control input-group-addon-exception">Framework </span>
+        <br />
+        <div class="checkbox-container" ng-repeat="(key,framework) in frameworks" ng-init="framework.selected = (checkbox_selection.indexOf(framework.id) > -1)" style="display:inline-block; position: relative;">
+
+            <label class="form-control">
+                <input name="frameworks" type="checkbox" value={{framework.id}} ng-model="framework.selected" ng-click="ngclick(framework.id)"> {{framework.nom}}
+
+            </label>
+
+        </div>
+    </div>
+    <div class=" spacer">
+        <span class="input-group-addon form-control input-group-addon-exception">Type </span>
+        <br />
+        <div class="checkbox-container" style="display:inline-block; position: relative;">
+
+            <label class="form-control">
+                <input ng-model="experience.type" name="type" type="radio" ng-value="0"   > Contrat pro
+
+            </label>
+
+        </div>
+        <div class="checkbox-container" style="display:inline-block; position: relative;">
+            <label class="form-control">
+                <input ng-model="experience.type" name="type" type="radio" ng-value="1" > Projet personnel
+
+            </label>
+
+        </div>
+    </div>
+    <div class=" spacer" style="position: relative;">
+        <span class="input-group-addon form-control input-group-addon-exception">Description </span>
+        <br />
+        <textarea name="description" class="form-control" ng-model="experience.description"></textarea>
+    </div>
+    <br />
+    <input type="submit" class="btn btn-success pull-right">
 </form>
+
+
