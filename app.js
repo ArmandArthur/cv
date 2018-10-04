@@ -167,6 +167,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 			{
 				$scope.isConnectedByCookie = true;
 				$scope.vueCourante = 'VUE_DISPLAY_EXPERIENCES';
+				$location.path($scope.vueCourante);
 			}
 		});
     });
