@@ -77,12 +77,12 @@
                        
                         <ul class="nav nav-tabs" id="tab-cateogories" role="tablist">
                           <li class="nav-item" ng-repeat="categorie in categories">
-                            <a class="nav-link active" href="#/VUE_DISPLAY_CATEGORIE/{{categorie.value}}" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">{{categorie.value}}</a>
+                            <a class="nav-link active" href="{{categorie.value}}" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">{{categorie.value}}</a>
                           </li>
                         </ul>
                        
                         <div class="tab-content spacer">
-                           <div ng-repeat="framework in frameworks"  id="/VUE_DISPLAY_CATEGORIE/{{framework.categorie.value}}" role="tabpanel" class="tab-pane show active"  >
+                           <div ng-repeat="framework in frameworks"  id="{{framework.categorie.value}}" role="tabpanel" class="tab-pane show active"  >
                                 <div class="progress" >
                                     <div  ng-click="display_framework_formulaire(framework)"  class="progress-bar" role="progressbar" style="width: {{framework.level}}%" aria-valuenow="{{framework.level}}" aria-valuemin="0" aria-valuemax="100">
                                         <div data-toggle="tooltip" data-placement="top" data-title="{{framework.version}}"></div>
