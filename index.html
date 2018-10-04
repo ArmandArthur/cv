@@ -82,7 +82,7 @@
                         </ul>
                        
                         <div class="tab-content spacer">
-                           <div ng-repeat="framework in frameworks"  id="{{framework.categorie.value}}" role="tabpanel" class="tab-pane show active"  >
+                           <div ng-repeat="framework in frameworks"  id="{{framework.categorie.value}}" role="tabpanel" class="tab-pane show" ng-class="{active:$first}""  >
                                 <div class="progress" >
                                     <div  ng-click="display_framework_formulaire(framework)"  class="progress-bar" role="progressbar" style="width: {{framework.level}}%" aria-valuenow="{{framework.level}}" aria-valuemin="0" aria-valuemax="100">
                                         <div data-toggle="tooltip" data-placement="top" data-title="{{framework.version}}"></div>
