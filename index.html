@@ -109,7 +109,7 @@
                               <span class="p-5"><span class="label" ng-class="experience.type == 0 ? 'label-primary' : 'label-success'  "">Durée</span> {{experience.date_debut | date:'dd/MM/yyyy' }} - {{experience.date_fin | date:'dd/MM/yyyy'}}</span>
                               <span class="p-5"><span class="label" ng-class="experience.type == 0 ? 'label-primary' : 'label-success'  "s">Frameworks</span></span><span ng-repeat="framework in experience.frameworks" > {{framework.nom}}</span>
                               <span class="p-5"><span class="label" ng-class="experience.type == 0 ? 'label-primary' : 'label-success'  "">Description</span></span>
-                              <div>{{experience.description}}</div>
+                              <div ng-bind-html="experience.description"></div>
                             
                           </li>
                         </ul>
