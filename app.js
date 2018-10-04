@@ -80,9 +80,9 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 	$scope.$on('frameworkFormulaireSubmit', function(event, framework) {
 		//console.info($scope.get_categorie_structure());
        restfulService.framework(framework).then(function(framework){
-	  		$scope.vueCourante = "VUE_DISPLAY_CATEGORIE"; //template
+	  		$scope.vueCourante = "VUE_DISPLAY_CATEGORIES"; //template
 
-	  		$location.path($scope.vueCourante+"/"+framework.categorie.value); // url
+	  		$location.path($scope.vueCourante); // url
 	  	})
 
     });
