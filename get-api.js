@@ -32,12 +32,12 @@ exports.associateGlobale = function () {
 	Experience.associate();
 }
 exports.associateGlobale();
+ExperienceFramework.sync();
 Categorie.sync();
 Framework.sync();
 
 
 Experience.sync();
-ExperienceFramework.sync();
 Utilisateur.sync();
 
 exports.getCategories = function (req, res) {
