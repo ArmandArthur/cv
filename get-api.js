@@ -54,7 +54,12 @@ exports.getCategories = function (req, res) {
 };
 exports.getFrameworks = function (req, res) {
 
-	Framework.findAll().then(frameworks => {
+	Framework.findAll({
+		include: [{
+			model: Categorie,
+			as: 'categorie'
+		}]
+	}).then(frameworks => {
 
 
 		res.setHeader('Access-Control-Allow-Origin', '*')
