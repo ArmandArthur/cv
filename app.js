@@ -141,6 +141,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 	  			}
 	  			if($scope.categorie_selected == null)
   				{
+  					alert('ok');
   					$scope.categorie_selected = "PHP";
   				}
 
