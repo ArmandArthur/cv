@@ -122,7 +122,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 			console.info(url)
 
 
-			if(categorie_value != '')
+			if(categorie_value != "undefined")
 			{
 				restfulService.getFrameworks().then(function(frameworks){
 			  		$scope.frameworks = frameworks;
