@@ -118,39 +118,33 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 		{
 			var url = location.split('/')[1];
 			var categorie_value = location.split('/')[2];
+			
+			restfulService.getFrameworks().then(function(frameworks){
+		  		$scope.frameworks = frameworks;
+		  		
+		  	});
 
-			console.info(url)
+			restfulService.getExperiences().then(function(experiences){
+		  		$scope.experiences = experiences;
+		  		
+		  	});
+			restfulService.getCategories().then(function(categories){
+		  		$scope.categories = categories;
+		  	});	
 
-
-			if(typeof categorie_value != undefined)
-			{
-				restfulService.getFrameworks().then(function(frameworks){
-			  		$scope.frameworks = frameworks;
-			  		
-			  	});
-
-				restfulService.getExperiences().then(function(experiences){
-			  		$scope.experiences = experiences;
-			  		
-			  	});
-				restfulService.getCategories().then(function(categories){
-			  		$scope.categories = categories;
-			  	});	
-			}
-			else{
-				restfulService.getCategories().then(function(categories){
-			  		$scope.categories = categories;
-			  		for(var i in $scope.categories)
-		  			{	
-		  				alert('o')
-		  				if($scope.categories[i] == url)
-	  					{
-	  						alert('ok')
-	  						$scope.categorie_selected = url;
-	  					}
-		  			}
-			  	});	
-			}
+			restfulService.getCategories().then(function(categories){
+		  		$scope.categories = categories;
+		  		for(var i in $scope.categories)
+	  			{	
+	  				alert('o')
+	  				if($scope.categories[i] == url)
+  					{
+  						alert('ok')
+  						$scope.categorie_selected = url;
+  					}
+	  			}			  	
+	  		});	
+		
 			if(url == 'VUE_FORMULAIRE_FRAMEWORK')
 			{
 				$scope.vueCourante = url;
