@@ -136,10 +136,8 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 		  		$scope.categories = categories;
 		  		for(var i in $scope.categories)
 	  			{	
-	  				console.info($scope.categories[i])
 	  				if($scope.categories[i].value == url)
   					{
-  						alert('ok')
   						$scope.categorie_selected = url;
   					}
 	  			}			  	
