@@ -118,7 +118,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 		{
 			var url = location.split('/')[1];
 			var categorie_value = location.split('/')[2];
-			
+
 			restfulService.getFrameworks().then(function(frameworks){
 		  		$scope.frameworks = frameworks;
 		  		
@@ -137,7 +137,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 		  		for(var i in $scope.categories)
 	  			{	
 	  				alert('o')
-	  				if($scope.categories[i] == url)
+	  				if($scope.categories[i].value == url)
   					{
   						alert('ok')
   						$scope.categorie_selected = url;
