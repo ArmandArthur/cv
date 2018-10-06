@@ -139,6 +139,10 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
   						$scope.categorie_selected = url;
   					}
 	  			}
+	  			if($scope.categorie_selected == '')
+  				{
+  					$scope.categorie_selected = "PHP";
+  				}
 
   					$scope.categories = categories;			  		
 
