@@ -160,7 +160,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 
 
 			}	
-			else if(url == 'VUE_DISPLAY_CATEGORIES' or url == 'VUE_HOME')
+			else if(url == 'VUE_DISPLAY_CATEGORIES' || url == 'VUE_HOME')
 			{
 
 					$scope.vueCourante = url;
