@@ -141,9 +141,11 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 				restfulService.getCategories().then(function(categories){
 			  		$scope.categories = categories;
 			  		for(var i in $scope.categories)
-		  			{
+		  			{	
+		  				alert('o')
 		  				if($scope.categories[i] == url)
 	  					{
+	  						alert('ok')
 	  						$scope.categorie_selected = url;
 	  					}
 		  			}
