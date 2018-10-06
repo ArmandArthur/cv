@@ -128,9 +128,6 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 		  		$scope.experiences = experiences;
 		  		
 		  	});
-			restfulService.getCategories().then(function(categories){
-		  		$scope.categories = categories;
-		  	});	
 
 			restfulService.getCategories().then(function(categories){
 		  		
@@ -141,7 +138,10 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
   						$scope.categorie_selected = url;
   					}
 	  			}
-	  			$scope.categories = categories;			  	
+
+  					$scope.categories = categories;			  		
+
+	  			
 	  		});	
 		
 			if(url == 'VUE_FORMULAIRE_FRAMEWORK')
