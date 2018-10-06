@@ -120,20 +120,23 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 			var categorie_value = location.split('/')[2];
 
 			console.info(categorie_value)
-			restfulService.getFrameworks().then(function(frameworks){
-		  		$scope.frameworks = frameworks;
-		  		
-		  	});
-
-			restfulService.getExperiences().then(function(experiences){
-		  		$scope.experiences = experiences;
-		  		
-		  	});
-			restfulService.getCategories().then(function(categories){
-		  		$scope.categories = categories;
-		  	});
 
 
+			if(categorie_value != '')
+			{
+				restfulService.getFrameworks().then(function(frameworks){
+			  		$scope.frameworks = frameworks;
+			  		
+			  	});
+
+				restfulService.getExperiences().then(function(experiences){
+			  		$scope.experiences = experiences;
+			  		
+			  	});
+				restfulService.getCategories().then(function(categories){
+			  		$scope.categories = categories;
+			  	});	
+			}
 			if(url == 'VUE_FORMULAIRE_FRAMEWORK')
 			{
 				$scope.vueCourante = url;
