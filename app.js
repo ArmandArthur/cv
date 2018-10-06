@@ -91,6 +91,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
        restfulService.experience(experience).then(function(experienceReturned){
 	  		$scope.vueCourante = "VUE_DISPLAY_EXPERIENCES"; 
 	  		//$scope.experiences.push(experienceReturned);
+	  	    $scope.experienceCourant = experienceReturned;
 	  		$location.path($scope.vueCourante); 
 	  	});
 
