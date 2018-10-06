@@ -119,6 +119,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 			var url = location.split('/')[1];
 			var categorie_value = location.split('/')[2];
 
+			console.info(categorie_value)
 			restfulService.getFrameworks().then(function(frameworks){
 		  		$scope.frameworks = frameworks;
 		  		
