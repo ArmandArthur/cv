@@ -95,7 +95,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 	  		$location.path($scope.vueCourante); 
 	  		setTimeout(function() {
     			$('html, body').animate({scrollTop: $('#experience-'+experienceReturned.id).offset().top }, 250);
-			}, 2000);
+			}, 3000);
 	  		
 	  	});
 
