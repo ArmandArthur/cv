@@ -130,8 +130,8 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 		  	});
 
 			restfulService.getCategories().then(function(categories){
+		  		$scope.categorie_selected = null;
 		  		
-		  		console.info(categories);
 		  		for(var i in categories)
 	  			{	
 	  				if(categories[i].value == url)
@@ -139,7 +139,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
   						$scope.categorie_selected = url;
   					}
 	  			}
-	  			if($scope.categorie_selected == '')
+	  			if($scope.categorie_selected == null)
   				{
   					$scope.categorie_selected = "PHP";
   				}
