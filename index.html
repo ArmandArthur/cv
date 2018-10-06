@@ -103,7 +103,7 @@
                         </nav>                                                    
                         <ul class="list-group spacer" id="navbar-experiences">
                           <li id="experience-{{experience.id}}" class="list-group-item alert spacer " ng-class="{'alert-info' : experience.type == 0 , 'alert-success': experience.type == 1, 'alert-warning' : experience.id == experienceCourant.id }" ng-repeat="experience in experiences" ng-click="display_experience_formulaire(experience)">
-                            <h4 ng-show="experience.id == experienceCourant.id">Modifié le {{experience.updatedAt</h4>
+                            <h5 ng-show="experience.id == experienceCourant.id">Modifié le {{experience.updatedAt| date:'dd/MM/yyyy à hh:mm' }}</h5>
                               <span class="p-5"><span class="label " ng-class="{'label-info' : experience.type == 0 , 'label-success': experience.type == 1, 'label-warning' : experience.id == experienceCourant.id }"" >Titre</span> {{experience.titre}}</span>
                               <span class="p-5"><span class="label" ng-class="{'label-info' : experience.type == 0 , 'label-success': experience.type == 1, 'label-warning' : experience.id == experienceCourant.id }"'  "">Durée</span> {{experience.date_debut | date:'dd/MM/yyyy' }} - {{experience.date_fin | date:'dd/MM/yyyy'}}</span>
                               <span class="p-5"><span class="label" ng-class="{'label-info' : experience.type == 0 , 'label-success': experience.type == 1, 'label-warning' : experience.id == experienceCourant.id }""s">Frameworks</span></span><span ng-repeat="framework in experience.frameworks" > {{framework.nom}}</span>
