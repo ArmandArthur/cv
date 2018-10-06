@@ -131,6 +131,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 
 			restfulService.getCategories().then(function(categories){
 		  		
+		  		console.info(categories);
 		  		for(var i in categories)
 	  			{	
 	  				if(categories[i].value == url)
