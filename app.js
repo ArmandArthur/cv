@@ -119,7 +119,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 			var url = location.split('/')[1];
 			var categorie_value = location.split('/')[2];
 
-			console.info(categorie_value)
+			console.info(url)
 
 
 			if(categorie_value != '')
