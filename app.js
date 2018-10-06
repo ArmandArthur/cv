@@ -137,6 +137,18 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 			  		$scope.categories = categories;
 			  	});	
 			}
+			else{
+				restfulService.getCategories().then(function(categories){
+			  		$scope.categories = categories;
+			  		for(var i in $scope.categories)
+		  			{
+		  				if($scope.categories[i] == url)
+	  					{
+	  						$scope.categorie_selected = url;
+	  					}
+		  			}
+			  	});	
+			}
 			if(url == 'VUE_FORMULAIRE_FRAMEWORK')
 			{
 				$scope.vueCourante = url;
