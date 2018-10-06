@@ -94,7 +94,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 	  	    $scope.experienceCourant = experienceReturned;
 	  		$location.path($scope.vueCourante); 
 	  		setTimeout(function() {
-    			$('html, body').animate({scrollTop: $('#experience-'+experienceReturned.id).offset().top }, 1200);
+    			$('html, body').animate({scrollTop: $('#experience-'+experienceReturned.id).offset().top }, 2000);
 			}, 1000);
 	  		
 	  	});
