@@ -62,7 +62,7 @@
 
                 <formulaire-utilisateur ng-if="vueCourante == 'VUE_HOME' && isConnectedByCookie == false" ></formulaire-utilisateur>
 
-                    <div class="animate {{animateTechnologies}}" ng-if="vueCourante == 'VUE_DISPLAY_CATEGORIES' ">
+                    <div class="animate {{animateTechnologies}}" ng-if="vueCourante == 'VUE_DISPLAY_CATEGORIES' || vueCourante == 'VUE_HOME' ">
                         <div ng-if="vueCourante == 'VUE_DISPLAY_CATEGORIES'" class="alert alert-warning navbar-collapse-question collapse ">
                             <h6>CONNAISSANCE DE LA TECHNOLOGIE (%)</h6>
                           </div>
