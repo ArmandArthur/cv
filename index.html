@@ -81,7 +81,7 @@
                         </ul>
                        
                         <div class="tab-content spacer">
-                           <div  ng-repeat="categorie in categories" id="{{categorie.value}}" role="tabpanel" class="tab-pane "  >
+                           <div  ng-repeat="categorie in categories" id="{{categorie.value}}" role="tabpanel" class="tab-pane"  >
                                 <div ng-show="categorie.value == framework.categorie.value && categorie.value == categorie_selected" ng-repeat="framework in frameworks" class="progress" >
                                     <div ng-show="categorie_selected == framework.categorie.value" ng-click="display_framework_formulaire(framework)"  class="progress-bar" role="progressbar" style="width: {{framework.level}}%" aria-valuenow="{{framework.level}}" aria-valuemin="0" aria-valuemax="100">
                                         <div data-toggle="tooltip" data-placement="top" data-title="{{framework.version}}"></div>

@@ -133,14 +133,15 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 		  	});	
 
 			restfulService.getCategories().then(function(categories){
-		  		$scope.categories = categories;
-		  		for(var i in $scope.categories)
+		  		
+		  		for(var i in categories)
 	  			{	
-	  				if($scope.categories[i].value == url)
+	  				if(categories[i].value == url)
   					{
   						$scope.categorie_selected = url;
   					}
-	  			}			  	
+	  			}
+	  			$scope.categories = categories;			  	
 	  		});	
 		
 			if(url == 'VUE_FORMULAIRE_FRAMEWORK')
