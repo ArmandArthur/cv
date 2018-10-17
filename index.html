@@ -1,157 +1,185 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr"  ng-app="cv">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" ng-app="cv">
 
-        <title>CV Arthur ARMAND - Angular - Node</title>
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="style.css"/>
-        <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-        <link rel="stylesheet" href="bower_components/angular-motion/dist/angular-motion.min.css">
-        <!--[if lt IE 9]>
-            <script src="html5shiv.js"></script>
-        <![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CV Arthur ARMAND - Angular - Node</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="bower_components/angular-motion/dist/angular-motion.min.css">
+    <!--[if lt IE 9]>
+      <script src="html5shiv.js"></script>
+      <![endif]-->
+</head>
 
-    </head>
-    <body >
-
-        <div class="container">
-        <div class="navbar navbar-default " id="categorieController" ng-controller="categorieController" >
-
+<body>
+    <div class="wrapper"  id="categorieController" ng-controller="categorieController">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Bootstrap Sidebar</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">API</a>
+                    <ul class=" list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">CRUD une catégorie<span class="label label-info" >  {{crudCategorie}} / {{crudCategorieMax}}</span> </a>
+                        </li>
+                        <li class="active">
+                            <a href="#">CRUD une technologie <span class="label label-warning">0/10  </span></a>
+                        </li>
+                        <li>
+                            <a href="#">
+                           CRUD une expérience <span class="label label-danger">0/10  
+                           </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Menu</a>
+                    <ul class=" list-unstyled" id="submenu">
+                        <li><a data-toggle="collapse" href="#VUE_DISPLAY_CATEGORIES">Langages</a></li>
+                        <li><a data-toggle="collapse" href="#VUE_DISPLAY_TECHNOS">Technologies</a></li>
+                        <li><a data-toggle="collapse" href="#VUE_DISPLAY_EXPERIENCES">Expériences</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+                </li>
+                <li>
+                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="container" id="content">
+            <div class="navbar navbar-default ">
                 <div class="navbar-header">
-                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-question">
-                    <span class="glyphicon glyphicon-question-sign" ></span>
-                  </button>  
-                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="glyphicon glyphicon-align-justify" ></span>
-                  </button>
-                  <a class="navbar-brand" href="/#/VUE_DISPLAY_CATEGORIES">Arthur ARMAND</a>
-
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-question">
+                        <span class="glyphicon glyphicon-question-sign"></span>
+                    </button>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="glyphicon glyphicon-align-justify"></span>
+                    </button>
+                    <a class="navbar-brand" href="/#/VUE_DISPLAY_CATEGORIES" id="sidebarCollapse">Arthur ARMAND</a>
                 </div>
-
                 <div class="navbar-collapse collapse">
-                    
-                        <ul class="navbar-nav" >
-                            <li><a data-toggle="collapse"  href="#VUE_DISPLAY_CATEGORIES"><span class="label label-info" >Technologies</span></a></li>
-                            <li><a data-toggle="collapse" href="#VUE_DISPLAY_EXPERIENCES"><span class="label label-info" >Expériences</span></a></li>                            
-                            <li ng-show="isConnectedByCookie == true">
-                                <a data-toggle="collapse" href="#VUE_FORMULAIRE_CATEGORIE" ng-click="display_categorie_formulaire()"> <span class="label label-danger" >Ajouter une catégorie</span>
-                                    
-                                </a>
-                            </li>
-                            <li ng-show="isConnectedByCookie == true">
-                            <a data-toggle="collapse"  href="#VUE_FORMULAIRE_FRAMEWORK" ng-click="display_framework_formulaire()"><span class="label label-danger" >Ajouter un framework</span>
-                            </a>                            
-                            </li>
-                            <li ng-show="isConnectedByCookie == true">
-                            <a data-toggle="collapse" href="#VUE_FORMULAIRE_EXPERIENCE" ng-click="display_experience_formulaire()"> <span class="label label-danger" >Ajouter une expérience</span>
-                            </a>                            
-                            </li>
-                        </ul>
+                    <ul class="navbar-nav">
+                        <li ng-show="isConnectedByCookie == true">
+                            <a data-toggle="collapse" href="#VUE_FORMULAIRE_CATEGORIE" ng-click="display_categorie_formulaire()"> <span class="label label-danger">Ajouter une catégorie</span>
+                            </a>
+                        </li>
+                        <li ng-show="isConnectedByCookie == true">
+                            <a data-toggle="collapse" href="#VUE_FORMULAIRE_FRAMEWORK" ng-click="display_framework_formulaire()"><span class="label label-danger" >Ajouter un framework</span>
+                            </a>
+                        </li>
+                        <li ng-show="isConnectedByCookie == true">
+                            <a data-toggle="collapse" href="#VUE_FORMULAIRE_EXPERIENCE" ng-click="display_experience_formulaire()"> <span class="label label-danger">Ajouter une expérience</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <!--<div ng-show="vueCourante == 'VUE_DISPLAY_CATEGORIES'" class="alert alert-warning">
-                    <h6>Mobile : Veuillez cliquer sur le menu de droite pour accéder à mon CV </h6>
-                </div>-->
-                <div ng-show="vueCourante == 'VUE_HOME' && isConnectedByCookie == false" class="alert alert-warning">
-                    Pour accéder à la partie d'administration, veuillez entrer votre email svp.
-                </div>
+            <h6>Mobile : Veuillez cliquer sur le menu de droite pour accéder à mon CV </h6>
+            </div>-->
 
-                <formulaire-utilisateur ng-if="vueCourante == 'VUE_HOME' && isConnectedByCookie == false" ></formulaire-utilisateur>
-
-                    <div class="animate {{animateTechnologies}}" ng-if="vueCourante == 'VUE_DISPLAY_CATEGORIES' || vueCourante == 'VUE_HOME' ">
-                        <div ng-if="vueCourante == 'VUE_DISPLAY_CATEGORIES'" class="alert alert-warning navbar-collapse-question collapse ">
-                            <h6>CONNAISSANCE DE LA TECHNOLOGIE (%)</h6>
-                          </div>
-
-                        <nav aria-label="breadcrumb" class="spacer">
-                          <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#/VUE_HOME">Accueil</a></li>
-                            <li class="breadcrumb-item"><a href="#/VUE_DISPLAY_CATEGORIES">Technologies</a></li>
-                          </ol>
-                        </nav> 
-                       
-                        <ul class="nav nav-tabs" id="tab-cateogories" role="tablist">
-                          <li class="nav-item" ng-repeat="categorie in categories">
-                            <a class="nav-link "  href="#{{categorie.value}}" data-toggle="tab"  role="tab" aria-controls="{{categorie.value}}" aria-selected="true">{{categorie.value}}</a>
-                          </li>
-                        </ul>
-                       
-                        <div class="tab-content spacer">
-                           <div  ng-repeat="categorie in categories" id="{{categorie.value}}" role="tabpanel" class="tab-pane show"   >
-                                <div ng-show="categorie.value == framework.categorie.value && categorie.value == categorie_selected" ng-repeat="framework in frameworks" class="progress" >
-                                    <div ng-show="categorie_selected == framework.categorie.value" ng-click="display_framework_formulaire(framework)"  class="progress-bar" role="progressbar" style="width: {{framework.level}}%" aria-valuenow="{{framework.level}}" aria-valuemin="0" aria-valuemax="100">
-                                        <div data-toggle="tooltip" data-placement="top" data-title="{{framework.version}}"></div>
-                                        {{framework.nom}} 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <!--<div ng-show="vueCourante == 'VUE_HOME' && isConnectedByCookie == false" class="alert alert-warning">
+            Pour accéder à la partie d'administration, veuillez entrer votre email svp.
+            </div>-->
+                <!--<formulaire-utilisateur ng-if="vueCourante == 'VUE_HOME' && isConnectedByCookie == false"></formulaire-utilisateur>-->
+                <div class="animate {{animateTechnologies}} " ng-if="vueCourante == 'VUE_DISPLAY_CATEGORIES' || vueCourante == 'VUE_HOME' " ng-animate>
+                    <div ng-if="vueCourante == 'VUE_DISPLAY_CATEGORIES'" class="alert alert-warning navbar-collapse-question collapse ">
+                        <h6>CONNAISSANCE DE LA TECHNOLOGIE (%)</h6>
                     </div>
-                    <div class="animate {{animateExperiences}}" ng-if="vueCourante == 'VUE_DISPLAY_EXPERIENCES' " >
-                          <div ng-if="vueCourante == 'VUE_DISPLAY_EXPERIENCES'" class="alert alert-warning navbar-collapse-question collapse ">
-                            <h6>LISTE DES EXPERIENCES</h6>
-                          </div>
-                        <nav aria-label="breadcrumb" class="spacer">
-                          <ol class="breadcrumb">
+                    <nav aria-label="breadcrumb" class="spacer">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">Accueil</li>
+                            <li class="breadcrumb-item">Langages</li>
+                        </ol>
+                    </nav>
+                    <canvas id="radar" class="chart chart-radar" chart-data="data" chart-options="options" chart-labels="labels" chart-click="onClick" auto-legend>
+                    </canvas>
+                </div>
+                <div class="animate" ng-if="vueCourante == 'VUE_DISPLAY_TECHNOS'" ng-animate>
+                    <div ng-if="vueCourante == 'VUE_DISPLAY_TECHNOS'" class="alert alert-warning navbar-collapse-question collapse ">
+                        <h6>CONNAISSANCE DE LA TECHNOLOGIE (%)</h6>
+                    </div>
+                    <nav aria-label="breadcrumb" class="spacer">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">Accueil</li>
+                            <li class="breadcrumb-item">Technologies</li>
+                        </ol>
+                    </nav>
+                    <nav aria-label="breadcrumb" class="spacer" id="breadcrumb-technos">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item" ng-repeat="categorie in categories"><a href="#/VUE_DISPLAY_TECHNOS/{{categorie.value}}" ng-click="setCategorie(categorie)" ng-class="{'active' : categorieCourant == categorie.value}">{{categorie.value}}</a></li>
+                        </ol>
+                    </nav>
+                    <canvas id="bar-technos" class="chart chart-bar" chart-data="dataTechnos" chart-options="optionsTechnos" chart-labels="labelsTechnos" chart-click="onClickTechnos">
+                    </canvas>
+                </div>
+                <div class="animate {{animateExperiences}}" ng-if="vueCourante == 'VUE_DISPLAY_EXPERIENCES' ">
+                    <div ng-if="vueCourante == 'VUE_DISPLAY_EXPERIENCES'" class="alert alert-warning navbar-collapse-question collapse ">
+                        <h6>LISTE DES EXPERIENCES</h6>
+                    </div>
+                    <nav aria-label="breadcrumb" class="spacer">
+                        <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#/VUE_HOME">Accueil</a></li>
                             <li class="breadcrumb-item"><a href="#/VUE_DISPLAY_EXPERIENCES">Expériences</a></li>
-                          </ol>
-                        </nav>                                                    
-                        <ul class="list-group spacer" id="navbar-experiences">
-                          <li id="experience-{{experience.id}}" class="spacer " ng-repeat="experience in experiences" ng-click="display_experience_formulaire(experience)">
-                              <h5 ng-show="experience.id == experienceCourant.id" class="label-default">Modifié le {{experience.updatedAt| date:'dd/MM/yyyy à hh:mm' }}</h5>
-                              <div class="list-group-item  alert" ng-class="{'alert-info' : experience.type == 0 , 'alert-success': experience.type == 1, 'alert-warning' : experience.id == experienceCourant.id }">                                 
-                                  <span class="p-5"><span class="label " ng-class="{'label-info' : experience.type == 0 , 'label-success': experience.type == 1, 'label-warning' : experience.id == experienceCourant.id }"" >Titre</span> {{experience.titre}}</span>
-                                  <span class="p-5"><span class="label" ng-class="{'label-info' : experience.type == 0 , 'label-success': experience.type == 1, 'label-warning' : experience.id == experienceCourant.id }"'  "">Durée</span> {{experience.date_debut | date:'dd/MM/yyyy' }} - {{experience.date_fin | date:'dd/MM/yyyy'}}</span>
-                                  <span class="p-5"><span class="label" ng-class="{'label-info' : experience.type == 0 , 'label-success': experience.type == 1, 'label-warning' : experience.id == experienceCourant.id }""s">Frameworks</span></span><span ng-repeat="framework in experience.frameworks" > {{framework.nom}}</span>
-                                  <span class="p-5"><span class="label" ng-class="{'label-info' : experience.type == 0 , 'label-success': experience.type == 1, 'label-warning' : experience.id == experienceCourant.id }"">Description</span></span>
-                                  <p ng-bind-html="experience.description"></p>
-                              </div>
-                          </li>
-                        </ul>
-                    </div>
-                  
-                     <formulaire-categorie class="animate {{animateExperiences}}" ng-if="vueCourante == 'VUE_FORMULAIRE_CATEGORIE'" ></formulaire-categorie>
+                        </ol>
+                    </nav>
 
-                    <formulaire-framework class="animate {{animateExperiences}}" ng-if="vueCourante == 'VUE_FORMULAIRE_FRAMEWORK'" categories="categories" framework="frameworkCourant" ></formulaire-framework> 
-
-                    <formulaire-experience class="animate {{animateExperiences}}" ng-if="vueCourante == 'VUE_FORMULAIRE_EXPERIENCE'" frameworks="frameworks" experience="experienceCourant" ></formulaire-experience> 
+                    <ul class="list-group spacer" id="navbar-experiences">
+                        <li id="experience-{{experience.id}}" class="spacer " ng-repeat="experience in experiences" ng-click="display_experience_formulaire(experience)">
+                            <h5 ng-show="experience.id == experienceCourant.id" class="label-default">Modifié le {{experience.updatedAt| date:'dd/MM/yyyy à hh:mm' }}</h5>
+                            <div class="list-group-item  alert" ng-class="{'alert-info' : experience.type == 0 , 'alert-success': experience.type == 1, 'alert-warning' : experience.id == experienceCourant.id }">
+                                <span class="p-5"><span class="label " ng-class="{'label-info' : experience.type == 0 , 'label-success': experience.type == 1, 'label-warning' : experience.id == experienceCourant.id }"" >Titre</span> {{experience.titre}}</span>
+                                <span class="p-5"><span class="label" ng-class="{'label-info' : experience.type == 0 , 'label-success': experience.type == 1, 'label-warning' : experience.id == experienceCourant.id }"'  "">Durée</span> {{experience.date_debut | date:'dd/MM/yyyy' }} - {{experience.date_fin | date:'dd/MM/yyyy'}}</span>
+                                <span class="p-5"><span class="label" ng-class="{'label-info' : experience.type == 0 , 'label-success': experience.type == 1, 'label-warning' : experience.id == experienceCourant.id }""s">Frameworks</span></span><span ng-repeat="framework in experience.frameworks"> {{framework.nom}}</span>
+                                <span class="p-5"><span class="label" ng-class="{'label-info' : experience.type == 0 , 'label-success': experience.type == 1, 'label-warning' : experience.id == experienceCourant.id }"">Description</span></span>
+                                <p ng-bind-html="experience.description"></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <formulaire-categorie class="animate {{animateExperiences}}" ng-if="vueCourante == 'VUE_FORMULAIRE_CATEGORIE'" categorie="categorieCourant"></formulaire-categorie>
+                <formulaire-framework class="animate {{animateExperiences}}" ng-if="vueCourante == 'VUE_FORMULAIRE_FRAMEWORK'" categories="categories" framework="frameworkCourant"></formulaire-framework>
+                <formulaire-experience class="animate {{animateExperiences}}" ng-if="vueCourante == 'VUE_FORMULAIRE_EXPERIENCE'" frameworks="frameworks" experience="experienceCourant"></formulaire-experience>
+            </div>
         </div>
-        </div>
-        
-        
-                
-
-
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script type="text/javascript" src="/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>        
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/tooltip.js"></script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular.min.js"></script>
-                <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular-animate.min.js"></script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular-sanitize.min.js"></script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular-resource.min.js"></script>
-
-
-        <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
-        <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-        <script type="text/javascript" src="/bower_components/jpkleemans-angular-validate/dist/angular-validate.min.js"></script>
-
-
-        <script type="text/javascript" src="app.js"></script>
-        <script type="text/javascript" src="app-bootstrap.js"></script>
-        <script type="text/javascript" src="directives-form.js"></script> 
-        <script type="text/javascript" src="directives-api-restful.js"></script>          
-
-
-    </body>
-
-
-    
+    </div>
+</body>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/tooltip.js"></script>
+<script type="text/javascript" src="angular.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular-animate.min.js"></script>
+<script type="text/javascript" src="angular-sanitize.min.js"></script>
+<script type="text/javascript" src="angular-resource.min.js"></script>
+<script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="/bower_components/jpkleemans-angular-validate/dist/angular-validate.min.js"></script>
+<script type="text/javascript" src="/node_modules/chart.js/dist/Chart.min.js"></script>
+<script type="text/javascript" src="/node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="app-bootstrap.js"></script>
+<script type="text/javascript" src="directives-form.js"></script>
+<script type="text/javascript" src="directives-api-restful.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
 
 </html>
+

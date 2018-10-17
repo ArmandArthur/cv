@@ -7,7 +7,8 @@ var Experience = sequelizeExperience(serviceConstante);
 var Categorie = sequelizeCategorie(serviceConstante);
 var ExperienceFramework = sequelizeExperienceFramework(serviceConstante);
 var Utilisateur = sequelizeUtilisateur(serviceConstante);
-
+var Requete = sequelizeRequete(serviceConstante);
+var UtilisateurRequete = sequelizeRequeteUtilisateur(serviceConstante);
 
 Framework.associate = function () {
 	Framework.belongsToMany(Experience, {
@@ -26,20 +27,80 @@ Experience.associate = function () {
 		foreignKey: 'experienceId'
 	});
 };
+Utilisateur.associate = function () {
+	Utilisateur.belongsToMany(Requete, {
+		as: 'requetes',
+		through: 'requeteutilisateur',
+		foreignKey: 'utilisateurId'
+	});
+};
+Requete.associate = function () {
+	Requete.belongsToMany(Utilisateur, {
+		as: 'utilisateurs',
+		through: 'requeteutilisateur',
+		foreignKey: 'requeteId'
+	});
+	UtilisateurRequete.belongsTo(Requete, {
+		foreignKey: 'requeteId'
+	})
+
+};
 
 exports.associateGlobale = function () {
 	Framework.associate();
 	Experience.associate();
+	Utilisateur.associate();
+	Requete.associate();	
+
 }
 exports.associateGlobale();
-ExperienceFramework.sync();
-Categorie.sync();
-Framework.sync();
+
+setTimeout(function(){ ExperienceFramework.sync(); }, 1200);
+setTimeout(function(){ Categorie.sync(); }, 1800);
+setTimeout(function(){ Framework.sync(); },2400);
+setTimeout(function(){ Experience.sync(); }, 3000);
+setTimeout(function(){ Utilisateur.sync(); }, 3600);
+setTimeout(function(){ Requete.sync(); }, 4200);
+setTimeout(function(){ UtilisateurRequete.sync(); }, 4600);
 
 
-Experience.sync();
-Utilisateur.sync();
 
+exports.getCategorieRequest = function (req, res) {
+
+	Requete.findOne({
+			where : {
+				value : 'categorie_crud'
+			}
+		}).then(requete => {
+			res.send(requete);
+	})
+
+
+};
+exports.getFrameworkRequest = function (req, res) {
+
+	Requete.findOne({
+			where : {
+				value : 'framework_crud'
+			}
+		}).then(requete => {
+			res.send(requete);
+	})
+
+
+};
+exports.getExperienceRequest = function (req, res) {
+
+	Requete.findOne({
+			where : {
+				value : 'experience_crud'
+			}
+		}).then(requete => {
+			res.send(requete);
+	})
+
+
+};
 exports.getCategories = function (req, res) {
 
 	Categorie.findAll().then(categories => {
@@ -87,20 +148,17 @@ exports.getExperiences = function (req, res) {
 
 };
 
-exports.getFrameworksByCategorieValue = function (req, res) {
+exports.getCategorieByValue = function (req, res) {
 
 
-	Framework.findAll({
-			include: [{
-				model: Categorie,
-				where: {
-					value: req.params.categorie_label
-				}
-			}]
+	Categorie.findOne({
+			where : {
+				value : req.params.categorie_value
+			}
 		})
-		.then(frameworks => {
+		.then(categorie => {
 			res.setHeader('Access-Control-Allow-Origin', '*')
-			res.send(frameworks);
+			res.send(categorie);
 		})
 
 
@@ -122,16 +180,120 @@ exports.getUtilisateurByIp = function (req, res) {
 
 };
 
+exports.getFrameworkByNom = function (req, res) {
+
+
+	Framework.findOne({
+			where : {
+				nom : req.params.nom
+			},
+			include: [{
+				model: Categorie,
+				as: 'categorie'
+			}]
+		})
+		.then(framework => {
+			res.setHeader('Access-Control-Allow-Origin', '*')
+			res.send(framework);
+		})
+
+
+};
+
 exports.categorie = function (req, res) {
 
-	const categorie = Categorie.build({
-		label: req.body.categorie_nom,
-		value: req.body.categorie_nom
-	});
-	categorie.save().then(() => {
-		res.setHeader('Access-Control-Allow-Origin', '*')
-		res.send(categorie);
-	})
+
+
+
+	UtilisateurRequete.findOne({
+										
+			include: [{
+				model: Requete,
+
+				where : {
+					value : "categorie_crud"
+				},	
+			}]
+
+			}).then(utilisateurRequest => {
+					if(utilisateurRequest)
+					{
+						const userRequest = {
+							id :  utilisateurRequest.get('id'),
+							nombre :  parseInt(utilisateurRequest.get('nombre')+1)
+						}
+							UtilisateurRequete.update(userRequest, {
+										where: {
+											id: utilisateurRequest.get('id')
+										}
+									});
+						
+					}
+					else
+					{
+						const userRequest = {
+							
+							nombre :  1,
+							requeteId : 1,
+							utilisateurId: 1
+						}						
+						UtilisateurRequete.create(userRequest);
+					}
+
+					
+					if(utilisateurRequest.nombre < utilisateurRequest.requete.max_limit)
+					{
+							const categorie = {
+								label: req.body.categorie_nom,
+								value: req.body.categorie_nom,
+								level: req.body.categorie_level,
+								id: req.body.categorie_id
+							};
+							if (req.body.categorie_id != null) {
+								Categorie.update(categorie, {
+									where: {
+										id: categorie.id
+									}
+								}).then(() => {
+
+									Categorie.findOne({
+										where: {
+											'id': req.body.categorie_id
+										}
+									}).then(categorie => {
+										res.json(
+											{
+												"categorie": categorie,
+												"nombre" : parseInt(utilisateurRequest.get('nombre')+1)
+											}
+										)
+									})
+								})
+							} else {
+
+								Categorie.create(categorie).then((categorieItem) => {
+									Categorie.findOne({
+										where: {
+											'id': categorieItem.get('id')
+										}
+									}).then(categorie => {
+										res.json(
+											{
+												"categorie": categorie,
+												"nombre" : parseInt(utilisateurRequest.get('nombre')+1)
+											}
+										)
+									})
+								})
+							}
+					}
+					else{
+						res.sendStatus(403);
+					}
+			})
+
+
+
 
 
 };
@@ -274,6 +436,34 @@ exports.experience = function (req, res) {
 
 };
 
+exports.getFrameworksByCategorieValue = function (req, res) {
+
+	Categorie.findOne({
+			where : {
+				value : req.params.categorie_value
+			}
+		})
+		.then(categorie => {
+			console.info(categorie)
+			Framework.findAll({
+					include: [{
+						model: Categorie,
+						where: {
+							id: categorie.get('id')
+						}
+					}]
+				})
+				.then(frameworks => {
+					res.setHeader('Access-Control-Allow-Origin', '*')
+					res.send(frameworks);
+				})
+	})
+
+
+
+
+};
+
 function sequelizeCategorie(serviceConstante) {
 	return serviceConstante.sequelize.define('categorie', {
 		id: {
@@ -286,7 +476,10 @@ function sequelizeCategorie(serviceConstante) {
 		},
 		value: {
 			type: serviceConstante.Sequelize.STRING
-		}
+		},
+		level: {
+			type: serviceConstante.Sequelize.STRING
+		}		
 	});
 }
 
@@ -377,4 +570,43 @@ function sequelizeUtilisateur(serviceConstante) {
 	});
 
 
+}
+
+function sequelizeRequete(serviceConstante) {
+	return serviceConstante.sequelize.define('requete', {
+		id: {
+			type: serviceConstante.Sequelize.INTEGER,
+			primaryKey: true,
+			autoIncrement: true
+		},
+		value: {
+			type: serviceConstante.Sequelize.STRING
+		},
+		max_limit: {
+			type: serviceConstante.Sequelize.INTEGER
+		}
+	});
+
+
+}
+
+function sequelizeRequeteUtilisateur(serviceConstante) {
+	return serviceConstante.sequelize.define('requeteutilisateur', {
+		id: {
+			type: serviceConstante.Sequelize.INTEGER,
+			primaryKey: true,
+			autoIncrement: true
+		},
+		requeteId: {
+			type: serviceConstante.Sequelize.INTEGER
+		},
+		utilisateurId: {
+			type: serviceConstante.Sequelize.INTEGER
+		},
+		nombre: {
+			type: serviceConstante.Sequelize.INTEGER
+		}		
+	}, {
+		tableName: 'requeteutilisateur'
+	});
 }

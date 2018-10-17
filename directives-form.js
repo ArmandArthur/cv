@@ -3,8 +3,10 @@ angular.module("Directives", ["ngValidate"])
       $scope.submit = function() { 
 
             $scope.$emit('categorieFormulaireSubmit', {
-                categorie_nom: $scope.categorie.nom.toUpperCase()
-            });
+                categorie_id: $scope. categorie.id,
+                categorie_nom: $scope.categorie.value.toUpperCase(),
+                categorie_level: $scope.categorie.level
+              });
             
 
            

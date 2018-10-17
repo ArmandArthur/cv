@@ -10,9 +10,10 @@
                         </nav> 
 <form name="frameworkForm" id="frameworkForm" method="POST" class="spacer animate {{animateExperiences}}"   ng-submit="submit(frameworkForm)" ng-validate="validationFramework"> 
      <div class="input-group">
+    
 <select name="categorie" ng-model="framework.categorie.id"  class="form-control" >
-	<option value="" ng-selected="framework.categorie.id == null ">Choix de la catégorie</option>
-   <option data-ng-repeat="categorie in categories" value="{{categorie.id}}" ng-selected="categorie.id == framework.categorie.id">{{categorie.label}}</option>
+	<option ng-value="" >Choix de la catégorie</option>
+   <option ng-repeat="categorie in categories" ng-value="{{categorie.id}}" ng-selected="categorie.id == framework.categorie.id">{{categorie.label}}</option>
                                                 </select>
      </div> 
      <div class="input-group spacer"  style="display:none;"> 

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" ng-app="preindexcv">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CV Arthur ARMAND - Angular - Node</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="preindex-style.css" />
+    <!--[if lt IE 9]>
+      <script src="html5shiv.js"></script>
+      <![endif]-->
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+</head>
+
+<body>
+    <div class="wrapper"  id="preindexController" ng-controller="preindexController">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>A.ARMAND</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li >
+                    <a href="#login" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">LOGIN</a>
+                    <ul class=" list-unstyled collapse" id="login" >
+                        <li>
+                             <formulaire-login></formulaire-login>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#inscription" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">INSCRIPTION</a>
+                    <ul class=" list-unstyled" id="inscription">
+                        <li><formulaire-inscription><formulaire-inscription>
+                    </ul>
+                </li>
+            </ul>
+
+        </nav>
+      
+    </div>
+</body>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/tooltip.js"></script>
+<script type="text/javascript" src="angular.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular-animate.min.js"></script>
+<script type="text/javascript" src="angular-sanitize.min.js"></script>
+<script type="text/javascript" src="angular-resource.min.js"></script>
+<script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="/bower_components/jpkleemans-angular-validate/dist/angular-validate.min.js"></script>
+<script type="text/javascript" src="/node_modules/angular-recaptcha/release/angular-recaptcha.js"></script>
+<script type="text/javascript" src="preindex-app.js"></script>
+<script type="text/javascript" src="preindex-directives-form.js"></script>
+<script type="text/javascript" src="preindex-directives-api-restful.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
+
+</html>
+

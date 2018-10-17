@@ -1,4 +1,4 @@
-angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAnimate"])
+angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAnimate","chart.js"])
 .controller("categorieController", function($scope, $location, restfulService) {
 	$scope.categories = [];
 	$scope.frameworks = [];
@@ -7,6 +7,10 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 	$scope.frameworkCourant = null;
 	$scope.experienceCourant = null;
 	$scope.isConnectedByCookie = false;
+	$scope.chart;
+	$scope.categorieCourant = "PHP";
+	$scope.crudCategorie = 1;
+	$scope.crudCategorieMax = 0;
 	$location.path($scope.vueCourante);
 
 	
@@ -69,20 +73,22 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 	}
 
 	$scope.$on('categorieFormulaireSubmit', function(event, categorie) {
-		//console.info($scope.get_categorie_structure());
-       restfulService.categorie(categorie).then(function(categorie){
+       restfulService.categorie(categorie).then(function(response){
+	  		$scope.crudCategorie =  response.nombre;
 	  		$scope.vueCourante = "VUE_DISPLAY_CATEGORIES"; //template
-	  		$scope.categories.push(categorie); // push nouvelle catégorie
+	  		$scope.categories.push(response.categorie); // push nouvelle catégorie
+
 	  		$location.path($scope.vueCourante); // url
+
 	  	})
     });
     
 	$scope.$on('frameworkFormulaireSubmit', function(event, framework) {
 		//console.info($scope.get_categorie_structure());
        restfulService.framework(framework).then(function(framework){
-	  		$scope.vueCourante = "VUE_DISPLAY_CATEGORIES"; //template
-
-	  		$location.path($scope.vueCourante); // url
+	  		$scope.vueCourante = "VUE_DISPLAY_TECHNOS"; //template
+	  		$scope.categorieCourant = framework.categorie.value;
+	  		$location.path($scope.vueCourante+"/"+$scope.categorieCourant); // url
 	  	})
 
     });
@@ -113,7 +119,6 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
     });
 
 
-
 	$scope.$watch(
 		function() 
 		{
@@ -126,7 +131,41 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 
 			restfulService.getFrameworks().then(function(frameworks){
 		  		$scope.frameworks = frameworks;
-		  		
+
+				$scope.dataTechnos = [];
+				$scope.labelsTechnos  = [];
+				$scope.seriesTechnos = [];
+				var dataset = [];
+
+				$scope.optionsTechnos = {
+				  scales: {
+				    xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Frameworks'
+                            }
+                        }],
+                    yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }]
+				  }
+				};
+		  		for(var i in frameworks)
+	  			{	
+	  				if(frameworks[i].nom != null) // car sinon il y a la promise
+	  				{
+	  					$scope.seriesTechnos.push(frameworks[i].nom)	;	
+						$scope.labelsTechnos.push(frameworks[i].nom)	;		
+						dataset.push(frameworks[i].level);
+	  				}
+	  			}
+	  			$scope.dataTechnos.push(dataset);
+
 		  	});
 
 			restfulService.getExperiences().then(function(experiences){
@@ -135,25 +174,39 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 		  	});
 
 			restfulService.getCategories().then(function(categories){
-		  		$scope.categorie_selected = null;
-		  		
+
+				$scope.data = [];
+				$scope.labels = [];
+				var dataset = [];
+
+				$scope.options = {
+				  scale: {
+				    ticks: {
+				      beginAtZero: true,
+				      min: 0,
+				      max: 100
+				    },  
+				  }
+				};
 		  		for(var i in categories)
 	  			{	
-	  				if(categories[i].value == url)
-  					{
-  						$scope.categorie_selected = url;
-  					}
+	  				if(categories[i].value != null) // car sinon il y a la promise
+	  				{
+						$scope.labels.push(categories[i].value)	;		
+						dataset.push(categories[i].level);
+	  				}
 	  			}
-	  			if($scope.categorie_selected == null)
-  				{
-  					$scope.categorie_selected = "PHP";
-  				}
+	  			$scope.data.push(dataset);
 
   					$scope.categories = categories;			  		
 
 	  			
 	  		});	
 		
+			restfulService.getCategorieRequest().then(function(requete){
+	  			$scope.crudCategorieMax = requete.max_limit;
+	  		});	
+
 			if(url == 'VUE_FORMULAIRE_FRAMEWORK')
 			{
 				$scope.vueCourante = url;
@@ -169,11 +222,63 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 
 
 			}	
+			else if(url == 'VUE_DISPLAY_TECHNOS')
+			{
+				$scope.vueCourante = url;
+				if(categorie_value == null)
+				{
+					categorie_value = $scope.categorieCourant;
+
+				}
+    	restfulService.getFrameworksByCategorieValue(categorie_value).then(function(frameworks){
+
+				$scope.frameworks = frameworks;
+				$scope.dataTechnos = [];
+				$scope.labelsTechnos  = [];
+				$scope.seriesTechnos = [];
+				var dataset = [];
+
+				$scope.optionsTechnos = {
+				  scales: {
+				    xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Frameworks'
+                            }
+                        }],
+                    yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }]
+				  }
+				};
+		  		for(var i in frameworks)
+	  			{	
+	  				if(frameworks[i].nom != null) // car sinon il y a la promise
+	  				{
+	  					//$scope.seriesTechnos.push(frameworks[i].nom)	;	
+						$scope.labelsTechnos.push(frameworks[i].nom)	;		
+						dataset.push(frameworks[i].level);
+	  				}
+	  			}
+	  			$scope.dataTechnos.push(dataset);
+	
+		});					
+			
+
+			}				
 			else if(url == 'VUE_DISPLAY_CATEGORIES' || url == 'VUE_HOME')
 			{
 
 					$scope.vueCourante = url;
 					$scope.animateTechnologies = "technologies";
+
+
+
 
 			}			
 
@@ -182,16 +287,47 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 		}
 	);
 
-    $.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function(data) {
+
+		/*$scope.$on('chart-create', function (event, chart) {
+		$scope.chart = chart;
+	});*/
+	$scope.setCategorie = function(categorie){
+		$scope.categorieCourant = categorie.value;
+	};
+    $scope.onClick = function (e) {
+    	
+    	var index = e[0]._index;
+    	$scope.frameworkCourantLabel = $scope.labels[index];
+    	restfulService.getCategorieByValue($scope.frameworkCourantLabel).then(function(categorie){
+
+				$scope.categorieCourant = categorie;
+				$scope.vueCourante = 'VUE_FORMULAIRE_CATEGORIE';
+				$location.path($scope.vueCourante);
+	
+		});
+  };
+      $scope.onClickTechnos = function (e) {
+      	var framework_nom = e[0]._model.label;
+
+    	restfulService.getFrameworkByNom(framework_nom).then(function(framework){
+
+				$scope.frameworkCourant = framework;
+				$scope.vueCourante = 'VUE_FORMULAIRE_FRAMEWORK';
+				$location.path($scope.vueCourante);
+	
+		});
+  };
+
+    /*$.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function(data) {
 		restfulService.getUtilisateurByIp(data.geobytesipaddress).then(function(utilisateur){
 			if( utilisateur.email )
 			{
 				$scope.isConnectedByCookie = true;
-				$scope.vueCourante = 'VUE_DISPLAY_EXPERIENCES';
+				$scope.vueCourante = 'VUE_HOME';
 				$location.path($scope.vueCourante);
 			}
 		});
-    });
+    });*/
 
 
 

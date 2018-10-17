@@ -9,10 +9,17 @@
                           </ol>
                         </nav> 
 <form name="categorieForm" method="POST" class="spacer"  ng-submit="submit()" ng-controller="categorieFormulaireController" > 
+     <div class="input-group spacer"  style="display:none;"> 
+          <input type="text"  class="form-control" ng-value="id" ng-model="categorie.id" name="id"> 
+     </div>   
      <div class="input-group"> 
           <span class="input-group-addon">Nom de la catégorie</span> 
-          <input type="text"  class="form-control" ng-model="categorie.nom"> 
+          <input type="text"  class="form-control" ng-model="categorie.value"> 
      </div>
+     <div class="input-group spacer"> 
+          <span class="input-group-addon">Niveau du langage</span> 
+          <input type="text"  class="form-control" ng-value="level" ng-model="categorie.level" name="level"> 
+     </div>        
     <div style="clear:both;"></div>
      <input type="submit" class="btn btn-success pull-right" >
 </form>
