@@ -73,7 +73,7 @@ angular.module("preindexDirectives", ["ngValidate", "vcRecaptcha"])
 
             if(form.validate())
             {
-              console.info(form)
+              console.info($scope.recaptcha)
               /*var objet =  {
                   categorie_id: $scope.framework.categorie.id,
                   framework_id : $scope.framework.id,
