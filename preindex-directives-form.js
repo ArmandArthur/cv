@@ -1,4 +1,4 @@
-angular.module("preindexDirectives", ["ngValidate"])
+angular.module("preindexDirectives", ["ngValidate", "vcRecaptcha"])
 .controller('preindexLoginFormulaireController', function($scope) {
     $scope.validationLogin = {
         rules: {
