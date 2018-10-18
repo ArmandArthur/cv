@@ -21,6 +21,8 @@ app.use(cors());
 
 // API
 var api = express();
+var preindexApi = express();
+
 api.get("/categories", serviceApi.getCategories);
 api.get("/frameworks", serviceApi.getFrameworks);
 api.get("/experiences", serviceApi.getExperiences);
@@ -38,7 +40,7 @@ api.post("/framework_crud", serviceApi.framework);
 api.post("/experience_crud", serviceApi.experience); 
 //api.post("/utilisateur_crud", serviceApi.utilisateur); 
 
-api.post("/inscription_crud", serviceApi.inscription);
+preindexApi.post("/inscription_crud", serviceApi.inscription);
 
 
 app.use(session({
@@ -48,6 +50,7 @@ app.use(session({
   cookie: { secure: true }
 }))
 app.use("/api", api);
+app.use("/", preindexApi);
 
 http.createServer(app).listen(PORT);
 
