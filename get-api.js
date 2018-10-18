@@ -125,9 +125,7 @@ bcrypt.genSalt(10, function(err, salt) {
 
   						req.session.utilisateurs[utilisateur.get('id')] = utilisateur;
   							
-						res.redirect('/index.html');
-						next();
-						res.end();
+						return res.status(200);
 						
 					})
 				})
