@@ -1,7 +1,7 @@
 var serviceConstante = require(__dirname + "/get-constante.js");
 var rp = require('request-promise');
 var request = require('request');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 
 var Framework = sequelizeFramework(serviceConstante);
 var Experience = sequelizeExperience(serviceConstante);
@@ -97,7 +97,9 @@ exports.utilisateur_inscription = function (req, res) {
           message: "Email déjà utilisé..."
         });
       } else {
-        bcrypt.hash(req.body.password, 10, (err, hash) => {
+
+bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(req.body.password, salt, function(err, hash) {
           if (err) 
           {
             return res.status(500).json({
@@ -119,7 +121,9 @@ exports.utilisateur_inscription = function (req, res) {
 					})
 				})
           }
-      });
+    });
+});
+
       }
   });
 
