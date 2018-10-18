@@ -65,6 +65,13 @@ setTimeout(function(){ UtilisateurRequete.sync(); }, 4600);
 
 
 
+exports.inscription = function (req, res) {
+
+console.info(req.body);
+
+
+};
+
 exports.getCategorieRequest = function (req, res) {
 
 	Requete.findOne({
