@@ -120,7 +120,7 @@ bcrypt.genSalt(10, function(err, salt) {
 						}
 					}).then(utilisateur => {
   						session = req.session;
-  						if(!session.utilisateurs)
+  						if(typeof session.utilisateurs == 'undefined')
   							session.utilisateurs = [];
 
   						session.utilisateurs[utilisateur.get('id')] = utilisateur;
