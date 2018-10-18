@@ -1,6 +1,6 @@
 var serviceConstante = require(__dirname + "/get-constante.js");
 var rp = require('request-promise');
-
+var request = require('request');
 
 var Framework = sequelizeFramework(serviceConstante);
 var Experience = sequelizeExperience(serviceConstante);
@@ -64,11 +64,26 @@ setTimeout(function(){ Requete.sync(); }, 4200);
 setTimeout(function(){ UtilisateurRequete.sync(); }, 4600);
 
 
+exports.verificationCaptcha = function (req, res) {
+ if(req.body['recaptcha'] === undefined || req.body['recaptcha'] === '' || req.body['recaptcha'] === null) 
+ {
+    return res.json({"responseCode" : 1,"responseDesc" : "Valider le captcha svp !"});
+  }
+  var secretKey = "6LfsiHUUAAAAAJgzd6dFvKfRnJvXeoWvFQBwpjlU";
+  var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['recaptcha'] + "&remoteip=" + req.connection.remoteAddress;
+  request(verificationUrl,function(error,response,body) {
+    body = JSON.parse(body);
+    // Success will be true or false depending upon captcha validation.
+    if(body.success !== undefined && !body.success) {
+      return res.json({"responseCode" : 1,"responseDesc" : "Failed captcha verification"});
+    }
+    res.json({"responseCode" : 0,"responseDesc" : "Sucess"});
+  });
+
+}
 
 exports.inscription = function (req, res) {
-
-console.info(req.body);
-
+	exports.verificationCaptcha(req, res); 
 
 };
 
