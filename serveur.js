@@ -36,7 +36,7 @@ api.get("/experience_request", serviceApi.getExperienceRequest);
 api.post("/categorie_crud", serviceApi.categorie); 
 api.post("/framework_crud", serviceApi.framework); 
 api.post("/experience_crud", serviceApi.experience); 
-api.post("/utilisateur_crud", serviceApi.utilisateur); 
+//api.post("/utilisateur_crud", serviceApi.utilisateur); 
 
 api.post("/inscription_crud", serviceApi.inscription);
 
