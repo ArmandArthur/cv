@@ -66,6 +66,7 @@ setTimeout(function(){ UtilisateurRequete.sync(); }, 4600);
 
 
 exports.verificationCaptcha = function (req, res, next) {
+	console.info(req.body);
  if(req.body['recaptcha'] === undefined || req.body['recaptcha'] === '' || req.body['recaptcha'] === null) 
  {
     return res.sendStatus(404);
