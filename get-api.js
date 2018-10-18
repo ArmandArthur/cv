@@ -119,8 +119,12 @@ bcrypt.genSalt(10, function(err, salt) {
 							'id': utilisateurItem.get('id')
 						}
 					}).then(utilisateur => {
-  						sess = req.session;
-  						sess.utilisateurs[utilisateur.get('id')] = utilisateur;
+  						session = req.session;
+  						if(!session.utilisateurs)
+  							session.utilisateurs = [];
+
+  						session.utilisateurs[utilisateur.get('id')] = utilisateur;
+  							
 						res.render('index.html');
 					})
 				})
