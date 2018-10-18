@@ -81,7 +81,7 @@ angular.module("preindexDirectives", ["ngValidate", "vcRecaptcha"])
 
               $scope.$emit('inscriptionFormulaireSubmit',objet);
               */
-              form.submit();
+              $(form).submit();
             }
 
 
