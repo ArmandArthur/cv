@@ -89,9 +89,9 @@ exports.inscription = function (req, res) {
 };
 
 exports.utilisateur_inscription = function (req, res) {
-  Utilisateur.find({ email: req.body.email })
+  Utilisateur.findOne({ email: req.body.email })
     .then(user => {
-      if (user.length >= 1) {
+      if (user) {
         return res.status(409).json({
           message: "Email déjà utilisé..."
         });
