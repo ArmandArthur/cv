@@ -125,7 +125,7 @@ bcrypt.genSalt(10, function(err, salt) {
 
   						req.session.utilisateurs[utilisateur.get('id')] = utilisateur;
   							
-						res.redirect('http://armand-arthur.com/index.html');
+						res.redirect('armand-arthur.com/index.html');
 					})
 				})
           }
