@@ -1,6 +1,7 @@
 var serviceConstante = require(__dirname + "/get-constante.js");
 var rp = require('request-promise');
 var request = require('request');
+var bcrypt = require('bcrypt');
 
 var Framework = sequelizeFramework(serviceConstante);
 var Experience = sequelizeExperience(serviceConstante);
@@ -67,7 +68,7 @@ setTimeout(function(){ UtilisateurRequete.sync(); }, 4600);
 exports.verificationCaptcha = function (req, res) {
  if(req.body['recaptcha'] === undefined || req.body['recaptcha'] === '' || req.body['recaptcha'] === null) 
  {
-    return res.json({"responseCode" : 1,"responseDesc" : "Valider le captcha svp !"});
+    return res.sendStatus(404);
   }
   var secretKey = "6LfsiHUUAAAAAJgzd6dFvKfRnJvXeoWvFQBwpjlU";
   var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['recaptcha'] + "&remoteip=" + req.connection.remoteAddress;
@@ -75,9 +76,9 @@ exports.verificationCaptcha = function (req, res) {
     body = JSON.parse(body);
     // Success will be true or false depending upon captcha validation.
     if(body.success !== undefined && !body.success) {
-      return res.json({"responseCode" : 1,"responseDesc" : "Failed captcha verification"});
+      return res.sendStatus(403);
     }
-    res.json({"responseCode" : 0,"responseDesc" : "Sucess"});
+    exports.utilisateur_inscription(req, res);
   });
 
 }
@@ -86,6 +87,44 @@ exports.inscription = function (req, res) {
 	exports.verificationCaptcha(req, res); 
 
 };
+
+exports.utilisateur_inscription = function (req, res) {
+  Utilisateur.find({ email: req.body.email })
+    .exec()
+    .then(user => {
+      if (user.length >= 1) {
+        return res.status(409).json({
+          message: "Email déjà utilisé..."
+        });
+      } else {
+        bcrypt.hash(req.body.password, 10, (err, hash) => {
+          if (err) 
+          {
+            return res.status(500).json({
+              error: err
+            });
+          } else 
+          {
+          		const utilisateur = {
+          			email : req.body.email,
+          			hash : hash
+          		}
+          		Utilisateur.create(utilisateur).then((utilisateurItem) => {
+					Utilisateur.findOne({
+						where: {
+							'id': utilisateurItem.get('id')
+						}
+					}).then(utilisateur => {
+						res.send(utilisateur);
+					})
+				})
+          }
+      });
+      }
+  });
+
+};
+
 
 exports.getCategorieRequest = function (req, res) {
 
@@ -126,9 +165,6 @@ exports.getExperienceRequest = function (req, res) {
 exports.getCategories = function (req, res) {
 
 	Categorie.findAll().then(categories => {
-
-
-		res.setHeader('Access-Control-Allow-Origin', '*')
 		res.send(categories);
 		//res.end();
 	})
@@ -143,9 +179,6 @@ exports.getFrameworks = function (req, res) {
 			as: 'categorie'
 		}]
 	}).then(frameworks => {
-
-
-		res.setHeader('Access-Control-Allow-Origin', '*')
 		res.send(frameworks);
 		//res.end();
 	})
@@ -160,9 +193,7 @@ exports.getExperiences = function (req, res) {
 			as: 'frameworks'
 		}]
 	}).then(experiences => {
-
-
-		res.setHeader('Access-Control-Allow-Origin', '*')
+		
 		res.send(experiences);
 		//res.end();
 	})
@@ -179,7 +210,6 @@ exports.getCategorieByValue = function (req, res) {
 			}
 		})
 		.then(categorie => {
-			res.setHeader('Access-Control-Allow-Origin', '*')
 			res.send(categorie);
 		})
 
@@ -195,7 +225,6 @@ exports.getUtilisateurByIp = function (req, res) {
 			}
 		})
 		.then(utilisateur => {
-			res.setHeader('Access-Control-Allow-Origin', '*')
 			res.send(utilisateur);
 		})
 
@@ -215,7 +244,6 @@ exports.getFrameworkByNom = function (req, res) {
 			}]
 		})
 		.then(framework => {
-			res.setHeader('Access-Control-Allow-Origin', '*')
 			res.send(framework);
 		})
 
@@ -320,19 +348,8 @@ exports.categorie = function (req, res) {
 
 };
 
-exports.utilisateur = function (req, res) {
-
-	const utilisateur = Utilisateur.build({
-		email: req.body.email,
-		ip: req.body.ip
-	});
-	utilisateur.save().then(() => {
-		res.setHeader('Access-Control-Allow-Origin', '*')
-		res.send(utilisateur);
-	})
 
 
-};
 
 exports.framework = function (req, res) {
 
@@ -476,7 +493,6 @@ exports.getFrameworksByCategorieValue = function (req, res) {
 					}]
 				})
 				.then(frameworks => {
-					res.setHeader('Access-Control-Allow-Origin', '*')
 					res.send(frameworks);
 				})
 	})
@@ -586,6 +602,9 @@ function sequelizeUtilisateur(serviceConstante) {
 		email: {
 			type: serviceConstante.Sequelize.STRING
 		},
+		hash: {
+			type: serviceConstante.Sequelize.STRING
+		},		
 		ip: {
 			type: serviceConstante.Sequelize.STRING
 		}
