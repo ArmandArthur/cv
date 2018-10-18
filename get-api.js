@@ -94,7 +94,7 @@ exports.utilisateur_inscription = function (req, res) {
 	}})
     .then(user => {
     	console.info(user);
-      if (user.id !=  null) {
+      if (user !=  null) {
         return res.status(409).json({
           message: "Email déjà utilisé..."
         });
