@@ -40,7 +40,7 @@ api.post("/framework_crud", serviceApi.framework);
 api.post("/experience_crud", serviceApi.experience); 
 //api.post("/utilisateur_crud", serviceApi.utilisateur); 
 
-preindexApi.post("inscription_crud", serviceApi.inscription);
+preindexApi.post("/inscription_crud", serviceApi.inscription);
 
 
 app.use(session({
