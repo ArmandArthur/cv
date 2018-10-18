@@ -50,7 +50,7 @@ app.use(session({
   cookie: { secure: true }
 }))
 app.use("/api", api);
-app.use("/", preindexApi);
+app.use("/preindexapi", preindexApi);
 
 http.createServer(app).listen(PORT);
 
