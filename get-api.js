@@ -91,6 +91,7 @@ exports.inscription = function (req, res) {
 exports.utilisateur_inscription = function (req, res) {
   Utilisateur.findOne({ email: req.body.email })
     .then(user => {
+    	console.info(user);
       if (user.id !=  null) {
         return res.status(409).json({
           message: "Email déjà utilisé..."
