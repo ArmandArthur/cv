@@ -118,7 +118,6 @@ bcrypt.genSalt(10, function(err, salt) {
 							'id': utilisateurItem.get('id')
 						}
 					}).then(utilisateur => {
-						console.info(req.session);
 						  if (!req.session.utilisateurs) {
 						    req.session.utilisateurs = {}
 						  }
