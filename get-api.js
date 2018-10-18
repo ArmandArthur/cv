@@ -65,7 +65,7 @@ setTimeout(function(){ Requete.sync(); }, 4200);
 setTimeout(function(){ UtilisateurRequete.sync(); }, 4600);
 
 
-exports.verificationCaptcha = function (req, res) {
+exports.verificationCaptcha = function (req, res, next) {
  if(req.body['recaptcha'] === undefined || req.body['recaptcha'] === '' || req.body['recaptcha'] === null) 
  {
     return res.sendStatus(404);
@@ -127,6 +127,8 @@ bcrypt.genSalt(10, function(err, salt) {
   							
 						res.redirect('/index.html');
 						next();
+						res.end();
+						
 					})
 				})
           }
