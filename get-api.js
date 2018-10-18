@@ -93,7 +93,6 @@ exports.utilisateur_inscription = function (req, res) {
 				email: req.body.email 
 	}})
     .then(user => {
-    	console.info(user);
       if (user !=  null) {
         return res.status(409).json({
           message: "Email déjà utilisé..."
@@ -125,7 +124,7 @@ bcrypt.genSalt(10, function(err, salt) {
 
   						req.session.utilisateurs[utilisateur.get('id')] = utilisateur;
   							
-						res.render('index.html');
+						res.redirect('index.html');
 					})
 				})
           }
