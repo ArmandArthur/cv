@@ -17,7 +17,9 @@ app.use(serveStatic(__dirname+"/preindex.html"));
 
 app.use(bodyParser.json());
 app.use(cors());
-
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 // API
 var api = express();
