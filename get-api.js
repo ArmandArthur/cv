@@ -89,7 +89,9 @@ exports.inscription = function (req, res) {
 };
 
 exports.utilisateur_inscription = function (req, res) {
-  Utilisateur.findOne({ email: req.body.email })
+  Utilisateur.findOne(where : {
+				email: req.body.email 
+	})
     .then(user => {
     	console.info(user);
       if (user.id !=  null) {
