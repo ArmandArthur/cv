@@ -40,13 +40,14 @@ api.post("/experience_crud", serviceApi.experience);
 
 api.post("/inscription_crud", serviceApi.inscription);
 
-app.use("/api", api);
+
 app.use(session({
   secret: 'lafouine',
   resave: false,
   saveUninitialized: true,
   cookie: { secure: true }
 }))
+app.use("/api", api);
 
 http.createServer(app).listen(PORT);
 
