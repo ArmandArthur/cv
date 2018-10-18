@@ -66,12 +66,12 @@ setTimeout(function(){ UtilisateurRequete.sync(); }, 4600);
 
 
 exports.verificationCaptcha = function (req, res, next) {
- if(req.body['recaptcha'] === undefined || req.body['recaptcha'] === '' || req.body['recaptcha'] === null) 
+ if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) 
  {
     return res.sendStatus(404);
   }
   var secretKey = "6LfsiHUUAAAAAJgzd6dFvKfRnJvXeoWvFQBwpjlU";
-  var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['recaptcha'] + "&remoteip=" + req.connection.remoteAddress;
+  var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
   request(verificationUrl,function(error,response,body) {
     body = JSON.parse(body);
     // Success will be true or false depending upon captcha validation.

@@ -73,13 +73,15 @@ angular.module("preindexDirectives", ["ngValidate", "vcRecaptcha"])
 
             if(form.validate())
             {
-              var objet =  {
+              /*var objet =  {
                   recaptcha: $scope.recaptcha,
                   email : $scope.email,
                   password : $scope.password
               };
 
               $scope.$emit('inscriptionFormulaireSubmit',objet);
+              */
+              form.submit();
             }
 
 
