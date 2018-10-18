@@ -78,17 +78,17 @@ exports.verificationCaptcha = function (req, res) {
     if(body.success !== undefined && !body.success) {
       return res.sendStatus(403);
     }
-    exports.utilisateur_inscription(req, res);
+    exports.utilisateur_inscription(req, res, next);
   });
 
 }
 
-exports.inscription = function (req, res) {
-	exports.verificationCaptcha(req, res); 
+exports.inscription = function (req, res, next) {
+	exports.verificationCaptcha(req, res, next); 
 
 };
 
-exports.utilisateur_inscription = function (req, res) {
+exports.utilisateur_inscription = function (req, res, next) {
   Utilisateur.findOne({where : {
 				email: req.body.email 
 	}})
@@ -126,6 +126,7 @@ bcrypt.genSalt(10, function(err, salt) {
   						req.session.utilisateurs[utilisateur.get('id')] = utilisateur;
   							
 						res.redirect('/index.html');
+						next();
 					})
 				})
           }
