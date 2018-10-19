@@ -350,7 +350,7 @@ app.factory('myHttpResponseInterceptor',['$q','$location', function($q,$location
     'response': function(response){
     	if(response.message = '401')
     	{
-    		window.location.href = 'armand-arthur.com/preindex.html'
+    		window.location.href = 'http://armand-arthur.com/preindex.html'
     	}
     }
   }
