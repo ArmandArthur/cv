@@ -336,7 +336,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	
 });
 
-app.factory('myHttpResponseInterceptor',['$q','$location', '$scope', function($q,$location, $scope){
+app.factory('myHttpResponseInterceptor',['$q','$location', function($q,$location){
   return {
     'request': function (config) {
                     config.headers = config.headers || {};
