@@ -21,43 +21,10 @@ angular.module("DirectivesApiRestful", ["ngResource"])
     );
 
     var categorieServiceRest = $resource(url+'categorie_crud', null, {
-'get': {
-            method: 'POST',
-            headers: {
-                //REPLACE expression
-                //'Authorization': 'Bearer ' + currentUser.getProfile().token
-                //WITH a function
-                'Authorization': 'Bearer ' + $resource.query('token')
-                      
-            }
-        }
-    
     });
     var frameworkServiceRest = $resource(url+'framework_crud', null, {                
-'get': {
-            method: 'POST',
-            headers: {
-                //REPLACE expression
-                //'Authorization': 'Bearer ' + currentUser.getProfile().token
-                //WITH a function
-                'Authorization': 'Bearer ' + $scope.tokenApi
-                      
-            }
-        }
-       
     });
     var experienceServiceRest = $resource(url+'experience_crud', null, {                
-'get': {
-            method: 'POST',
-            headers: {
-                //REPLACE expression
-                //'Authorization': 'Bearer ' + currentUser.getProfile().token
-                //WITH a function
-                'Authorization': 'Bearer ' + $scope.tokenApi
-                      
-            }
-        }
-       
     });
 
     var serviceRequeteRest  = $resource(
