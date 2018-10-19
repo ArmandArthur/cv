@@ -347,7 +347,7 @@ app.factory('myHttpResponseInterceptor',['$q','$location', function($q,$location
                         config.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
                     }
                     return config;
-                }
+                },
 
         'responseError': function (rejection) {
             if (rejection.status === 304)  return $q.resolve(rejection);
