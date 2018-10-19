@@ -26,17 +26,17 @@ app.use(bodyParser.urlencoded({
 var api = express();
 var preindexApi = express();
 
-api.get("/categories", serviceApi.getCategories);
-api.get("/frameworks", serviceApi.getFrameworks);
-api.get("/experiences", serviceApi.getExperiences);
-api.get("/categorie/:categorie_value", serviceApi.getCategorieByValue);
-api.get("/frameworks/categorie/:categorie_value", serviceApi.getFrameworksByCategorieValue);
-api.get("/utilisateur/:ip", serviceApi.getUtilisateurByIp);
-api.get("/framework/:nom", serviceApi.getFrameworkByNom);
+api.get("/categories",  serviceAuth,serviceApi.getCategories);
+api.get("/frameworks",  serviceAuth,serviceApi.getFrameworks);
+api.get("/experiences",  serviceAuth,serviceApi.getExperiences);
+api.get("/categorie/:categorie_value",  serviceAuth,serviceApi.getCategorieByValue);
+api.get("/frameworks/categorie/:categorie_value",  serviceAuth,serviceApi.getFrameworksByCategorieValue);
+api.get("/utilisateur/:ip",  serviceAuth,serviceApi.getUtilisateurByIp);
+api.get("/framework/:nom",  serviceAuth,serviceApi.getFrameworkByNom);
 
-api.get("/categorie_request", serviceApi.getCategorieRequest);
-api.get("/framework_request", serviceApi.getFrameworkRequest);
-api.get("/experience_request", serviceApi.getExperienceRequest);
+api.get("/categorie_request",  serviceAuth, serviceApi.getCategorieRequest);
+api.get("/framework_request",  serviceAuth,serviceApi.getFrameworkRequest);
+api.get("/experience_request",  serviceAuth,serviceApi.getExperienceRequest);
 
 api.post("/categorie_crud", serviceAuth, serviceApi.categorie); 
 api.post("/framework_crud", serviceAuth,  serviceApi.framework); 
@@ -54,7 +54,6 @@ app.use(session({
 }))
 app.use("/api", api);
 app.use("/preindexapi", preindexApi);
-app.use('/', serviceAuth);
 http.createServer(app).listen(PORT);
 
 

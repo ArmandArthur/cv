@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+var url = require('url');
 
 module.exports = (req, res, next) => {
     try {
@@ -8,8 +9,8 @@ module.exports = (req, res, next) => {
         req.email = decoded;
         next();
     } catch (error) {
-        return res.status(401).json({
-            message: error
-        });
+        res.redirect(url.format({
+           pathname: "/",
+         }));
     }
 };
