@@ -9,8 +9,8 @@ module.exports = (req, res, next) => {
         req.email = decoded;
         next();
     } catch (error) {
-              return      res.redirect(url.format({
-               pathname: "/preindex.html",
+            res.redirect(url.format({
+               pathname: "http://armand-arthur.com/preindex.html",
              }));
     }
 };
