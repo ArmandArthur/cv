@@ -14,7 +14,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 
 	
 	localStorage.setItem('token', $location.search().token);
-	$location.url($location.path());
+	//$location.url($location.path());
 	//$location.path($scope.vueCourante);
 	
 
