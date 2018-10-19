@@ -1,4 +1,4 @@
-angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAnimate","chart.js"])
+var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAnimate","chart.js"])
 .controller("categorieController", function($scope, $location, restfulService) {
 	$scope.categories = [];
 	$scope.frameworks = [];
@@ -337,9 +337,10 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 
 
 	
-});
+}).config(['$routeProvider','$locationProvider', function($routeProvider,$location) {}]);
 
-$httpProvider.interceptors.push(['$q', '$location', '$scope', function($q, $location, $scope) {
+app.config(function ($httpProvider) {
+    $httpProvider.interceptors.push(['$q', '$location', '$scope', function($q, $location, $scope) {
             return {
                 'request': function (config) {
                     config.headers = config.headers || {};
@@ -356,3 +357,5 @@ $httpProvider.interceptors.push(['$q', '$location', '$scope', function($q, $loca
                 }
             };
         }]);
+});
+
