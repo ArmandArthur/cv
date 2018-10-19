@@ -339,23 +339,34 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	
 });
 
-app.config(function ($httpProvider) {
-    $httpProvider.interceptors.push(['$q', '$location', '$scope', function($q, $location, $scope) {
-            return {
-                'request': function (config) {
+app.factory('myHttpResponseInterceptor',['$q','$location',function($q,$location){
+  return {
+    response: function(response){
+      return promise.then(
+        function success(response) {
+        return response;
+      },
+      function error(response) {
+        if(response.status === 401){
+          $location.path('/signin');
+          return $q.reject(response);
+        }
+        else{
+          return $q.reject(response); 
+        }
+      });
+    },
+    'request': function (config) {
                     config.headers = config.headers || {};
-                    if ($scope.token) {
-                        config.headers.Authorization = 'Bearer ' + $scope.token;
+                    if ($location.search('token')) {
+                        config.headers.Authorization = 'Bearer ' +$location.search('token')
                     }
                     return config;
-                },
-                'responseError': function(response) {
-                    if(response.status === 401 || response.status === 403) {
-                        $location.path('/signin');
-                    }
-                    return $q.reject(response);
                 }
-            };
-        }]);
-});
+  }
+}]);
+//Http Intercpetor to check auth failures for xhr requests
+app.config(['$httpProvider',function($httpProvider) {
+  $httpProvider.interceptors.push('myHttpResponseInterceptor');
+}]);
 
