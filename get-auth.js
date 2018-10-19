@@ -11,8 +11,8 @@ exports.token_api = function (req, res, next) {
         /*return res.status(401).json({
             message: '401'
         });*/
-        res.setHeader('Access-Control-Allow-Origin', 'http://armand-arthur.com:8085');
-        res.redirect('http://armand-arthur.com');
+        
+        res.redirect('/');
             
     }
 };
