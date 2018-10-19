@@ -56,7 +56,7 @@ app.use(session({
 app.use("/api", api);
 app.use("/preindexapi", preindexApi);
 app.get('/', function(req, res){
-    res.sendFile(__dirname + '/preindex.html');
+    app.use(express.static(__dirname + '/preindex'));
 });
 
 http.createServer(app).listen(PORT);
