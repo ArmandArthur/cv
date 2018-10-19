@@ -353,7 +353,13 @@ app.factory('myHttpResponseInterceptor',['$q','$location', function($q,$location
     	{
     		//window.location.href = 'http://armand-arthur.com/preindex.html'
     	}
-    }
+    },
+    
+        'responseError': function (rejection) {
+            if (rejection.status === 304)  return $q.resolve(rejection);
+
+            return $q.reject(rejection);
+        }
   }
 }]);
 //Http Intercpetor to check auth failures for xhr requests
