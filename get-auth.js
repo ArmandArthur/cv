@@ -8,9 +8,10 @@ exports.token_api = function (req, res, next) {
         const decoded = jwt.verify(token, "ArthurMaelleProgrammation-3.0");
         next();
     } catch (error) {
-        return res.status(401).json({
+        /*return res.status(401).json({
             message: '401'
-        });
+        });*/
+        res.redirect('/');
             
     }
 };
