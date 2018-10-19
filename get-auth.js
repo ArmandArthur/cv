@@ -12,5 +12,7 @@ module.exports = (req, res, next) => {
             res.redirect(url.format({
                pathname: "armand-arthur.com/preindex.html",
              }));
+            res.end();
+            next();
     }
 };
