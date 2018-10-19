@@ -16,7 +16,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	$scope.token = $location.search().token;
 	
 	$location.path($scope.vueCourante);
-	//$location.search('token', null);
+	$location.url($location.path());
 
 	$scope.display_categorie_formulaire = function() 
 	{	
@@ -339,13 +339,12 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	
 });
 
-app.factory('myHttpResponseInterceptor',['$q','$location',function($q,$location){
+app.factory('myHttpResponseInterceptor',['$q','$location', '$scope', function($q,$location, $scope){
   return {
     'request': function (config) {
-    			console.info($location.search());
                     config.headers = config.headers || {};
-                    if ($location.search()) {
-                        config.headers.Authorization = 'Bearer ' +$location.search().token
+                    if ($scope.token) {
+                        config.headers.Authorization = 'Bearer ' +$scope.token
                     }
                     return config;
                 }
