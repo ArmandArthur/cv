@@ -33,6 +33,7 @@ angular.module("DirectivesApiRestful", ["ngResource"])
                       }
             }
         }
+    }
     );
     });
     var frameworkServiceRest = $resource(url+'framework_crud', null, {                
