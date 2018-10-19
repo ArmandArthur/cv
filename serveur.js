@@ -13,7 +13,7 @@ var session = require('express-session')
 var PORT = 8085;
 var app = express();
 app.use(logger(':method :url'));
-app.use("/", serveStatic(__dirname+"/preindex.html"));
+
 
 
 app.use(bodyParser.json());
@@ -47,7 +47,6 @@ api.post("/experience_crud", serviceAuth.token_api, serviceApi.experience);
 
 preindexApi.post("/inscription_crud", serviceApi.inscription);
 
-
 app.use(session({
   secret: 'lafouine',
   resave: false,
@@ -56,6 +55,8 @@ app.use(session({
 }))
 app.use("/api", api);
 app.use("/preindexapi", preindexApi);
+app.get("/", serveStatic(__dirname+"/preindex.html"));
+
 http.createServer(app).listen(PORT);
 
 
