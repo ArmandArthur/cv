@@ -347,13 +347,7 @@ app.factory('myHttpResponseInterceptor',['$q','$location', function($q,$location
                         config.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
                     }
                     return config;
-                },
-    'response': function(response){
-    	if(response.message = '401')
-    	{
-    		//window.location.href = 'http://armand-arthur.com/preindex.html'
-    	}
-    },
+                }
 
         'responseError': function (rejection) {
             if (rejection.status === 304)  return $q.resolve(rejection);
