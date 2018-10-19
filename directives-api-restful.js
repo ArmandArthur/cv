@@ -27,29 +27,38 @@ angular.module("DirectivesApiRestful", ["ngResource"])
                 //REPLACE expression
                 //'Authorization': 'Bearer ' + currentUser.getProfile().token
                 //WITH a function
-                'Authorization': 
-                      function() {
-                          return 'Bearer ' + $scope.tolenApi
-                      }
+                'Authorization': 'Bearer ' + $scope.tokenApi
+                      
             }
         }
-    }
-    );
+    
     });
     var frameworkServiceRest = $resource(url+'framework_crud', null, {                
-             headers: {
-                'Authorization': 
-                      function() {
-                          return 'Bearer ' + $scope.tokenApi;
-                      }
-            }});
+'get': {
+            method: 'POST',
+            headers: {
+                //REPLACE expression
+                //'Authorization': 'Bearer ' + currentUser.getProfile().token
+                //WITH a function
+                'Authorization': 'Bearer ' + $scope.tokenApi
+                      
+            }
+        }
+       
+    });
     var experienceServiceRest = $resource(url+'experience_crud', null, {                
-             headers: {
-                'Authorization': 
-                      function() {
-                          return 'Bearer ' + $scope.tokenApi;
-                      }
-            }});
+'get': {
+            method: 'POST',
+            headers: {
+                //REPLACE expression
+                //'Authorization': 'Bearer ' + currentUser.getProfile().token
+                //WITH a function
+                'Authorization': 'Bearer ' + $scope.tokenApi
+                      
+            }
+        }
+       
+    });
 
     var serviceRequeteRest  = $resource(
         url, 
