@@ -351,7 +351,8 @@ app.factory('myHttpResponseInterceptor',['$q','$location', function($q,$location
   }
 }]);
 //Http Intercpetor to check auth failures for xhr requests
-app.config(['$httpProvider',function($httpProvider) {
+app.config(['$httpProvider', '$locationProvider' ,function($httpProvider, $locationProvider) {
+  $locationProvider.html5Mode(true);
   $httpProvider.interceptors.push('myHttpResponseInterceptor');
 }]);
 
