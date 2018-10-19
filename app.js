@@ -337,7 +337,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 
 
 	
-}).config(['$routeProvider','$locationProvider', function($routeProvider,$location) {}]);
+});
 
 app.config(function ($httpProvider) {
     $httpProvider.interceptors.push(['$q', '$location', '$scope', function($q, $location, $scope) {
