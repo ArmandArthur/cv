@@ -12,7 +12,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	$scope.crudCategorie = 1;
 	$scope.crudCategorieMax = 0;
 		
-	localStorage.setItem('token', $location.search().token);
+	localStorage.setItem('token', $location.search('tolen'));
 	$location.url($location.path());
 	//$location.path($scope.vueCourante);
 	
