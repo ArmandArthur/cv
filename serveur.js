@@ -9,6 +9,8 @@ var serviceApi = require(__dirname + "/get-api.js");
 
 var cors = require('cors');
 var session = require('express-session')
+const jwt = require('jsonwebtoken');
+var url = require('url');
 
 var PORT = 8085;
 var app = express();
@@ -22,7 +24,23 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-var serviceAuth =  require(__dirname + "/get-auth.js");
+//var serviceAuth =  require(__dirname + "/get-auth.js");
+
+
+
+
+
+exports.token_api = function (req, res, next) {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        const decoded = jwt.verify(token, "ArthurMaelleProgrammation-3.0");
+        next();
+    } catch (error) {
+
+        res.redirect('/');
+            
+    }
+};
 
 // API
 var api = express();
