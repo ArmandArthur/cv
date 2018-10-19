@@ -13,10 +13,10 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 	$scope.crudCategorieMax = 0;
 	
 
-	$scope.tokenApi = $location.search().token;
+	//$scope.tokenApi = $location.search().token;
 	
 	$location.path($scope.vueCourante);
-	$location.search('token', null);
+	//$location.search('token', null);
 
 	$scope.display_categorie_formulaire = function() 
 	{	
