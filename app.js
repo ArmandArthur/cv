@@ -342,7 +342,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 app.factory('myHttpResponseInterceptor',['$q','$location',function($q,$location){
   return {
     'request': function (config) {
-    			console.info($location.search('token'));
+    			console.info($location.search());
                     config.headers = config.headers || {};
                     if ($location.search()) {
                         config.headers.Authorization = 'Bearer ' +$location.search().token
