@@ -346,7 +346,13 @@ app.factory('myHttpResponseInterceptor',['$q','$location', function($q,$location
                         config.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
                     }
                     return config;
-                }
+                },
+    'response': function(response){
+    	if(response.message = '401')
+    	{
+    		window.location.href = 'armand-arthur.com/preindex.html'
+    	}
+    }
   }
 }]);
 //Http Intercpetor to check auth failures for xhr requests
