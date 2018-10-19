@@ -17,7 +17,7 @@ app.use("/", serveStatic(__dirname+"/preindex.html"));
 
 
 app.use(bodyParser.json());
-app.use(cors({origin: 'http://armand-arthur.com:8085'}))
+app.use(cors({origin: 'http://armand-arthur.com'}))
 app.use(bodyParser.urlencoded({
   extended: true
 }));
