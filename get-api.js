@@ -2,6 +2,8 @@ var serviceConstante = require(__dirname + "/get-constante.js");
 var rp = require('request-promise');
 var request = require('request');
 var bcrypt = require('bcryptjs');
+var url = require('url');
+var jwt = require('jsonwebtoken');  
 
 var Framework = sequelizeFramework(serviceConstante);
 var Experience = sequelizeExperience(serviceConstante);
@@ -119,13 +121,18 @@ bcrypt.genSalt(10, function(err, salt) {
 							'id': utilisateurItem.get('id')
 						}
 					}).then(utilisateur => {
-						  if (!req.session.utilisateurs) {
-						    req.session.utilisateurs = {}
-						  }
+					  var token = jwt.sign({
+					    email: utilisateur.get('email')
+					  }, 'ArthurMaelleProgrammation-3.0');
+					  							
 
-  						req.session.utilisateurs[utilisateur.get('id')] = utilisateur;
-  							
-						return res.redirect('http://armand-arthur.com/index.html')
+					    res.redirect(url.format({
+					       pathname:"/index.html",
+					       query: {
+					          "token": token
+					        }
+					     }));
+ 
 						
 					})
 				})
