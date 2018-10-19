@@ -1,4 +1,4 @@
-angular.module("DirectivesApiRestful", ["ngResource"])
+angular.module("DirectivesApiRestful", ["ngResource", "ngRoute"])
 .factory("restfulService", ['$http', function($resource,$http){
 
     var url = "http://armand-arthur.com:8085/api/"; 
