@@ -343,7 +343,7 @@ exports.categorie = function (req, res) {
 					{
 						userRequestConstante = {
 							requeteid :  utilisateurRequest.get('id'),
-							nombre :  parseInt(utilisateurRequest.get('nombre')+1)
+							nombre :  parseInt(utilisateurRequest.get('nombre')+1),
 							utilisateurId : 1
 						}
 						nombre = userRequestConstante.nombre; 
