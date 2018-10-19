@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
         const decoded = jwt.verify(token, "ArthurMaelleProgrammation-3.0");
         next();
     } catch (error) {
-            res.redirect('/preindex.html');
+            res.redirect('/');
             
     }
 };
