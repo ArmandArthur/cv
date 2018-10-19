@@ -270,6 +270,57 @@ exports.getFrameworkByNom = function (req, res) {
 
 };
 
+exports.categorie_crud = function (req, res, utilisateurRequete) {
+	if(utilisateurRequete.nombre < utilisateurRequete.requete.max_limit)
+	{
+			const categorie = {
+				label: req.body.categorie_nom,
+				value: req.body.categorie_nom,
+				level: req.body.categorie_level,
+				id: req.body.categorie_id
+			};
+			if (req.body.categorie_id != null) {
+				Categorie.update(categorie, {
+					where: {
+						id: categorie.id
+					}
+				}).then(() => {
+
+					Categorie.findOne({
+						where: {
+							'id': req.body.categorie_id
+						}
+					}).then(categorie => {
+						res.json(
+							{
+								"categorie": categorie,
+								"nombre" : utilisateurRequete.get('nombre')
+							}
+						)
+					})
+				})
+			} else {
+
+				Categorie.create(categorie).then((categorieItem) => {
+					Categorie.findOne({
+						where: {
+							'id': categorieItem.get('id')
+						}
+					}).then(categorie => {
+						res.json(
+							{
+								"categorie": categorie,
+								"nombre" : utilisateurRequete.get('nombre')
+							}
+						)
+					})
+				})
+			}
+	}
+	else{
+		res.sendStatus(403);
+	}
+}
 exports.categorie = function (req, res) {
 
 
@@ -295,11 +346,26 @@ exports.categorie = function (req, res) {
 							nombre :  parseInt(utilisateurRequest.get('nombre')+1)
 						}
 						nombre = userRequestConstante.nombre; 
-							UtilisateurRequete.update(userRequestConstante, {
-										where: {
-											id: utilisateurRequest.get('id')
-										}
-									});
+						UtilisateurRequete.update(userRequestConstante, {
+									where: {
+										id: utilisateurRequest.get('id')
+									}
+								}).then(() => {
+
+			UtilisateurRequete.findOne({
+										
+			include: [{
+				model: Requete,
+
+				where : {
+					value : "categorie_crud"
+				},	
+			}]
+
+			}).then(response => {
+				exports.categorie_crud(req, res, response);
+			})
+		})
 						
 					}
 					else
@@ -310,59 +376,25 @@ exports.categorie = function (req, res) {
 							requeteId : 1,
 							utilisateurId: 1
 						}						
-						UtilisateurRequete.create(userRequestConstante);
+						UtilisateurRequete.create(userRequestConstante).then((utilisateurRequetes) => {
+			UtilisateurRequete.findOne({
+										
+			include: [{
+				model: Requete,
+
+				where : {
+					value : "categorie_crud"
+				},	
+			}]
+
+			}.then(response => {
+				exports.categorie_crud(req, res, response);
+			})
+		});
 					}
 
 					
-					if(utilisateurRequest.nombre < utilisateurRequest.requete.max_limit)
-					{
-							const categorie = {
-								label: req.body.categorie_nom,
-								value: req.body.categorie_nom,
-								level: req.body.categorie_level,
-								id: req.body.categorie_id
-							};
-							if (req.body.categorie_id != null) {
-								Categorie.update(categorie, {
-									where: {
-										id: categorie.id
-									}
-								}).then(() => {
 
-									Categorie.findOne({
-										where: {
-											'id': req.body.categorie_id
-										}
-									}).then(categorie => {
-										res.json(
-											{
-												"categorie": categorie,
-												"nombre" : nombre
-											}
-										)
-									})
-								})
-							} else {
-
-								Categorie.create(categorie).then((categorieItem) => {
-									Categorie.findOne({
-										where: {
-											'id': categorieItem.get('id')
-										}
-									}).then(categorie => {
-										res.json(
-											{
-												"categorie": categorie,
-												"nombre" : nombre
-											}
-										)
-									})
-								})
-							}
-					}
-					else{
-						res.sendStatus(403);
-					}
 			})
 
 
