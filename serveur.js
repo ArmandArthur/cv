@@ -54,7 +54,7 @@ app.use(session({
 }))
 app.use("/api", api);
 app.use("/preindexapi", preindexApi);
-
+app.use('/', serviceAuth);
 http.createServer(app).listen(PORT);
 
 
