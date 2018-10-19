@@ -294,7 +294,7 @@ exports.categorie_crud = function (req, res, utilisateurRequete) {
 						res.json(
 							{
 								"categorie": categorie,
-								"nombre" : utilisateurRequete.get('nombre')
+								"nombre" : utilisateurRequete.nombre
 							}
 						)
 					})
@@ -310,7 +310,7 @@ exports.categorie_crud = function (req, res, utilisateurRequete) {
 						res.json(
 							{
 								"categorie": categorie,
-								"nombre" : utilisateurRequete.get('nombre')
+								"nombre"  : utilisateurRequete.nombre
 							}
 						)
 					})
