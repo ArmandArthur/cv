@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
         const decoded = jwt.verify(token, "ArthurMaelleProgrammation-3.0");
         next();
     } catch (error) {
-            return res.redirect('http://armand-arthur.com:8085');
+            res.redirect('http://armand-arthur.com');
             
     }
 };
