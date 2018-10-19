@@ -344,7 +344,7 @@ app.factory('myHttpResponseInterceptor',['$q','$location',function($q,$location)
     'request': function (config) {
                     config.headers = config.headers || {};
                     if ($location.search('token')) {
-                        config.headers.Authorization = 'Bearer ' +$location.search('token')
+                        config.headers.Authorization = 'Bearer ' +$location.search('token').token
                     }
                     return config;
                 }
