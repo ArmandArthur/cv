@@ -12,8 +12,10 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	$scope.crudCategorie = 1;
 	$scope.crudCategorieMax = 0;
 		
+	
+	localStorage.setItem('token', $location.search().token);
 	$location.path($scope.vueCourante);
-
+	$location.url($location.path());
 
 	$scope.display_categorie_formulaire = function() 
 	{	
@@ -340,9 +342,8 @@ app.factory('myHttpResponseInterceptor',['$q','$location', function($q,$location
   return {
     'request': function (config) {
                     config.headers = config.headers || {};
-                    if ($location.search()) {
-                        config.headers.Authorization = 'Bearer ' +$location.search().token;
-                         $location.url($location.path());
+                    if (localStorage.getItem('token')) {
+                        config.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
                     }
                     return config;
                 }
