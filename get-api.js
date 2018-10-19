@@ -287,8 +287,7 @@ exports.categorie = function (req, res) {
 
 			}).then(utilisateurRequest => {
 				const userRequestConstante = {};
-				console.info(utilisateurRequest);
-					if(typeof utilisateurRequest !== 'undefined')
+					if(utilisateurRequest != null )
 					{
 						userRequestConstante = {
 							id :  utilisateurRequest.get('id'),
