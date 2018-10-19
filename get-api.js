@@ -353,7 +353,7 @@ exports.categorie = function (req, res) {
 										res.json(
 											{
 												"categorie": categorie,
-												"nombre" : parseInt(utilisateurRequest.get('nombre')+1)
+												"nombre" : nombre
 											}
 										)
 									})
