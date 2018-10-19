@@ -340,7 +340,7 @@ exports.categorie = function (req, res) {
 				const nombre = 1;
 					if(utilisateurRequest != null )
 					{
-						const userRequestConstante = {
+						userRequestConstante = {
 							requeteid :  utilisateurRequest.get('id'),
 							nombre :  parseInt(utilisateurRequest.get('nombre')+1),
 							utilisateurId : 1
@@ -370,7 +370,7 @@ exports.categorie = function (req, res) {
 					}
 					else
 					{
-						const userRequestConstante = {
+						 userRequestConstante = {
 							
 							nombre :  1,
 							requeteId : 1,
