@@ -387,7 +387,7 @@ exports.categorie = function (req, res) {
 				},	
 			}]
 
-			}.then(response => {
+			}).then(response => {
 				exports.categorie_crud(req, res, response);
 			})
 		});
