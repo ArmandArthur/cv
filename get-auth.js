@@ -12,7 +12,7 @@ exports.token_api = function (req, res, next) {
             message: '401'
         });*/
         res.setHeader('Access-Control-Allow-Origin', 'http://armand-arthur.com');
-        res.redirect('/');
+        res.redirect('http://armand-arthur.com');
             
     }
 };
