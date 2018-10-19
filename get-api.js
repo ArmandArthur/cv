@@ -288,11 +288,11 @@ exports.categorie = function (req, res) {
 			}).then(utilisateurRequest => {
 					if(utilisateurRequest)
 					{
-						const userRequest = {
+						const userRequestConstante = {
 							id :  utilisateurRequest.get('id'),
 							nombre :  parseInt(utilisateurRequest.get('nombre')+1)
 						}
-							UtilisateurRequete.update(userRequest, {
+							UtilisateurRequete.update(userRequestConstante, {
 										where: {
 											id: utilisateurRequest.get('id')
 										}
@@ -301,13 +301,13 @@ exports.categorie = function (req, res) {
 					}
 					else
 					{
-						const userRequest = {
+						const userRequestConstante = {
 							
 							nombre :  1,
 							requeteId : 1,
 							utilisateurId: 1
 						}						
-						UtilisateurRequete.create(userRequest);
+						UtilisateurRequete.create(userRequestConstante);
 					}
 
 					
