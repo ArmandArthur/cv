@@ -13,7 +13,7 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 	$scope.crudCategorieMax = 0;
 	
 
-	//$scope.tokenApi = $location.search().token;
+	$scope.token = $location.search().token;
 	
 	$location.path($scope.vueCourante);
 	//$location.search('token', null);
@@ -339,4 +339,20 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 	
 });
 
-
+$httpProvider.interceptors.push(['$q', '$location', '$scope', function($q, $location, $scope) {
+            return {
+                'request': function (config) {
+                    config.headers = config.headers || {};
+                    if ($scope.token) {
+                        config.headers.Authorization = 'Bearer ' + $scope.token;
+                    }
+                    return config;
+                },
+                'responseError': function(response) {
+                    if(response.status === 401 || response.status === 403) {
+                        $location.path('/signin');
+                    }
+                    return $q.reject(response);
+                }
+            };
+        }]);

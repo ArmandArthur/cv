@@ -1,5 +1,5 @@
-angular.module("DirectivesApiRestful", ["ngResource", "ngRoute"])
-.factory("restfulService", ['$http', function($resource,$http){
+angular.module("DirectivesApiRestful", ["ngResource"])
+.factory("restfulService", function($resource){
 
     var url = "http://armand-arthur.com:8085/api/"; 
     //var url = "http://arthur.cv-angular-node.com:8085/api/"
@@ -27,7 +27,7 @@ angular.module("DirectivesApiRestful", ["ngResource", "ngRoute"])
                 //REPLACE expression
                 //'Authorization': 'Bearer ' + currentUser.getProfile().token
                 //WITH a function
-                'Authorization': 'Bearer ' + $http.get('token')
+                'Authorization': 'Bearer ' + $resource.query('token')
                       
             }
         }
@@ -40,7 +40,7 @@ angular.module("DirectivesApiRestful", ["ngResource", "ngRoute"])
                 //REPLACE expression
                 //'Authorization': 'Bearer ' + currentUser.getProfile().token
                 //WITH a function
-                'Authorization': 'Bearer ' + $http.get('token')
+                'Authorization': 'Bearer ' + $scope.tokenApi
                       
             }
         }
@@ -53,7 +53,7 @@ angular.module("DirectivesApiRestful", ["ngResource", "ngRoute"])
                 //REPLACE expression
                 //'Authorization': 'Bearer ' + currentUser.getProfile().token
                 //WITH a function
-                'Authorization': 'Bearer ' + $http.get('token')
+                'Authorization': 'Bearer ' + $scope.tokenApi
                       
             }
         }
@@ -227,4 +227,4 @@ angular.module("DirectivesApiRestful", ["ngResource", "ngRoute"])
             );
         }           
     }
-}]);
+});
