@@ -287,12 +287,14 @@ exports.categorie = function (req, res) {
 
 			}).then(utilisateurRequest => {
 				const userRequestConstante = {};
+				const nombre = 1;
 					if(utilisateurRequest != null )
 					{
 						userRequestConstante = {
 							id :  utilisateurRequest.get('id'),
 							nombre :  parseInt(utilisateurRequest.get('nombre')+1)
 						}
+						nombre = userRequestConstante.nombre; 
 							UtilisateurRequete.update(userRequestConstante, {
 										where: {
 											id: utilisateurRequest.get('id')
@@ -335,7 +337,7 @@ exports.categorie = function (req, res) {
 										res.json(
 											{
 												"categorie": categorie,
-												"nombre" : parseInt(utilisateurRequest.get('nombre')+1)
+												"nombre" : nombre
 											}
 										)
 									})
