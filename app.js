@@ -11,10 +11,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	$scope.categorieCourant = "PHP";
 	$scope.crudCategorie = 1;
 	$scope.crudCategorieMax = 0;
-	
-
-	$scope.token = $location.search().token;
-	
+		
 	$location.path($scope.vueCourante);
 	$location.url($location.path());
 
@@ -343,8 +340,8 @@ app.factory('myHttpResponseInterceptor',['$q','$location', '$scope', function($q
   return {
     'request': function (config) {
                     config.headers = config.headers || {};
-                    if ($scope.token) {
-                        config.headers.Authorization = 'Bearer ' +$scope.token
+                    if ($location.search()) {
+                        config.headers.Authorization = 'Bearer ' +$location.search().token
                     }
                     return config;
                 }
