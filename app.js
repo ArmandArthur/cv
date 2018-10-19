@@ -11,9 +11,11 @@ angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAni
 	$scope.categorieCourant = "PHP";
 	$scope.crudCategorie = 1;
 	$scope.crudCategorieMax = 0;
-	$location.path($scope.vueCourante);
-
 	
+
+	$scope.tokenApi = $location.search().token;
+	$location.search('token', null);
+	$location.path($scope.vueCourante);
 
 	$scope.display_categorie_formulaire = function() 
 	{	

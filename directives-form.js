@@ -17,7 +17,7 @@ angular.module("Directives", ["ngValidate"])
 		restrict: "E",        
 		templateUrl: 'formulaireCategorie.html',
         scope: {
-            categorie : '='
+            categorie : '=',
         }
 	}
 })

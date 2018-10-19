@@ -20,10 +20,28 @@ angular.module("DirectivesApiRestful", ["ngResource"])
         }
     );
 
-    var categorieServiceRest = $resource(url+'categorie_crud', null, {});
-    var frameworkServiceRest = $resource(url+'framework_crud', null, {});
-    var experienceServiceRest = $resource(url+'experience_crud', null, {});
-    var utilisateurServiceRest = $resource(url+'utilisateur_crud', null, {});
+    var categorieServiceRest = $resource(url+'categorie_crud', null, {
+                 headers: {
+                'Authorization': 
+                      function() {
+                          return 'Bearer ' + $scope.tokenApi;
+                      }
+            }
+    });
+    var frameworkServiceRest = $resource(url+'framework_crud', null, {                
+             headers: {
+                'Authorization': 
+                      function() {
+                          return 'Bearer ' + $scope.tokenApi;
+                      }
+            }});
+    var experienceServiceRest = $resource(url+'experience_crud', null, {                
+             headers: {
+                'Authorization': 
+                      function() {
+                          return 'Bearer ' + $scope.tokenApi;
+                      }
+            }});
 
     var serviceRequeteRest  = $resource(
         url, 
@@ -170,19 +188,6 @@ angular.module("DirectivesApiRestful", ["ngResource"])
 
 
             return experienceServiceRest.save(JSON.stringify(experience)).$promise
-            .then(
-                function(data) {
-                    return data;
-                },
-                function() {
-                    return 'error';
-                } 
-            );
-        },
-        utilisateur : function(utilisateur){
-
-
-            return utilisateurServiceRest.save(utilisateur).$promise
             .then(
                 function(data) {
                     return data;

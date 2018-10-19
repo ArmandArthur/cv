@@ -6,6 +6,7 @@ var logger = require('morgan');
 var serveStatic = require('serve-static');
 var bodyParser = require('body-parser');
 var serviceApi = require(__dirname + "/get-api.js");
+var serviceAuth =  require(__dirname + "/get-auth.js");
 var cors = require('cors');
 var session = require('express-session')
 
@@ -37,9 +38,9 @@ api.get("/categorie_request", serviceApi.getCategorieRequest);
 api.get("/framework_request", serviceApi.getFrameworkRequest);
 api.get("/experience_request", serviceApi.getExperienceRequest);
 
-api.post("/categorie_crud", serviceApi.categorie); 
-api.post("/framework_crud", serviceApi.framework); 
-api.post("/experience_crud", serviceApi.experience); 
+api.post("/categorie_crud", serviceAuth, serviceApi.categorie); 
+api.post("/framework_crud", serviceAuth,  serviceApi.framework); 
+api.post("/experience_crud", serviceAuth, serviceApi.experience); 
 //api.post("/utilisateur_crud", serviceApi.utilisateur); 
 
 preindexApi.post("/inscription_crud", serviceApi.inscription);
