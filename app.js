@@ -15,7 +15,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	
 	localStorage.setItem('token', $location.search().token);
 	$location.url($location.path(''));
-	$location.path($scope.vueCourante);
+	//$location.path($scope.vueCourante);
 	
 
 	$scope.display_categorie_formulaire = function() 
