@@ -19,7 +19,7 @@ app.use(serveStatic(__dirname+"/preindex.html"));
 
 
 app.use(bodyParser.json());
-app.use(cors({origin: 'http://armand-arthur.com'}))
+app.use(cors({origin: 'http://armand-arthur.com	'}))
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -37,7 +37,10 @@ exports.token_api = function (req, res, next) {
         next();
     } catch (error) {
 
-        res.redirect('http://armand-arthur.com/preindex.html');
+       //res.redirect('http://armand-arthur.com/preindex.html');
+       return res.status(401).json({
+            message: error
+
             
     }
 };
