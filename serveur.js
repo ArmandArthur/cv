@@ -40,6 +40,7 @@ exports.token_api = function (req, res, next) {
        //res.redirect('http://armand-arthur.com/preindex.html');
        return res.status(401).json({
             message: error
+        });
 
             
     }
