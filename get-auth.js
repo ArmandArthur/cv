@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
         next();
     } catch (error) {
             res.redirect(url.format({
-               pathname: "http://armand-arthur.com/preindex.html",
+               pathname: "armand-arthur.com/preindex.html",
              }));
     }
 };
