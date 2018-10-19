@@ -6,7 +6,7 @@ var logger = require('morgan');
 var serveStatic = require('serve-static');
 var bodyParser = require('body-parser');
 var serviceApi = require(__dirname + "/get-api.js");
-var serviceAuth =  require(__dirname + "/get-auth.js");
+
 var cors = require('cors');
 var session = require('express-session')
 
@@ -21,6 +21,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+var serviceAuth =  require(__dirname + "/get-auth.js");
 
 // API
 var api = express();
