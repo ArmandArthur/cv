@@ -46,21 +46,21 @@ exports.token_api = function (req, res, next) {
 var api = express();
 var preindexApi = express();
 
-api.get("/categories",  serviceAuth.token_api,serviceApi.getCategories);
-api.get("/frameworks",  serviceAuth.token_api,serviceApi.getFrameworks);
-api.get("/experiences",  serviceAuth.token_api,serviceApi.getExperiences);
-api.get("/categorie/:categorie_value",  serviceAuth.token_api,serviceApi.getCategorieByValue);
-api.get("/frameworks/categorie/:categorie_value",  serviceAuth.token_api,serviceApi.getFrameworksByCategorieValue);
-api.get("/utilisateur/:ip",  serviceAuth.token_api,serviceApi.getUtilisateurByIp);
-api.get("/framework/:nom",  serviceAuth.token_api,serviceApi.getFrameworkByNom);
+api.get("/categories",  token_api,serviceApi.getCategories);
+api.get("/frameworks",  token_api,serviceApi.getFrameworks);
+api.get("/experiences",  token_api,serviceApi.getExperiences);
+api.get("/categorie/:categorie_value",  token_api,serviceApi.getCategorieByValue);
+api.get("/frameworks/categorie/:categorie_value",  token_api,serviceApi.getFrameworksByCategorieValue);
+api.get("/utilisateur/:ip",  token_api,serviceApi.getUtilisateurByIp);
+api.get("/framework/:nom",  token_api,serviceApi.getFrameworkByNom);
 
-api.get("/categorie_request",  serviceAuth.token_api, serviceApi.getCategorieRequest);
-api.get("/framework_request",  serviceAuth.token_api,serviceApi.getFrameworkRequest);
-api.get("/experience_request",  serviceAuth.token_api,serviceApi.getExperienceRequest);
+api.get("/categorie_request",  token_api, serviceApi.getCategorieRequest);
+api.get("/framework_request",  token_api,serviceApi.getFrameworkRequest);
+api.get("/experience_request",  token_api,serviceApi.getExperienceRequest);
 
-api.post("/categorie_crud", serviceAuth.token_api, serviceApi.categorie); 
-api.post("/framework_crud", serviceAuth.token_api,  serviceApi.framework); 
-api.post("/experience_crud", serviceAuth.token_api, serviceApi.experience); 
+api.post("/categorie_crud", token_api, serviceApi.categorie); 
+api.post("/framework_crud", token_api,  serviceApi.framework); 
+api.post("/experience_crud", token_api, serviceApi.experience); 
 //api.post("/utilisateur_crud", serviceApi.utilisateur); 
 
 preindexApi.post("/inscription_crud", serviceApi.inscription);
