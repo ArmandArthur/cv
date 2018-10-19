@@ -271,7 +271,7 @@ exports.getFrameworkByNom = function (req, res) {
 };
 
 exports.categorie_crud = function (req, res, utilisateurRequete) {
-	if(utilisateurRequete.get('nombre') < utilisateurRequete.get('max_limit'))
+	if(utilisateurRequete.get('nombre') < utilisateurRequete.get('requete.max_limit'))
 	{
 			const categorie = {
 				label: req.body.categorie_nom,
