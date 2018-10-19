@@ -13,11 +13,11 @@ var session = require('express-session')
 var PORT = 8085;
 var app = express();
 app.use(logger(':method :url'));
-app.use("/", serveStatic(__dirname+"/preindex.html"));
+app.use(serveStatic(__dirname+"/preindex.html"));
 
 
 app.use(bodyParser.json());
-app.use(cors({origin: 'http://armand-arthur.com'}))
+//app.use(cors({origin: 'http://armand-arthur.com'}))
 app.use(bodyParser.urlencoded({
   extended: true
 }));
