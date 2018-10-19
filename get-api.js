@@ -127,7 +127,7 @@ bcrypt.genSalt(10, function(err, salt) {
 					  							
 
 					    res.redirect(url.format({
-					       pathname: encodeURI("http://armand-arthur.com/index.html"),
+					       pathname: '/',
 					       query: {
 					          "token": token
 					        }
