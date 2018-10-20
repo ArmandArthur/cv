@@ -155,7 +155,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 			var categorie_value = location.split('/')[3];
 
 			console.info(location)
-			console.info(categorie_value);
+			console.info(url);
 			restfulService.getFrameworks().then(function(frameworks){
 		  		$scope.frameworks = frameworks;
 
