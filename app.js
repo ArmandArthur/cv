@@ -33,7 +33,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	    window.history.pushState('',document.title,rtn)
 	}
 
-	localStorage.setItem('token', $location.search().token);
+	sessionStorage.setItem('token', $location.search().token);
 	//$location.url($location.path());
 	//$location.path($scope.vueCourante);
 	$scope.remove_get_url($location.path());
@@ -367,8 +367,8 @@ app.factory('myHttpResponseInterceptor',['$q','$location', function($q,$location
   return {
     'request': function (config) {
                     config.headers = config.headers || {};
-                    if (localStorage.getItem('token')) {
-                        config.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+                    if (sessionStorage.getItem('token')) {
+                        config.headers.Authorization = 'Bearer ' + sessionStorage.getItem('token');
                     }
                     return config;
                 },
