@@ -373,6 +373,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
+    console.info(document.cookie);
     for(var i = 0; i < ca.length; i++) {
         var c = ca[i];
         while (c.charAt(0) == ' ') {
@@ -382,7 +383,7 @@ function getCookie(cname) {
             return c.substring(name.length, c.length);
         }
     }
-    alert('ok')
+
     return "";
 }
 
