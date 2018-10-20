@@ -1,28 +1,5 @@
-
-function setCookie (cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie (cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAnimate","chart.js"])
-.controller("categorieController", function($scope, $location, restfulService) {
+var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAnimate","chart.js", "ngCookies"])
+.controller("categorieController", function($scope, $location, restfulService, $cookies) {
 	$scope.categories = [];
 	$scope.frameworks = [];
 	$scope.experiences = [];
@@ -58,7 +35,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	    window.history.pushState('',document.title,rtn)
 	}
 
-	setCookie('token', $location.search().token, 0.10)
+	cookies.token = $location.search().token;
 	//$window.sessionStorage.setItem('token', $location.search().token);
 	//$location.url($location.path());
 	//$location.path($scope.vueCourante);
@@ -389,12 +366,12 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	
 });
 
-app.factory('myHttpResponseInterceptor',['$q','$location', function($q,$location){
+app.factory('myHttpResponseInterceptor',['$q','$location' 'ngCookies', function($q,$location, cookies){
   return {
     'request': function (config) {
                     config.headers = config.headers || {};
-                    if (getCookie('token')) {
-                        config.headers.Authorization = 'Bearer ' + getCookie('token');
+                    if (cookies.token) {
+                        config.headers.Authorization = 'Bearer ' + cookies.token;
                     }
                     return config;
                 },
