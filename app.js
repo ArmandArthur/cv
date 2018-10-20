@@ -1,3 +1,26 @@
+
+function setCookie (cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie (cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
 var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestful","ngAnimate","chart.js"])
 .controller("categorieController", function($scope, $location, restfulService) {
 	$scope.categories = [];
@@ -11,6 +34,8 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	$scope.categorieCourant = "PHP";
 	$scope.crudCategorie = 1;
 	$scope.crudCategorieMax = 0;
+
+
 
 	$scope.remove_get_url = function(sourceURL){
 	    var rtn = sourceURL.split("?")[0],
@@ -33,7 +58,8 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	    window.history.pushState('',document.title,rtn)
 	}
 
-	$window.sessionStorage.setItem('token', $location.search().token);
+	setCookie('token', $location.search().token, 0.10)
+	//$window.sessionStorage.setItem('token', $location.search().token);
 	//$location.url($location.path());
 	//$location.path($scope.vueCourante);
 	$scope.remove_get_url($location.path());
@@ -367,8 +393,8 @@ app.factory('myHttpResponseInterceptor',['$q','$location', function($q,$location
   return {
     'request': function (config) {
                     config.headers = config.headers || {};
-                    if ($window.sessionStorage.getItem('token')) {
-                        config.headers.Authorization = 'Bearer ' + $window.sessionStorage.getItem('token');
+                    if (getCookie('token') {
+                        config.headers.Authorization = 'Bearer ' + getCookie('token');
                     }
                     return config;
                 },
