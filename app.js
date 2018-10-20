@@ -32,7 +32,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	    }
 	    window.history.pushState('',document.title,rtn)
 	}
-	
+
 	localStorage.setItem('token', $location.search().token);
 	//$location.url($location.path());
 	//$location.path($scope.vueCourante);
@@ -151,8 +151,8 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 		}, 
 		function(location) 
 		{
-			var url = location.split('/')[1];
-			var categorie_value = location.split('/')[2];
+			var url = location.split('/')[2];
+			var categorie_value = location.split('/')[3];
 
 			restfulService.getFrameworks().then(function(frameworks){
 		  		$scope.frameworks = frameworks;
@@ -232,22 +232,22 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	  			$scope.crudCategorieMax = requete.max_limit;
 	  		});	
 
-			if(url == 'VUE_FORMULAIRE_FRAMEWORK')
+			if(url == '#VUE_FORMULAIRE_FRAMEWORK')
 			{
 				$scope.vueCourante = url;
 			}	
-			else if(url == 'VUE_FORMULAIRE_EXPERIENCE')
+			else if(url == '#VUE_FORMULAIRE_EXPERIENCE')
 			{
 				$scope.vueCourante = url;
 				$scope.animateTechnologies = "technologies";
 			}
-			else if(url == 'VUE_DISPLAY_EXPERIENCES')
+			else if(url == '#VUE_DISPLAY_EXPERIENCES')
 			{
 				$scope.vueCourante = url;
 
 
 			}	
-			else if(url == 'VUE_DISPLAY_TECHNOS')
+			else if(url == '#VUE_DISPLAY_TECHNOS')
 			{
 				$scope.vueCourante = url;
 				if(categorie_value == null)
@@ -296,7 +296,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 			
 
 			}				
-			else if(url == 'VUE_DISPLAY_CATEGORIES' || url == 'VUE_HOME')
+			else if(url == '#VUE_DISPLAY_CATEGORIES' || url == '#VUE_HOME')
 			{
 
 					$scope.vueCourante = url;
