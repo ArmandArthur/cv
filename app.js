@@ -151,7 +151,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 		}, 
 		function(location) 
 		{
-			var url = location.split('/')[2].split('#')[1];
+			var url = location.split('/')[1].split('#')[1];
 			var categorie_value = location.split('/')[3];
 
 			console.info(location)
