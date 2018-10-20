@@ -366,12 +366,29 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	
 });
 
-app.factory('myHttpResponseInterceptor',['$q','$location', 'cookies', function($q,$location, cookies){
+app.factory('myHttpResponseInterceptor',['$q','$location', function($q,$location){
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+
   return {
     'request': function (config) {
                     config.headers = config.headers || {};
-                    if (cookies.token) {
-                        config.headers.Authorization = 'Bearer ' + cookies.token;
+                    if (getCookie('token')) {
+                        config.headers.Authorization = 'Bearer ' + getCookie('token');
                     }
                     return config;
                 },
@@ -384,7 +401,7 @@ app.factory('myHttpResponseInterceptor',['$q','$location', 'cookies', function($
   }
 }]);
 //Http Intercpetor to check auth failures for xhr requests
-app.config(['$httpProvider', '$locationProvider', '$cookiesProvider' ,function($httpProvider, $locationProvider, $cookiesProvider) {
+app.config(['$httpProvider', '$locationProvider' ,function($httpProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
   $httpProvider.interceptors.push('myHttpResponseInterceptor');
 }]);
