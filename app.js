@@ -12,12 +12,6 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	$scope.crudCategorie = 1;
 	$scope.crudCategorieMax = 0;
 
-	
-	localStorage.setItem('token', $location.search().token);
-	//$location.url($location.path());
-	//$location.path($scope.vueCourante);
-	$scope.remove_get_url($location.path());
-
 	$scope.remove_get_url = function(sourceURL){
 	    var rtn = sourceURL.split("?")[0],
 	        param,
@@ -38,6 +32,13 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	    }
 	    window.history.pushState('',document.title,rtn)
 	}
+	
+	localStorage.setItem('token', $location.search().token);
+	//$location.url($location.path());
+	//$location.path($scope.vueCourante);
+	$scope.remove_get_url($location.path());
+
+
 
 	$scope.display_categorie_formulaire = function() 
 	{	
