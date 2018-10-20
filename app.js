@@ -393,7 +393,7 @@ app.factory('myHttpResponseInterceptor',['$q','$location', function($q,$location
   return {
     'request': function (config) {
                     config.headers = config.headers || {};
-                    if (getCookie('token') {
+                    if (getCookie('token')) {
                         config.headers.Authorization = 'Bearer ' + getCookie('token');
                     }
                     return config;
