@@ -370,8 +370,6 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	
 });
 
-app.factory('myHttpResponseInterceptor',['$q','$location', function($q,$location){
-
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
@@ -386,6 +384,10 @@ function getCookie(cname) {
     }
     return "";
 }
+
+app.factory('myHttpResponseInterceptor',['$q','$location', function($q,$location){
+
+
 
 
   return {
