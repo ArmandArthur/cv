@@ -35,6 +35,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	    window.history.pushState('',document.title,rtn)
 	}
 
+	console.info($location.search().token)
 	if($location.search().token != '')
 	{
 		$cookies.token = $location.search().token;
