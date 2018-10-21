@@ -153,7 +153,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	$scope.$watch(
 		function() 
 		{
-			return $location.path();
+			return $location.url();
 		}, 
 		function(location) 
 		{
