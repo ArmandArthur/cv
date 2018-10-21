@@ -44,9 +44,9 @@
                 <li class="active">
                     <a href="#submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Menu</a>
                     <ul class=" list-unstyled" id="submenu">
-                        <li><a data-toggle="collapse" href="/index.html?VUE=DISPLAY_CATEGORIES">Langages</a></li>
-                        <li><a data-toggle="collapse" href="/index.html?VUE=DISPLAY_TECHNOS">Technologies</a></li>
-                        <li><a data-toggle="collapse" href="/index.html?VUE=DISPLAY_EXPERIENCES">Expériences</a></li>
+                        <li><a  href="/index.html?VUE=DISPLAY_CATEGORIES">Langages</a></li>
+                        <li><a  href="/index.html?VUE=DISPLAY_TECHNOS">Technologies</a></li>
+                        <li><a  href="/index.html?VUE=DISPLAY_EXPERIENCES">Expériences</a></li>
                     </ul>
                 </li>
             </ul>
@@ -119,7 +119,7 @@
                     </nav>
                     <nav class="spacer" >
                         <ol>
-                            <li ng-repeat="categorie in categories"><a data-target="/index.html?VUE=DISPLAY_TECHNOS&CATEGORIE_VALUE={{categorie.value}}" ng-click="setCategorie(categorie)" ng-class="{'active' : categorieCourant == categorie.value}">{{categorie.value}}</a></li>
+                            <li ng-repeat="categorie in categories"><a href="/index.html?VUE=DISPLAY_TECHNOS&CATEGORIE_VALUE={{categorie.value}}" ng-click="setCategorie(categorie)" ng-class="{'active' : categorieCourant == categorie.value}">{{categorie.value}}</a></li>
                         </ol>
                     </nav>
                     <canvas id="bar-technos" class="chart chart-bar" chart-data="dataTechnos" chart-options="optionsTechnos" chart-labels="labelsTechnos" chart-click="onClickTechnos">
