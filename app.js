@@ -14,7 +14,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 
 
 
-	/$scope.remove_get_url = function(sourceURL){
+	/*$scope.remove_get_url = function(sourceURL){
 	    var rtn = sourceURL.split("?")[0],
 	        param,
 	        params_arr = [],
