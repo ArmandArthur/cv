@@ -35,7 +35,6 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	    window.history.pushState('',document.title,rtn)
 	}
 
-	console.info($location.search().token)
 	if(typeof $location.search().token != 'undefined')
 	{
 		$cookies.token = $location.search().token;
@@ -158,8 +157,8 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 		}, 
 		function(location) 
 		{
-			var url = location.split('/')[1].split('#')[1];
-			var categorie_value = location.split('/')[3];
+			var url = location.search('VUE');
+			//var categorie_value = location.split('/')[3];
 
 			console.info(location)
 			console.info(url);
@@ -241,22 +240,22 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	  			$scope.crudCategorieMax = requete.max_limit;
 	  		});	
 
-			if(url == '#VUE_FORMULAIRE_FRAMEWORK')
+			if(url == 'FORMULAIRE_FRAMEWORK')
 			{
 				$scope.vueCourante = url;
 			}	
-			else if(url == '#VUE_FORMULAIRE_EXPERIENCE')
+			else if(url == 'FORMULAIRE_EXPERIENCE')
 			{
 				$scope.vueCourante = url;
 				$scope.animateTechnologies = "technologies";
 			}
-			else if(url == '#VUE_DISPLAY_EXPERIENCES')
+			else if(url == 'DISPLAY_EXPERIENCES')
 			{
 				$scope.vueCourante = url;
 
 
 			}	
-			else if(url == '#VUE_DISPLAY_TECHNOS')
+			else if(url == 'DISPLAY_TECHNOS')
 			{
 				$scope.vueCourante = url;
 				if(categorie_value == null)
@@ -305,7 +304,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 			
 
 			}				
-			else if(url == '#VUE_DISPLAY_CATEGORIES' || url == '#VUE_HOME')
+			else if(url == 'DISPLAY_CATEGORIES' || url == '#VUE_HOME')
 			{
 
 					$scope.vueCourante = url;
@@ -388,10 +387,6 @@ function getCookie(cname) {
 }
 
 app.factory('myHttpResponseInterceptor',['$q','$location', function($q,$location){
-
-
-
-
   return {
     'request': function (config) {
                     config.headers = config.headers || {};
