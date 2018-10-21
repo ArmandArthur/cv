@@ -119,7 +119,7 @@
                     </nav>
                     <nav aria-label="breadcrumb" class="spacer" id="breadcrumb-technos">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item" ng-repeat="categorie in categories"><a href="#/DISPLAY_TECHNOS/{{categorie.value}}" ng-click="setCategorie(categorie)" ng-class="{'active' : categorieCourant == categorie.value}">{{categorie.value}}</a></li>
+                            <li class="breadcrumb-item" ng-repeat="categorie in categories"><a href="&CATEGORIE_VALUE={{categorie.value}}" ng-click="setCategorie(categorie)" ng-class="{'active' : categorieCourant == categorie.value}">{{categorie.value}}</a></li>
                         </ol>
                     </nav>
                     <canvas id="bar-technos" class="chart chart-bar" chart-data="dataTechnos" chart-options="optionsTechnos" chart-labels="labelsTechnos" chart-click="onClickTechnos">
