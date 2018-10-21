@@ -157,7 +157,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 		}, 
 		function(location) 
 		{
-			var url = location.url().search('VUE');
+			var url = location.search().VUE;
 			//var categorie_value = location.split('/')[3];
 
 			console.info(location)
