@@ -14,7 +14,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 
 
 
-	$scope.remove_get_url = function(sourceURL){
+	/$scope.remove_get_url = function(sourceURL){
 	    var rtn = sourceURL.split("?")[0],
 	        param,
 	        params_arr = [],
@@ -38,11 +38,11 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	if(typeof $location.search().token != 'undefined')
 	{
 		$cookies.token = $location.search().token;
-	}
+	}*/
 	//$window.sessionStorage.setItem('token', $location.search().token);
 	//$location.url($location.path());
 	//$location.path($scope.vueCourante);
-	$scope.remove_get_url($location.path());
+	//$scope.remove_get_url($location.path());
 
 
 
