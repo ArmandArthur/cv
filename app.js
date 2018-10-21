@@ -3,7 +3,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	$scope.categories = [];
 	$scope.frameworks = [];
 	$scope.experiences = [];
-	$scope.vueCourante = "VUE_HOME";
+	$scope.vueCourante = "HOME";
 	$scope.frameworkCourant = null;
 	$scope.experienceCourant = null;
 	$scope.isConnectedByCookie = false;
@@ -49,7 +49,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	$scope.display_categorie_formulaire = function() 
 	{	
 		//$scope.framework_selection(framework);
-		$scope.vueCourante = 'VUE_FORMULAIRE_CATEGORIE';
+		$scope.vueCourante = 'FORMULAIRE_CATEGORIE';
 		
 	}
 
@@ -71,7 +71,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
                   level: null
               };
 		}
-		$scope.vueCourante = 'VUE_FORMULAIRE_FRAMEWORK';
+		$scope.vueCourante = 'FORMULAIRE_FRAMEWORK';
 		
 		//$scope.framework = framework;
 		//$location.path($scope.vueCourante); // url
@@ -96,7 +96,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
                   frameworks : []
               };
 		}
-		$scope.vueCourante = 'VUE_FORMULAIRE_EXPERIENCE';
+		$scope.vueCourante = 'FORMULAIRE_EXPERIENCE';
 		$location.path($scope.vueCourante); // url
 
 			
@@ -106,7 +106,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	$scope.$on('categorieFormulaireSubmit', function(event, categorie) {
        restfulService.categorie(categorie).then(function(response){
 	  		$scope.crudCategorie =  response.nombre;
-	  		$scope.vueCourante = "VUE_DISPLAY_CATEGORIES"; //template
+	  		$scope.vueCourante = "DISPLAY_CATEGORIES"; //template
 	  		$scope.categories.push(response.categorie); // push nouvelle catégorie
 
 	  		$location.path($scope.vueCourante); // url
@@ -117,7 +117,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	$scope.$on('frameworkFormulaireSubmit', function(event, framework) {
 		//console.info($scope.get_categorie_structure());
        restfulService.framework(framework).then(function(framework){
-	  		$scope.vueCourante = "VUE_DISPLAY_TECHNOS"; //template
+	  		$scope.vueCourante = "DISPLAY_TECHNOS"; //template
 	  		$scope.categorieCourant = framework.categorie.value;
 	  		$location.path($scope.vueCourante+"/"+$scope.categorieCourant); // url
 	  	})
@@ -126,7 +126,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	$scope.$on('experienceFormulaireSubmit', function(event, experience) {
 		//console.info($scope.get_categorie_structure());
        restfulService.experience(experience).then(function(experienceReturned){
-	  		$scope.vueCourante = "VUE_DISPLAY_EXPERIENCES"; 
+	  		$scope.vueCourante = "DISPLAY_EXPERIENCES"; 
 	  		//$scope.experiences.push(experienceReturned);
 	  	    $scope.experienceCourant = experienceReturned;
 	  		$location.path($scope.vueCourante); 
@@ -158,6 +158,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 		function(location) 
 		{
 			var url = location.search().VUE;
+			var categorie_value = location.search().CATEGORIE_VALUE;
 			//var categorie_value = location.split('/')[3];
 
 			console.info(location)
@@ -304,7 +305,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 			
 
 			}				
-			else if(url == 'DISPLAY_CATEGORIES' || url == '#VUE_HOME')
+			else if(url == 'DISPLAY_CATEGORIES' || url == '#HOME')
 			{
 
 					$scope.vueCourante = url;
@@ -334,7 +335,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
     	restfulService.getCategorieByValue($scope.frameworkCourantLabel).then(function(categorie){
 
 				$scope.categorieCourant = categorie;
-				$scope.vueCourante = 'VUE_FORMULAIRE_CATEGORIE';
+				$scope.vueCourante = 'FORMULAIRE_CATEGORIE';
 				$location.path($scope.vueCourante);
 	
 		});
@@ -345,7 +346,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
     	restfulService.getFrameworkByNom(framework_nom).then(function(framework){
 
 				$scope.frameworkCourant = framework;
-				$scope.vueCourante = 'VUE_FORMULAIRE_FRAMEWORK';
+				$scope.vueCourante = 'FORMULAIRE_FRAMEWORK';
 				$location.path($scope.vueCourante);
 	
 		});
@@ -356,7 +357,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 			if( utilisateur.email )
 			{
 				$scope.isConnectedByCookie = true;
-				$scope.vueCourante = 'VUE_HOME';
+				$scope.vueCourante = 'HOME';
 				$location.path($scope.vueCourante);
 			}
 		});
