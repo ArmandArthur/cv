@@ -178,7 +178,7 @@ exports.getCategorieRequest = function(req, res) {
 		        }
 		    }).then(requeteUtilisateur => {
 		         res.json({
-                        "crudCategorieMax": requete.get('max_limit')
+                        "crudCategorieMax": requete.get('max_limit'),
                         "crudCategorie": requeteUtilisateur.get('nombre')
                     })
 		    })
