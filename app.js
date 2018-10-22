@@ -167,7 +167,7 @@ $scope.$on('$locationChangeStart', function(){
 			var categorie_value = location_search.CATEGORIE_VALUE;
 			//var categorie_value = location.split('/')[3];
 
-			console.info(location)
+			console.info(location_search)
 			console.info(url);
 			restfulService.getFrameworks().then(function(frameworks){
 		  		$scope.frameworks = frameworks;
