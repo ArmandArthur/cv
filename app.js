@@ -149,7 +149,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 
     });
 
-$scope.$on('$routeUpdate', function(){
+$scope.$on('$locationChangeStart', function(){
 	alert('ok')
   $scope.sort = $location.search().sort;
   $scope.order = $location.search().order;
