@@ -149,12 +149,12 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 
     });
 
-$scope.$on('$locationChangeStart', function(){
+/*$scope.$on('$locationChangeStart', function(){
 	alert('ok')
   $scope.sort = $location.search().sort;
   $scope.order = $location.search().order;
   $scope.offset = $location.search().offset;
-});
+});*/
 
 	$scope.$watch(
 		function() 
@@ -167,8 +167,6 @@ $scope.$on('$locationChangeStart', function(){
 			var categorie_value = location_search.CATEGORIE_VALUE;
 			//var categorie_value = location.split('/')[3];
 
-			console.info(location_search)
-			console.info(url);
 			restfulService.getFrameworks().then(function(frameworks){
 		  		$scope.frameworks = frameworks;
 
