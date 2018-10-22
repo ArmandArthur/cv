@@ -333,99 +333,92 @@ exports.categorie = function(req, res) {
 
 
 
-
-    UtilisateurRequete.findOne({
-
-        include: [{
-            model: Requete,
-
+    Utilisateur.findOne({
             where: {
-                value: "categorie_crud"
-            },
-        }],
-        where: {
-            utilisateurId: req.email
-        }
-
-    }).then(utilisateurRequest => {
-        const nombre = 1;
-        if (utilisateurRequest != null) {
-            userRequestConstante = {
-                requeteid: utilisateurRequest.get('id'),
-                nombre: parseInt(utilisateurRequest.get('nombre') + 1),
-                utilisateurId: utilisateurRequest.get('utilisateurId')
+                email: req.email
             }
-            nombre = userRequestConstante.nombre;
-            UtilisateurRequete.update(userRequestConstante, {
+        })
+        .then(utilisateur => {
+            UtilisateurRequete.findOne({
+
+                include: [{
+                    model: Requete,
+
+                    where: {
+                        value: "categorie_crud"
+                    },
+                }],
                 where: {
-                    id: utilisateurRequest.get('id')
+                    utilisateurId: utilisateur.get('id')
                 }
-            }).then(() => {
 
-                UtilisateurRequete.findOne({
-
-                    include: [{
-                        model: Requete,
-
-                        where: {
-                            value: "categorie_crud"
-                        },
-                    }],
-                    where: {
-                        utilisateurId: req.email
+            }).then(utilisateurRequest => {
+                const nombre = 1;
+                if (utilisateurRequest != null) {
+                    userRequestConstante = {
+                        requeteid: utilisateurRequest.get('id'),
+                        nombre: parseInt(utilisateurRequest.get('nombre') + 1),
+                        utilisateurId: utilisateurRequest.get('utilisateurId')
                     }
+                    nombre = userRequestConstante.nombre;
+                    UtilisateurRequete.update(userRequestConstante, {
+                        where: {
+                            id: utilisateurRequest.get('id')
+                        }
+                    }).then(() => {
 
-                }).then(response => {
-                    exports.categorie_crud(req, res, response);
-                })
+                        UtilisateurRequete.findOne({
+
+                            include: [{
+                                model: Requete,
+
+                                where: {
+                                    value: "categorie_crud"
+                                },
+                            }],
+                            where: {
+                                utilisateurId:  utilisateur.get('id')
+                            }
+
+                        }).then(response => {
+                            exports.categorie_crud(req, res, response);
+                        })
+                    })
+
+                } else {
+
+                    userRequestConstante = {
+
+                        nombre: 1,
+                        requeteId: 1,
+                        utilisateurId: responseUtilisateurRequete.get('utilisateurId')
+                    }
+                    UtilisateurRequete.create(userRequestConstante).then((utilisateurRequetes) => {
+                        UtilisateurRequete.findOne({
+
+                            include: [{
+                                model: Requete,
+
+                                where: {
+                                    value: "categorie_crud"
+                                },
+                            }],
+                            where: {
+                                utilisateurId:  utilisateur.get('id')
+                            }
+
+                        }).then(response => {
+                            exports.categorie_crud(req, res, response);
+                        })
+                    });
+
+
+                }
+
+
+
             })
-
-        } else {
-
-				 UtilisateurRequete.findOne({
-                    include: [{
-                        model: Requete,
-
-                        where: {
-                            value: "categorie_crud"
-                        },
-                    }],
-                    where: {
-                        utilisateurId: req.email
-                    }
-
-                }).then(responseUtilisateurRequete => {
-			            userRequestConstante = {
-
-			                nombre: 1,
-			                requeteId: 1,
-			                utilisateurId: responseUtilisateurRequete.get('utilisateurId')
-			            }
-			            UtilisateurRequete.create(userRequestConstante).then((utilisateurRequetes) => {
-			                UtilisateurRequete.findOne({
-
-			                    include: [{
-			                        model: Requete,
-
-			                        where: {
-			                            value: "categorie_crud"
-			                        },
-			                    }],
-			                    where: {
-			                        utilisateurId: req.email
-			                    }
-
-			                }).then(response => {
-			                    exports.categorie_crud(req, res, response);
-			                })
-			            });
-                })
-
-        }
-
-
-
-    })
+        })
 
 
 
