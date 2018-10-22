@@ -109,7 +109,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	  		$scope.vueCourante = "DISPLAY_CATEGORIES"; //template
 	  		$scope.categories.push(response.categorie); // push nouvelle catégorie
 
-	  		$location.path($scope.vueCourante); // url
+	  		$location.url('/index.html?VUE='+$scope.vueCourante); // url
 
 	  	})
     });
