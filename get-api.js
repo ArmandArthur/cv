@@ -391,7 +391,7 @@ exports.categorie = function(req, res) {
 
                         nombre: 1,
                         requeteId: 1,
-                        utilisateurId: responseUtilisateurRequete.get('utilisateurId')
+                        utilisateurId:  utilisateur.get('id')
                     }
                     UtilisateurRequete.create(userRequestConstante).then((utilisateurRequetes) => {
                         UtilisateurRequete.findOne({
