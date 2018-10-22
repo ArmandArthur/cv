@@ -159,12 +159,12 @@ $scope.$on('$locationChangeStart', function(){
 	$scope.$watch(
 		function() 
 		{
-			return $location;
+			return $location.search();
 		}, 
-		function(location) 
+		function(location_search) 
 		{
-			var url = location.search().VUE;
-			var categorie_value = location.search().CATEGORIE_VALUE;
+			var url = location_search.VUE;
+			var categorie_value = location_search.CATEGORIE_VALUE;
 			//var categorie_value = location.split('/')[3];
 
 			console.info(location)
