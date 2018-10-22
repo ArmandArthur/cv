@@ -241,8 +241,9 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	  			
 	  		});	
 		
-			restfulService.getCategorieRequest().then(function(requete){
-	  			$scope.crudCategorieMax = requete.max_limit;
+			restfulService.getCategorieRequest().then(function(response){
+	  			$scope.crudCategorieMax = response.crudCategorieMax;
+	  			$scope.crudCategorie = response.crudCategorie;
 	  		});	
 
 			if(url == 'FORMULAIRE_FRAMEWORK')

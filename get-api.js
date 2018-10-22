@@ -161,13 +161,31 @@ exports.utilisateur_inscription = function(req, res, next) {
 
 exports.getCategorieRequest = function(req, res) {
 
-    Requete.findOne({
+    Utilisateur.findOne({
         where: {
-            value: 'categorie_crud'
+            email: req.email
         }
-    }).then(requete => {
-        res.send(requete);
+    }).then(utilisateur => {
+	    Requete.findOne({
+	        where: {
+	            value: 'categorie_crud'
+	        }
+	    }).then(requete => {
+	        UtilisateurRequete.findOne({
+		        where: {
+		            requeteId: requete.get('id'),
+		            utilisateurId: utilisateur.get('id')
+		        }
+		    }).then(requeteUtilisateur => {
+		         res.json({
+                        "crudCategorieMax": requete.get('max_limit')
+                        "crudCategorie": requeteUtilisateur.get('nombre')
+                    })
+		    })
+	    })
     })
+
+
 
 
 };
