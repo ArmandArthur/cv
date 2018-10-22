@@ -340,7 +340,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 
 				$scope.categorieCourant = categorie;
 				$scope.vueCourante = 'FORMULAIRE_CATEGORIE';
-				$location.path($scope.vueCourante);
+				$location.url('/index.html?VUE='+$scope.vueCourante);
 	
 		});
   };
@@ -351,7 +351,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 
 				$scope.frameworkCourant = framework;
 				$scope.vueCourante = 'FORMULAIRE_FRAMEWORK';
-				$location.path($scope.vueCourante);
+				$location.url('/index.html?VUE='+$scope.vueCourante);
 	
 		});
   };
