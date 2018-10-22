@@ -353,7 +353,7 @@ exports.categorie = function(req, res) {
             userRequestConstante = {
                 requeteid: utilisateurRequest.get('id'),
                 nombre: parseInt(utilisateurRequest.get('nombre') + 1),
-                utilisateurId: utilisateurRequest.get('requeteutilisateur').get('utilisateurId')
+                utilisateurId: utilisateurRequest.get('utilisateurId')
             }
             nombre = userRequestConstante.nombre;
             UtilisateurRequete.update(userRequestConstante, {
@@ -399,7 +399,7 @@ exports.categorie = function(req, res) {
 
 			                nombre: 1,
 			                requeteId: 1,
-			                utilisateurId: responseUtilisateurRequete.get('requeteutilisateur').get('utilisateurId')
+			                utilisateurId: responseUtilisateurRequete.get('utilisateurId')
 			            }
 			            UtilisateurRequete.create(userRequestConstante).then((utilisateurRequetes) => {
 			                UtilisateurRequete.findOne({
