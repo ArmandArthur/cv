@@ -333,10 +333,12 @@ exports.categorie = function (req, res) {
 				model: Requete,
 
 				where : {
-					value : "categorie_crud",
-					utilisateurId : req.email
+					value : "categorie_crud"					
 				},	
-			}]
+			}],
+			where: {
+				utilisateurId : req.email
+			}
 
 			}).then(utilisateurRequest => {
 				const nombre = 1;
@@ -360,10 +362,12 @@ exports.categorie = function (req, res) {
 				model: Requete,
 
 				where : {
-					value : "categorie_crud",
-					utilisateurId : req.email
+					value : "categorie_crud"
 				},	
-			}]
+			}],
+			where: {
+				utilisateurId : req.email
+			}
 
 			}).then(response => {
 				exports.categorie_crud(req, res, response);
@@ -386,10 +390,12 @@ exports.categorie = function (req, res) {
 				model: Requete,
 
 				where : {
-					value : "categorie_crud",
-					utilisateurId : req.email
+					value : "categorie_crud"
 				},	
-			}]
+			}],
+			where: {
+				utilisateurId : req.email
+			}
 
 			}).then(response => {
 				exports.categorie_crud(req, res, response);
