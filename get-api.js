@@ -381,15 +381,8 @@ exports.categorie = function(req, res) {
             })
 
         } else {
-            userRequestConstante = {
 
-                nombre: 1,
-                requeteId: 1,
-                utilisateurId: 1
-            }
-            UtilisateurRequete.create(userRequestConstante).then((utilisateurRequetes) => {
-                UtilisateurRequete.findOne({
-
+				 UtilisateurRequete.findOne({
                     include: [{
                         model: Requete,
 
@@ -401,10 +394,33 @@ exports.categorie = function(req, res) {
                         utilisateurId: req.email
                     }
 
-                }).then(response => {
-                    exports.categorie_crud(req, res, response);
+                }).then(responseUtilisateurRequete => {
+			            userRequestConstante = {
+
+			                nombre: 1,
+			                requeteId: 1,
+			                utilisateurId: responseUtilisateurRequete.get('requeteutilisateur').get('utilisateurId')
+			            }
+			            UtilisateurRequete.create(userRequestConstante).then((utilisateurRequetes) => {
+			                UtilisateurRequete.findOne({
+
+			                    include: [{
+			                        model: Requete,
+
+			                        where: {
+			                            value: "categorie_crud"
+			                        },
+			                    }],
+			                    where: {
+			                        utilisateurId: req.email
+			                    }
+
+			                }).then(response => {
+			                    exports.categorie_crud(req, res, response);
+			                })
+			            });
                 })
-            });
+
         }
 
 
