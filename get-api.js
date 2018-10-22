@@ -325,12 +325,8 @@ exports.categorie_crud = function (req, res, utilisateurRequete) {
 exports.categorie = function (req, res) {
 
 
-	Utilisateur.findOne({
-				where : {
-					email : req.email
-				},	
-			
-			}).then(utilisateur => {
+
+
 	UtilisateurRequete.findOne({
 										
 			include: [{
@@ -338,7 +334,7 @@ exports.categorie = function (req, res) {
 
 				where : {
 					value : "categorie_crud",
-					utilisateurId : utilisateur.get('id')
+					utilisateurId : req.email
 				},	
 			}]
 
@@ -402,9 +398,6 @@ exports.categorie = function (req, res) {
 					
 
 			})
-			})
-
-
 
 
 
