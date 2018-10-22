@@ -360,7 +360,8 @@ exports.categorie = function (req, res) {
 				model: Requete,
 
 				where : {
-					value : "categorie_crud"
+					value : "categorie_crud",
+					utilisateurId : req.email
 				},	
 			}]
 
@@ -385,7 +386,8 @@ exports.categorie = function (req, res) {
 				model: Requete,
 
 				where : {
-					value : "categorie_crud"
+					value : "categorie_crud",
+					utilisateurId : req.email
 				},	
 			}]
 
