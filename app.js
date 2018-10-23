@@ -249,7 +249,13 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 		
 			restfulService.getCategorieRequest().then(function(response){
 	  			$scope.crudCategorieMax = response.crudCategorieMax;
-	  			$scope.crudCategorie = response.crudCategorie;
+		  		if($scope.crudCategorieMax <= response.crudCategorie){
+	  				$scope.crudCategorie =  $scope.crudCategorieMax;
+	  			}
+	  			else
+				{
+					$scope.crudCategorie = response.crudCategorie;
+				}
 	  		});	
 
 			if(url == 'FORMULAIRE_FRAMEWORK')
