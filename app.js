@@ -105,7 +105,13 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 
 	$scope.$on('categorieFormulaireSubmit', function(event, categorie) {
        restfulService.categorie(categorie).then(function(response){
-	  		$scope.crudCategorie =  response.nombre;
+	  		if($scope.crudCategorieMax <= response.nombre){
+  				$scope.crudCategorie =  $scope.crudCategorieMax;
+  			}
+  			else
+			{
+				$scope.crudCategorie = response.nombre;
+			}
 	  		$scope.vueCourante = "DISPLAY_CATEGORIES"; //template
 	  		$scope.categories.push(response.categorie); // push nouvelle catégorie
 
