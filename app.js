@@ -34,11 +34,11 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	    }
 	    window.history.pushState('',document.title,rtn)
 	}
-
+*/
 	if(typeof $location.search().token != 'undefined')
 	{
 		$cookies.token = $location.search().token;
-	}*/
+	}
 	//$window.sessionStorage.setItem('token', $location.search().token);
 	//$location.url($location.path());
 	//$location.path($scope.vueCourante);
