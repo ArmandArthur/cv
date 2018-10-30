@@ -177,10 +177,18 @@ exports.getCategorieRequest = function(req, res) {
 		            utilisateurId: utilisateur.get('id')
 		        }
 		    }).then(requeteUtilisateur => {
+		    	if (requeteUtilisateur != null) {
 		         res.json({
                         "crudCategorieMax": requete.get('max_limit'),
                         "crudCategorie": requeteUtilisateur.get('nombre')
                     })
+		     	}
+		     	else{
+		         res.json({
+                        "crudCategorieMax": requete.get('max_limit'),
+                        "crudCategorie": 0
+                    })
+		     	}
 		    })
 	    })
     })
