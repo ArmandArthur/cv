@@ -27,7 +27,7 @@ angular.module("preindexcv", [ "ngSanitize", "preindexDirectives", "DirectivesAp
 
   					$scope.categories = categories;			  		
 
-	  			$scope.height_chart = window.innerHeight*0.8
+	  			$scope.height_chart = window.innerHeight*1
 	  		});	
 });
 
