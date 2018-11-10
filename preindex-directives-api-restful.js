@@ -18,6 +18,17 @@ angular.module("DirectivesApiRestfulPreIndex", ["ngResource"])
                     return 'error';
                 } 
             );
+        },
+        getCategories : function(){
+            return serviceRest.getCategories().$promise
+            .then(
+                function(data) {
+                    return data;
+                },
+                function() {
+                    return 'error';
+                } 
+            );
         }
     }
 });
