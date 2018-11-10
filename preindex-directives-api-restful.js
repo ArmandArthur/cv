@@ -8,7 +8,8 @@ angular.module("DirectivesApiRestfulPreIndex", ["ngResource"])
         url, 
         null, 
         {
-            "getCategories" : { method: "GET", isArray: true, url: url+'categories'}
+            "getCategories" : { method: "GET", isArray: true, url: url+'categories'},
+            "getFrameworks" : { method: "GET", isArray: true, url: url+'frameworks'},
         }
     );
     return {
