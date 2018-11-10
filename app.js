@@ -12,37 +12,10 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	$scope.crudCategorie = 1;
 	$scope.crudCategorieMax = 0;
 
-
-
-	/*$scope.remove_get_url = function(sourceURL){
-	    var rtn = sourceURL.split("?")[0],
-	        param,
-	        params_arr = [],
-	        queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
-	    if (queryString !== "") 
-	    {
-	        params_arr = queryString.split("&");
-	        for (var i = params_arr.length - 1; i >= 0; i -= 1) 
-	        {
-	            param = params_arr[i].split("=")[0];
-	            if (param === key) 
-	            {
-	                params_arr.splice(i, 1);
-	            }
-	        }
-	        rtn = rtn + "?" + params_arr.join("&");
-	    }
-	    window.history.pushState('',document.title,rtn)
-	}
-*/
 	if(typeof $location.search().token != 'undefined')
 	{
 		$cookies.token = $location.search().token;
 	}
-	//$window.sessionStorage.setItem('token', $location.search().token);
-	//$location.url($location.path());
-	//$location.path($scope.vueCourante);
-	//$scope.remove_get_url($location.path());
 
 
 
@@ -368,21 +341,6 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 	
 		});
   };
-
-    /*$.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function(data) {
-		restfulService.getUtilisateurByIp(data.geobytesipaddress).then(function(utilisateur){
-			if( utilisateur.email )
-			{
-				$scope.isConnectedByCookie = true;
-				$scope.vueCourante = 'HOME';
-				$location.path($scope.vueCourante);
-			}
-		});
-    });*/
-
-
-
-
 
 	
 });
