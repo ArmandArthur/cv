@@ -30,6 +30,46 @@ angular.module("preindexcv", [ "ngSanitize", "preindexDirectives", "DirectivesAp
 	  			$scope.height_chart = window.innerHeight*1
 	  			$scope.width_chart = window.innerWidth*0.8
 	  		});	
+
+
+	  					preindexRestfulService.getFrameworks().then(function(frameworks){
+		  		$scope.frameworks = frameworks;
+
+				$scope.dataTechnos = [];
+				$scope.labelsTechnos  = [];
+				$scope.seriesTechnos = [];
+				var dataset = [];
+
+				$scope.optionsTechnos = {
+				  scales: {
+				    xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Frameworks'
+                            }
+                        }],
+                    yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }]
+				  }
+				};
+		  		for(var i in frameworks)
+	  			{	
+	  				if(frameworks[i].nom != null) // car sinon il y a la promise
+	  				{
+	  					$scope.seriesTechnos.push(frameworks[i].nom)	;	
+						$scope.labelsTechnos.push(frameworks[i].nom)	;		
+						dataset.push(frameworks[i].level);
+	  				}
+	  			}
+	  			$scope.dataTechnos.push(dataset);
+
+		  	});
 });
 
 

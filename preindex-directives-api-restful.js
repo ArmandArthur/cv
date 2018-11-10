@@ -35,6 +35,17 @@ angular.module("DirectivesApiRestfulPreIndex", ["ngResource"])
                     return 'error';
                 } 
             );
-        }
+        },
+        getFrameworks : function(){
+            return serviceRest.getFrameworks().$promise
+            .then(
+                function(data) {
+                    return data;
+                },
+                function() {
+                    return 'error';
+                } 
+            );
+        }        
     }
 });

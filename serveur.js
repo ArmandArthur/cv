@@ -54,6 +54,7 @@ api.post("/experience_crud", [serviceAuth, serviceApi.experience]);
 
 preindexApi.post("/inscription_crud", serviceApi.inscription);
 preindexApi.get("/categories",  serviceApi.getCategories);
+preindexApi.get("/frameworks",  serviceApi.getFrameworks);
 
 app.use(session({
   secret: 'lafouine',
