@@ -38,7 +38,7 @@ angular.module("DirectivesApiRestfulPreIndex", ["ngResource"])
             );
         },
         getFrameworks : function(){
-            return serviceRest.getFrameworks().$promise
+            return preindexServiceRestItems.getFrameworks().$promise
             .then(
                 function(data) {
                     return data;
