@@ -60,7 +60,7 @@ exports.associateGlobale();
 
 setTimeout(function() {
     ExperienceFramework.sync();
-}, 1200);
+}, 120
 setTimeout(function() {
     Categorie.sync();
 }, 1800);

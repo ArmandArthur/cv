@@ -13,13 +13,13 @@ angular.module("Directives", ["ngValidate"])
       };
 })
 .directive("formulaireCategorie", function() {
-	return {
-		restrict: "E",        
-		templateUrl: 'formulaireCategorie.html',
+  return {
+    restrict: "E",        
+    templateUrl: 'formulaireCategorie.html',
         scope: {
             categorie : '=',
         }
-	}
+  }
 })
 .controller('frameworkFormulaireController', function($scope) {
     $scope.validationFramework = {
