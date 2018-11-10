@@ -4,7 +4,13 @@ angular.module("DirectivesApiRestfulPreIndex", ["ngResource"])
     var url = "http://armand-arthur.com:8085/preindexapi/"; 
     //var url = "http://arthur.cv-angular-node.com:8085/api/"
     var preindexServiceRest = $resource(url+'inscription_crud', null, {});
-
+    var preindexServiceRestItems  = $resource(
+        url, 
+        null, 
+        {
+            "getCategories" : { method: "GET", isArray: true, url: url+'categories'}
+        }
+    );
     return {
         inscription : function(inscription){
 
@@ -20,7 +26,7 @@ angular.module("DirectivesApiRestfulPreIndex", ["ngResource"])
             );
         },
         getCategories : function(){
-            return serviceRest.getCategories().$promise
+            return preindexServiceRestItems.getCategories().$promise
             .then(
                 function(data) {
                     return data;
