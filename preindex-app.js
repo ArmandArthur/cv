@@ -1,4 +1,4 @@
-angular.module("preindexcv", [ "ngSanitize", "preindexDirectives", "DirectivesApiRestfulPreIndex"])
+angular.module("preindexcv", [ "ngSanitize", "preindexDirectives", "DirectivesApiRestfulPreIndex","chart.js",])
 .controller("preindexController", function($scope, $location, preindexRestfulService) {
 			preindexRestfulService.getCategories().then(function(categories){
 
