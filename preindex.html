@@ -54,11 +54,6 @@
                 </div>
 
                 <div class="item">
-                    <nav class="spacer" aria-label="breadcrumb" >
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item" ng-repeat="categorie in categories"><a href="/index.html?VUE=DISPLAY_TECHNOS&CATEGORIE_VALUE={{categorie.value}}" ng-click="setCategorie(categorie)" ng-class="{'active' : categorieCourant == categorie.value}">{{categorie.value}}</a></li>
-                        </ol>
-                    </nav>
                     <canvas id="bar-technos" class="chart chart-bar" chart-data="dataTechnos" chart-options="optionsTechnos" chart-labels="labelsTechnos" >
                 </div>
                 <div class="item">
