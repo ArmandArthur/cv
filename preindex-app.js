@@ -69,6 +69,8 @@ angular.module("preindexcv", [ "ngSanitize", "preindexDirectives", "DirectivesAp
 	  			}
 	  			$scope.dataTechnos.push(dataset);
 
+	  			$scope.height_chart = window.innerHeight*1
+	  			$scope.width_chart = window.innerWidth*0.8a
 		  	});
 });
 
