@@ -169,7 +169,7 @@ exports.login = function(req, res) {
               message: "Adresse email inexistante"
             });
           }
-
+          console.info(utilisateur)
           bcrypt.compare(req.body.password, utilisateur.get('hash'), (err, result) => {
             if (err) {
               return res.status(401).json({

@@ -57,12 +57,7 @@ preindexApi.post("/login", serviceApi.login);
 preindexApi.get("/categories",  serviceApi.getCategories);
 preindexApi.get("/frameworks",  serviceApi.getFrameworks);
 
-app.use(session({
-  secret: 'lafouine',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}))
+
 app.use("/api", api);
 app.use("/preindexapi", preindexApi);
 http.createServer(app).listen(PORT);
