@@ -172,14 +172,13 @@ exports.login = function(req, res) {
 
           console.info(req.body.password);
           console.info(utilisateur.get('hash'));
-          bcrypt.compare(req.body.password, utilisateur.get('hash'), (err, result) => {
-
-            if (err) {
+          bcrypt.compare(req.body.password, utilisateur.get('hash')).then((res) => {
+            if (!res) {
               return res.status(401).json({
                 message: "Password incohérent"
               });
             }
-            if (result) {
+            if (res) {
                 var token = jwt.sign({
                     email: utilisateur.get('email')
                 }, 'ArthurMaelleProgrammation-3.0');
@@ -191,8 +190,10 @@ exports.login = function(req, res) {
                         "token": token
                     }
                 }));
-            }
-          });
+            } 
+        });
+
+
         });
 
 
