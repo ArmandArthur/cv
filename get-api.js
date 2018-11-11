@@ -179,7 +179,7 @@ exports.login = function(req, res) {
                 message: "Password incohérent"
               });
             }
-            if (res) {
+            if (compare) {
                 var token = jwt.sign({
                     email: utilisateur.get('email')
                 }, 'ArthurMaelleProgrammation-3.0');
