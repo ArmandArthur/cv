@@ -23,15 +23,7 @@ angular.module("preindexDirectives", ["ngValidate", "vcRecaptcha"])
 
             if(form.validate())
             {
-              /*var objet =  {
-                  categorie_id: $scope.framework.categorie.id,
-                  framework_id : $scope.framework.id,
-                  framework_nom : $scope.framework.nom,
-                  framework_version : $scope.framework.version,
-                  framework_level : $scope.framework.level,
-              };
-
-              $scope.$emit('frameworkFormulaireSubmit',objet);*/
+              $(form).submit();
             }
 
 

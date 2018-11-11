@@ -2,8 +2,8 @@ angular.module("DirectivesApiRestfulPreIndex", ["ngResource"])
 .factory("preindexRestfulService", function($resource){
 
     var url = "http://armand-arthur.com:8085/preindexapi/"; 
-    //var url = "http://arthur.cv-angular-node.com:8085/api/"
     var preindexServiceRest = $resource(url+'inscription_crud', null, {});
+    var preindexServiceRestLogin = $resource(url+'login', null, {});
     var preindexServiceRestItems  = $resource(
         url, 
         null, 
@@ -26,6 +26,19 @@ angular.module("DirectivesApiRestfulPreIndex", ["ngResource"])
                 } 
             );
         },
+        login : function(login){
+
+
+            return preindexServiceRestLogin.save(login).$promise
+            .then(
+                function(data) {
+                    return data;
+                },
+                function() {
+                    return 'error';
+                } 
+            );
+        },        
         getCategories : function(){
             return preindexServiceRestItems.getCategories().$promise
             .then(

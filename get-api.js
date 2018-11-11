@@ -158,6 +158,43 @@ exports.utilisateur_inscription = function(req, res, next) {
 
 };
 
+exports.login = function(req, res, next) {
+      Utilisateur.findOne({ email: req.body.email })
+        .then(utilisateur => {
+
+          if (utilisateur == null) {
+            return res.status(401).json({
+              message: "Adresse email inexistante"
+            });
+          }
+
+          bcrypt.compare(req.body.password, utilisateur.get('hash'), (err, result) => {
+            if (err) {
+              return res.status(401).json({
+                message: "Password incohérent"
+              });
+            }
+            if (result) {
+                var token = jwt.sign({
+                    email: utilisateur.get('email')
+                }, 'ArthurMaelleProgrammation-3.0');
+
+
+                res.redirect(url.format({
+                    pathname: encodeURI("http://armand-arthur.com/index.html"),
+                    query: {
+                        "token": token
+                    }
+                }));
+            }
+            res.status(401).json({
+              message: "Auth failed"
+            });
+          });
+        });
+
+};
+
 
 exports.getCategorieRequest = function(req, res) {
 
@@ -750,3 +787,4 @@ function sequelizeRequeteUtilisateur(serviceConstante) {
         tableName: 'requeteutilisateur'
     });
 }
+

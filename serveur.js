@@ -53,6 +53,7 @@ api.post("/experience_crud", [serviceAuth, serviceApi.experience]);
 //api.post("/utilisateur_crud", serviceApi.utilisateur); 
 
 preindexApi.post("/inscription_crud", serviceApi.inscription);
+preindexApi.post("/login", serviceApi.login);
 preindexApi.get("/categories",  serviceApi.getCategories);
 preindexApi.get("/frameworks",  serviceApi.getFrameworks);
 
