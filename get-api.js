@@ -421,7 +421,6 @@ exports.categorie = function(req, res) {
                 }
 
             }).then(utilisateurRequest => {
-                const nombre = 1;
                 if (utilisateurRequest != null) {
                     userRequestConstante = {
                         requeteid: utilisateurRequest.get('id'),
