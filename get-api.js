@@ -158,7 +158,7 @@ exports.utilisateur_inscription = function(req, res, next) {
 
 };
 
-exports.login = function(req, res, next) {
+exports.login = function(req, res) {
       Utilisateur.findOne( {where: {
                 email: req.body.email
             }})
@@ -192,7 +192,6 @@ exports.login = function(req, res, next) {
           });
         });
 
-        next();
 
 };
 
