@@ -159,9 +159,9 @@ exports.utilisateur_inscription = function(req, res, next) {
 };
 
 exports.login = function(req, res, next) {
-      Utilisateur.findOne( where: {
+      Utilisateur.findOne( {where: {
                 email: req.body.email
-            })
+            }})
         .then(utilisateur => {
 
           if (utilisateur == null) {
