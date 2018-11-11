@@ -171,6 +171,7 @@ exports.login = function(req, res) {
           }
 
           bcrypt.compare(req.body.password, utilisateur.get('hash'), (err, result) => {
+            console.info(err);
             if (err) {
               return res.status(401).json({
                 message: "Password incohérent"
