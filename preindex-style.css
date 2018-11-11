@@ -179,3 +179,7 @@ label.error{
 .oveflow{
     overflow: hidden;
 }
+
+#preindex{
+    padding: 20px;
+}
