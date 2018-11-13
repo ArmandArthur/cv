@@ -66,29 +66,28 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="glyphicon glyphicon-align-justify"></span>
                     </button>
-                    <a class="navbar-brand" href="/index.html?VUE=DISPLAY_CATEGORIES" id="sidebarCollapse">Arthur ARMAND</a>
                 </div>
 
-                <div class="animate {{animateTechnologies}} " ng-if="vueCourante == 'DISPLAY_CATEGORIES' || vueCourante == 'HOME' " ng-animate>
+                <div class=" {{animateTechnologies}} " ng-if="vueCourante == 'DISPLAY_CATEGORIES' || vueCourante == 'HOME' " ng-animate>
                     <div ng-if="vueCourante == 'DISPLAY_CATEGORIES'" class="alert alert-warning navbar-collapse-question collapse ">
                         <h6>CONNAISSANCE DE LA TECHNOLOGIE (%)</h6>
                     </div>
                     <nav aria-label="breadcrumb" class="spacer">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item">Accueil</li>
+                            <li class="breadcrumb-item"><a href="/index.html?VUE=DISPLAY_CATEGORIES">Accueil</a></li>
                             <li class="breadcrumb-item">Langages</li>
                         </ol>
                     </nav>
                     <canvas id="radar" class="chart chart-radar" chart-data="data" chart-options="options" chart-labels="labels" chart-click="onClick" auto-legend>
                     </canvas>
                 </div>
-                <div class="animate" ng-if="vueCourante == 'DISPLAY_TECHNOS'" ng-animate>
+                <div class="" ng-if="vueCourante == 'DISPLAY_TECHNOS'" ng-animate>
                     <div ng-if="vueCourante == 'DISPLAY_TECHNOS'" class="alert alert-warning navbar-collapse-question collapse ">
                         <h6>CONNAISSANCE DE LA TECHNOLOGIE (%)</h6>
                     </div>
                     <nav aria-label="breadcrumb" class="spacer">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item">Accueil</li>
+                            <li class="breadcrumb-item"><a href="/index.html?VUE=DISPLAY_CATEGORIES">Accueil</a></li>
                             <li class="breadcrumb-item">Technologies</li>
                         </ol>
                     </nav>
@@ -100,7 +99,7 @@
                     <canvas id="bar-technos" class="chart chart-bar" chart-data="dataTechnos" chart-options="optionsTechnos" chart-labels="labelsTechnos" chart-click="onClickTechnos">
                     </canvas>
                 </div>
-                <div class="animate {{animateExperiences}}" ng-if="vueCourante == 'DISPLAY_EXPERIENCES' ">
+                <div class=" {{animateExperiences}}" ng-if="vueCourante == 'DISPLAY_EXPERIENCES' ">
                     <div ng-if="vueCourante == 'DISPLAY_EXPERIENCES'" class="alert alert-warning navbar-collapse-question collapse ">
                         <h6>LISTE DES EXPERIENCES</h6>
                     </div>
