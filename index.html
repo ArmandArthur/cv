@@ -25,15 +25,15 @@
             </div>
             <ul class="list-unstyled components">
                 <li class="active">
-                    <a href="#api" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">API</a>
-                    <ul class=" list-unstyled" id="api">
-                        <li>
-                            <a href="#">CRUD une catégorie<span class="label label-info" >  {{crudCategorie}} / {{crudCategorieMax}}</span> </a>
-                        </li>
+                    <a href="#submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">GRAPHIQUES</a>
+                    <ul class=" list-unstyled" id="submenu">
+                        <li><a  href="/index.html?VUE=DISPLAY_CATEGORIES">Langages</a></li>
+                        <li><a  href="/index.html?VUE=DISPLAY_TECHNOS">Technos</a></li>
+
                     </ul>
-                </li>
+                </li>     
                 <li class="active">
-                    <a href="#formulaire" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">FORMULAIRE</a>
+                    <a href="#formulaire" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">FORMULAIRES</a>
                     <ul class=" list-unstyled" id="formulaire">
                         <li>
                             <a data-toggle="collapse" href="/#FORMULAIRE_CATEGORIE" ng-click="display_categorie_formulaire()">Ajouter une catégorie</a>
@@ -51,15 +51,17 @@
                         
                        
                     </ul>
-                </li>                
+                </li>                             
                 <li class="active">
-                    <a href="#submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Menu</a>
-                    <ul class=" list-unstyled" id="submenu">
-                        <li><a  href="/index.html?VUE=DISPLAY_CATEGORIES">Langages</a></li>
-                        <li><a  href="/index.html?VUE=DISPLAY_TECHNOS">Technos</a></li>
-
+                    <a href="#api" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">API</a>
+                    <ul class=" list-unstyled" id="api">
+                        <li>
+                            <a href="#">CRUD une catégorie<span class="label label-info" >  {{crudCategorie}} / {{crudCategorieMax}}</span> </a>
+                        </li>
                     </ul>
                 </li>
+              
+
             </ul>
         </nav>
         <div class="container" id="content">
