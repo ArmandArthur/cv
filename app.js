@@ -20,9 +20,18 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
 
 
 
-	$scope.display_categorie_formulaire = function() 
+	$scope.display_categorie_formulaire = function(categorie) 
 	{	
-		//$scope.framework_selection(framework);
+		if(categorie != null)
+		{
+			$scope.categorieCourant = categorie;
+		}
+		else{
+			$scope.categorieCourant =  {
+                  value : null,
+                  level: null
+              };
+		}
 		$scope.vueCourante = 'FORMULAIRE_CATEGORIE';
 		
 	}
