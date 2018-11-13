@@ -99,7 +99,7 @@ var app = angular.module("cv", [ "ngSanitize", "Directives", "DirectivesApiRestf
        restfulService.framework(framework).then(function(framework){
 	  		$scope.vueCourante = "DISPLAY_TECHNOS"; //template
 	  		$scope.categorieCourant = framework.categorie.value;
-	  		$location.path($scope.vueCourante+"/"+$scope.categorieCourant); // url
+	  		$location.path("VUE="+$scope.vueCourante+"&CATEGORIE_VALUE="+$scope.categorieCourant); // url
 	  	})
 
     });
